@@ -1,8 +1,0 @@
----
-import Layout from "../../../layouts/Layout.astro";
-import TuitionDetail from "../../../components/page/TuitionDetail.astro";
-import branches from "../../../data/branches.json";
-export function getStaticPaths(){ return branches.map((b)=>({ params:{ branch:b.slug }, props:{ branch:b } })); }
-const { branch } = Astro.props;
----
-<Layout title={`${branch.name} 학비 · 한빛국제유치원`}><TuitionDetail locale="ko" branch={branch} /></Layout>

@@ -15,13 +15,11 @@ const faq = (locale === "en" ? faqEn : faqKo).admissions;
 const branches = locale === "en" ? branchesEn : branchesKo;
 const c = {
   ko: { title:"입학 안내", sub:"2027학년도 신입생을 모집합니다.",
-    stepsTitle:"지원 절차", steps:[{t:"입학 설명회 참석",d:"캠퍼스 투어와 설명회에서 한빛의 교육을 직접 확인하세요."},{t:"원서 및 서류 제출",d:"지원서, 필요 서류, 전형료를 제출합니다."},{t:"전형 및 학부모 면담",d:"학생 활동 관찰과 학부모 면담을 진행합니다."},{t:"합격 및 등록",d:"합격 안내 후 등록 절차를 완료합니다."}],
-    examTitle:"전형료", exam:[{k:"유아부 체험 수업",v:"₩20,000"},{k:"유치부 전형료",v:"₩90,000"}],
-    tuitionTitle:"연간 학비 (예시)", byCampus:"캠퍼스별 상세 학비", faqTitle:"입학 FAQ", apply:"지원하기" },
+    feesTitle:"학비 안내", examTitle:"전형료", exam:[{k:"유아부 체험 수업",v:"₩20,000"},{k:"유치부 전형료",v:"₩90,000"}],
+    byCampus:"캠퍼스별 연간 학비", pick:"캠퍼스를 선택하세요", faqTitle:"입학 FAQ", apply:"지원하기" },
   en: { title:"Admissions", sub:"Now accepting applications for 2027.",
-    stepsTitle:"Application Process", steps:[{t:"Attend an info session",d:"See Hanbit's education first-hand on a campus tour or session."},{t:"Submit application & documents",d:"Submit the application, required documents and the fee."},{t:"Assessment & parent meeting",d:"A student observation and a parent meeting take place."},{t:"Offer & enrolment",d:"Complete enrolment after the offer of admission."}],
-    examTitle:"Examination fees", exam:[{k:"Preschool trial lesson",v:"₩20,000"},{k:"Kindergarten fee",v:"₩90,000"}],
-    tuitionTitle:"Annual tuition (example)", byCampus:"Tuition by campus", faqTitle:"Admissions FAQ", apply:"Apply" },
+    feesTitle:"Fees", examTitle:"Examination fees", exam:[{k:"Preschool trial lesson",v:"₩20,000"},{k:"Kindergarten fee",v:"₩90,000"}],
+    byCampus:"Annual tuition by campus", pick:"Select a campus", faqTitle:"Admissions FAQ", apply:"Apply" },
 }[locale];
 ---
 <section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20 text-center">
@@ -29,27 +27,34 @@ const c = {
   <p class="mt-4 text-white/70">{c.sub}</p>
 </div></section>
 
-<!-- OVERVIEW -->
-<section id="overview" class="bg-white"><div class="mx-auto max-w-5xl px-6 py-20">
-  <div class="rule-gold mb-6"></div>
-  <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.examTitle}</h2>
-  <dl class="mt-6 max-w-xl divide-y divide-black/10 border-y border-black/10">
-    {c.exam.map((f)=>(<div class="flex items-center justify-between py-3.5"><dt class="text-sm text-ink/80">{f.k}</dt><dd class="font-serif text-lg font-semibold text-navy">{f.v}</dd></div>))}
-  </dl>
-</div></section>
-
-<!-- TUITION -->
+<!-- FEES: examination fees + annual tuition merged -->
 <section id="tuition" class="bg-cream"><div class="mx-auto max-w-5xl px-6 py-20">
   <div class="rule-gold mb-6"></div>
-  <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.tuitionTitle}</h2>
-  <table class="reveal mt-8 w-full overflow-hidden rounded-2xl border border-black/10 bg-white text-left text-sm">
-    <thead class="bg-navy-900 text-white"><tr><th class="px-5 py-3 font-semibold">{tuition.labels.level}</th><th class="px-5 py-3 font-semibold">{tuition.labels.year}</th><th class="px-5 py-3 font-semibold">{tuition.labels.entrance}</th></tr></thead>
-    <tbody>{tuition.rows.map((r)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}</tbody>
-  </table>
-  <p class="mt-4 text-xs text-ink/55">{tuition.note}</p>
-  <h3 class="reveal mt-12 font-serif text-xl font-semibold text-navy-900">{c.byCampus}</h3>
-  <div class="mt-5 flex flex-wrap gap-2">
-    {branches.map((b)=>(<a href={p(`/admissions/tuition/${b.slug}`)} class="rounded-full border border-navy/20 bg-white px-4 py-2 text-sm font-medium text-navy transition hover:bg-navy hover:text-white">{b.name}</a>))}
+  <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.feesTitle}</h2>
+
+  <h3 class="reveal mt-10 font-serif text-xl font-semibold text-navy-900">{c.examTitle}</h3>
+  <dl class="mt-5 max-w-xl divide-y divide-black/10 border-y border-black/10">
+    {c.exam.map((f)=>(<div class="flex items-center justify-between py-3.5"><dt class="text-sm text-ink/80">{f.k}</dt><dd class="font-serif text-lg font-semibold text-navy">{f.v}</dd></div>))}
+  </dl>
+
+  <h3 class="reveal mt-14 font-serif text-xl font-semibold text-navy-900">{c.byCampus}</h3>
+  <p class="mt-1 text-sm text-ink/55">{c.pick}</p>
+  <div data-campus-picker class="mt-5 flex flex-wrap gap-2">
+    {branches.map((b,i)=>(
+      <button type="button" data-campus data-name={b.name} data-city={b.city} data-address={b.address} data-hours={b.hours}
+        class:list={["campus-chip rounded-none border px-4 py-2 text-sm font-medium transition", i===0 ? "border-navy-900 bg-navy-900 text-white" : "border-navy/25 text-navy hover:bg-white"]}>{b.name}</button>
+    ))}
+  </div>
+
+  <div class="mt-6 rounded-2xl border border-black/10 bg-white p-6">
+    <p class="text-xs font-semibold uppercase tracking-wide text-gold"><span data-campus-city>{branches[0].city}</span></p>
+    <p class="mt-1 font-serif text-2xl font-semibold text-navy-900" data-campus-name>{branches[0].name}</p>
+    <p class="mt-1 text-sm text-ink/65"><span data-campus-address>{branches[0].address}</span> · <span data-campus-hours>{branches[0].hours}</span></p>
+    <table class="mt-6 w-full overflow-hidden rounded-xl border border-black/10 text-left text-sm">
+      <thead class="bg-navy-900 text-white"><tr><th class="px-5 py-3 font-semibold">{tuition.labels.level}</th><th class="px-5 py-3 font-semibold">{tuition.labels.year}</th><th class="px-5 py-3 font-semibold">{tuition.labels.entrance}</th></tr></thead>
+      <tbody>{tuition.rows.map((r)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}</tbody>
+    </table>
+    <p class="mt-4 text-xs text-ink/55">{tuition.note}</p>
   </div>
 </div></section>
 
@@ -63,5 +68,18 @@ const c = {
 </div></section>
 
 <section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 pb-20 pt-4 text-center">
-  <a href={p("/contact")} class="inline-block rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-navy-900 transition hover:brightness-95">{c.apply}</a>
+  <a href={p("/contact")} class="inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.apply}</a>
 </div></section>
+
+<script>
+  const picker = document.querySelector("[data-campus-picker]");
+  if (picker) {
+    const chips = Array.from(picker.querySelectorAll<HTMLButtonElement>("[data-campus]"));
+    const set = (el: HTMLElement, key: string) => { const t = document.querySelector(`[data-campus-${key}]`); if (t) t.textContent = el.dataset[key] || ""; };
+    chips.forEach((chip) => chip.addEventListener("click", () => {
+      chips.forEach((x) => { x.classList.remove("border-navy-900","bg-navy-900","text-white"); x.classList.add("border-navy/25","text-navy"); });
+      chip.classList.add("border-navy-900","bg-navy-900","text-white"); chip.classList.remove("border-navy/25","text-navy");
+      set(chip,"name"); set(chip,"city"); set(chip,"address"); set(chip,"hours");
+    }));
+  }
+</script>
