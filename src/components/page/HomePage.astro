@@ -1,12 +1,12 @@
 ---
 import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
-import Molecule from "../Molecule.astro";
 import CurvedDivider from "../CurvedDivider.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
 import branchesKo from "../../data/branches.json";
 import branchesEn from "../../data/en/branches.json";
+import media from "../../data/media.json";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useT(locale);
@@ -14,125 +14,91 @@ const p = (path: string) => localizePath(path, locale);
 const site = locale === "en" ? siteEn : siteKo;
 const branches = locale === "en" ? branchesEn : branchesKo;
 const c = {
-  ko: { heroTitle: "STEM 학습을 삶으로", heroSub: "유아부부터 중등부까지 · 전국 5개 도시 캠퍼스", rotate: ["자신감","호기심","역량"], rotatePre: "아이들이 ", rotatePost: " 을 키웁니다", missionTitle: "독립적으로 사고하고 더 나은 사회에 기여하는 미래의 혁신가를 키웁니다.", introEyebrow: "교육 철학", introTitle: "대한민국 유일의 국제 과학 학교", introBody: "21세기 아이의 잠재력을 여는 데에는 탄탄한 STEM 기초가 필수입니다. 유아부터 중등까지 이어지는 한빛의 고유 STEM 교육과정을 만나보세요.", diffEyebrow: "한빛의 차별점", diffTitle: "과학의 시선으로,\n아이의 모든 면을 키웁니다", diff: [ {t:"전인 교육",d:"비판적 사고, 정서적 회복탄력성, 사회성, 신체 발달까지 균형 있게."}, {t:"프로젝트 기반 학습",d:"아이의 호기심을 따라 개별 맞춤 활동과 멘토링으로."}, {t:"연령별 심화 프로그램",d:"방과후·토요학교·시즌 프로그램으로 모든 연령이 과학을 경험."}, {t:"혁신과 기업가정신",d:"창의력과 문제 해결력, 협업 역량을 기릅니다."} ], levelsEyebrow:"실생활을 위한 과학", levelsTitle:"한빛에서의 배움", levels:[{t:"유아 · 유치부",a:"만 1.5–6세",href:"/learning/preschool-kindergarten"},{t:"초등부",a:"만 6–11세",href:"/learning/primary"},{t:"중등부",a:"만 11–15세",href:"/learning/secondary"},{t:"IGCSE · A-Level",a:"케임브리지",href:"/learning/igcse-a-level"}], numbersTitle:"숫자로 보는 한빛", locEyebrow:"서울 · 부산 · 대전 · 대구 · 광주", locTitle:"하나의 한빛,\n다섯 도시", visitTitle:"다음 단계: 방문 예약", visitBody:"캠퍼스 투어와 입학 설명회에서 한빛을 직접 만나보세요." },
-  en: { heroTitle: "Bringing STEM Learning to Life", heroSub: "Preschool to Secondary · campuses in 5 cities", rotate:["Confidence","Curiosity","Competence"], rotatePre:"Helping children grow with ", rotatePost:"", missionTitle:"We raise independent thinkers and future innovators ready to contribute to a better society.", introEyebrow:"Our philosophy", introTitle:"Korea's International Science School", introBody:"A strong STEM foundation is essential to unlocking a child's potential. Explore Hanbit's proprietary STEM curriculum — a continuous pathway from preschool to secondary.", diffEyebrow:"The Hanbit Difference", diffTitle:"Through the lens of science,\nwe develop the whole child", diff:[{t:"Whole-child development",d:"Critical thinking, emotional resilience, social aptitude and physical well-being, in balance."},{t:"Project-based learning",d:"Guided by each child's curiosity, with tailored activities and mentorship."},{t:"Enrichment for every age",d:"Afterschool, Saturday and seasonal programs let every age experience science."},{t:"Innovation & entrepreneurship",d:"We build creativity, problem-solving and collaboration."}], levelsEyebrow:"Science for the real world", levelsTitle:"Learning at Hanbit", levels:[{t:"Preschool & Kindergarten",a:"Ages 1.5–6",href:"/learning/preschool-kindergarten"},{t:"Primary",a:"Ages 6–11",href:"/learning/primary"},{t:"Secondary",a:"Ages 11–15",href:"/learning/secondary"},{t:"IGCSE · A-Level",a:"Cambridge",href:"/learning/igcse-a-level"}], numbersTitle:"Hanbit by the Numbers", locEyebrow:"Seoul · Busan · Daejeon · Daegu · Gwangju", locTitle:"One Hanbit,\nFive Cities", visitTitle:"Next Steps: Schedule a Visit", visitBody:"Meet Hanbit in person on a campus tour or at an information session." }
+  ko: { heroTitle:"STEM 학습을 삶으로", heroSub:"유아부부터 중등부까지 · 전국 5개 도시 캠퍼스", missionTitle:"독립적으로 사고하고 더 나은 사회에 기여하는 미래의 혁신가를 키웁니다.", introEyebrow:"교육 철학", introTitle:"대한민국 유일의\n국제 과학 학교", introBody:"21세기 아이의 잠재력을 여는 데에는 탄탄한 STEM 기초가 필수입니다. 유아부터 중등까지 이어지는 한빛의 고유 STEM 교육과정을 만나보세요. 초기에 쌓은 과학적 탐구와 실험의 기초는 프로그래밍, 공학, 기술, 기업가정신으로 이어집니다.", curriculum:"교육과정 보기", diffEyebrow:"한빛의 차별점", diffTitle:"과학의 시선으로,\n아이의 모든 면을 키웁니다", diff:[{t:"전인 교육",d:"비판적 사고, 정서적 회복탄력성, 사회성, 신체 발달까지 균형 있게."},{t:"프로젝트 기반 학습",d:"아이의 호기심을 따라 개별 맞춤 활동과 멘토링으로."},{t:"연령별 심화 프로그램",d:"방과후·토요학교·시즌 프로그램으로 모든 연령이 과학을 경험."},{t:"혁신과 기업가정신",d:"창의력과 문제 해결력, 협업 역량을 기릅니다."}], levelsEyebrow:"실생활을 위한 과학", levelsTitle:"한빛에서의 배움", levels:[{t:"유아 · 유치부",a:"만 1.5–6세",href:"/learning/preschool-kindergarten",cat:"kindergarten,children"},{t:"초등부",a:"만 6–11세",href:"/learning/primary",cat:"primary,school,children"},{t:"중등부",a:"만 11–15세",href:"/learning/secondary",cat:"students,classroom,science"},{t:"IGCSE · A-Level",a:"케임브리지",href:"/learning/igcse-a-level",cat:"students,laptop,study"}], numbersTitle:"숫자로 보는 한빛", locEyebrow:"서울 · 부산 · 대전 · 대구 · 광주", locTitle:"하나의 한빛,\n다섯 도시", visitTitle:"다음 단계: 방문 예약", visitBody:"캠퍼스 투어와 입학 설명회에서 한빛을 직접 만나보세요.", explore:"캠퍼스 보기", visit:"방문 예약" },
+  en: { heroTitle:"Bringing STEM Learning to Life", heroSub:"Preschool to Secondary · campuses in 5 cities", missionTitle:"We raise independent thinkers and future innovators ready to contribute to a better society.", introEyebrow:"Our philosophy", introTitle:"Korea's International\nScience School", introBody:"A strong STEM foundation is essential to unlocking a child's potential in the 21st century. Explore Hanbit's proprietary STEM curriculum — a continuous pathway from preschool to secondary. Early inquiry and experimentation progress into programming, engineering, technology and entrepreneurship.", curriculum:"See the curriculum", diffEyebrow:"The Hanbit Difference", diffTitle:"Through the lens of science,\nwe develop the whole child", diff:[{t:"Whole-child development",d:"Critical thinking, emotional resilience, social aptitude and physical well-being, in balance."},{t:"Project-based learning",d:"Guided by each child's curiosity, with tailored activities and mentorship."},{t:"Enrichment for every age",d:"Afterschool, Saturday and seasonal programs let every age experience science."},{t:"Innovation & entrepreneurship",d:"We build creativity, problem-solving and collaboration."}], levelsEyebrow:"Science for the real world", levelsTitle:"Learning at Hanbit", levels:[{t:"Preschool & Kindergarten",a:"Ages 1.5–6",href:"/learning/preschool-kindergarten",cat:"kindergarten,children"},{t:"Primary",a:"Ages 6–11",href:"/learning/primary",cat:"primary,school,children"},{t:"Secondary",a:"Ages 11–15",href:"/learning/secondary",cat:"students,classroom,science"},{t:"IGCSE · A-Level",a:"Cambridge",href:"/learning/igcse-a-level",cat:"students,laptop,study"}], numbersTitle:"Hanbit by the Numbers", locEyebrow:"Seoul · Busan · Daejeon · Daegu · Gwangju", locTitle:"One Hanbit,\nFive Cities", visitTitle:"Next Steps: Schedule a Visit", visitBody:"Meet Hanbit in person on a campus tour or at an information session.", explore:"Explore campuses", visit:"Schedule a visit" }
 }[locale];
+const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-navy-700";
+const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
-<!-- HERO -->
-<section class="relative overflow-hidden bg-navy-900 text-white">
-  <div class="absolute inset-0 opacity-[0.14]" style="background-image: radial-gradient(circle,#fff 1px,transparent 1px); background-size: 28px 28px;"></div>
-  <Molecule class="absolute -right-8 top-20 w-44 h-44 float-slow opacity-30" />
-  <div class="relative mx-auto max-w-5xl px-6 py-32 text-center md:py-44">
-    <h1 class="reveal font-serif text-5xl font-semibold leading-[1.05] md:text-7xl">{c.heroTitle}</h1>
-    <p class="reveal mx-auto mt-7 max-w-lg text-base text-white/70 md:text-lg">{c.heroSub}</p>
-    <div class="reveal mt-10 flex flex-wrap justify-center gap-4">
-      <a href={p("/schools")} class="rounded-full bg-gold px-7 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{t("cta.explore")}</a>
-      <a href={p("/admissions")} class="rounded-full border border-white/30 px-7 py-3 text-sm font-semibold text-white transition hover:bg-white/10">{t("cta.visit")}</a>
+<!-- HERO: full-bleed photo, light wash, gold left headline -->
+<section class="relative isolate overflow-hidden bg-cream">
+  <img src={media.heroImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
+  <div class="absolute inset-0 bg-gradient-to-r from-white/92 via-white/60 to-white/20"></div>
+  <div class="relative mx-auto max-w-6xl px-6 py-36 md:py-52">
+    <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
+    <p class="reveal mt-6 max-w-md text-base font-medium text-navy-900/80 md:text-lg">{c.heroSub}</p>
+    <div class="reveal mt-10 flex flex-wrap gap-4">
+      <a href={p("/schools")} class={btnFill}>{c.explore}</a>
+      <a href={p("/admissions")} class={btnLine}>{c.visit}</a>
     </div>
   </div>
-  <CurvedDivider color="#f7f1e3" />
+  <div class="relative"><CurvedDivider color="#f7f1e3" /></div>
 </section>
 
 <!-- MISSION -->
-<section class="bg-cream">
-  <div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
-    <div class="rule-gold mx-auto mb-8"></div>
-    <p class="font-serif text-3xl font-medium leading-snug text-navy-900 md:text-4xl">{c.missionTitle}</p>
-  </div>
-</section>
+<section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 pb-24 pt-4 text-center">
+  <div class="rule-gold mx-auto mb-8"></div>
+  <p class="font-serif text-3xl font-medium leading-snug text-navy-900 md:text-4xl">{c.missionTitle}</p>
+</div></section>
 
-<!-- INTRO (editorial 2-col) -->
+<!-- INTRO: text left, image bleeds to right edge -->
 <section class="bg-white">
-  <div class="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-2">
-    <div class="reveal">
-      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold">{c.introEyebrow}</p>
-      <h2 class="mt-3 font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.introTitle}</h2>
-      <div class="rule-gold my-6"></div>
+  <div class="grid items-stretch md:grid-cols-2">
+    <div class="reveal flex flex-col justify-center px-6 py-24 md:ml-auto md:max-w-xl md:py-32 md:pr-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.introEyebrow}</p>
+      <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-gold md:text-5xl">{c.introTitle}</h2>
+      <div class="rule-gold my-7"></div>
       <p class="leading-relaxed text-ink/75">{c.introBody}</p>
-      <a href={p("/learning")} class="mt-8 inline-block text-sm font-semibold text-navy underline decoration-gold decoration-2 underline-offset-4 hover:text-gold">{t("cta.curriculum")} →</a>
+      <a href={p("/learning")} class={`mt-9 ${btnLine}`}>{c.curriculum}</a>
     </div>
-    <Figure alt={locale === "en" ? "Students doing a science experiment" : "과학 실험을 하는 학생들"} class="reveal aspect-[4/5]" rounded="rounded-[2rem]" />
+    <Figure alt={locale === "en" ? "Students doing a science experiment" : "과학 실험을 하는 학생들"} cat="science,laboratory,children" class="min-h-[360px] md:min-h-full" rounded="rounded-none" />
   </div>
 </section>
 
-<!-- THE DIFFERENCE (editorial numbered list) -->
-<section class="bg-navy-900 text-white">
-  <div class="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.2fr]">
-    <div class="reveal">
-      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold-soft">{c.diffEyebrow}</p>
-      <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight md:text-5xl">{c.diffTitle}</h2>
-    </div>
-    <div data-reveal-children class="divide-y divide-white/15">
-      {c.diff.map((d, i) => (
-        <div class="flex gap-6 py-6 first:pt-0">
-          <span class="font-serif text-3xl font-semibold text-gold-soft">{String(i+1).padStart(2,"0")}</span>
-          <div><h3 class="font-serif text-2xl font-semibold">{d.t}</h3><p class="mt-2 text-sm leading-relaxed text-white/70">{d.d}</p></div>
-        </div>
-      ))}
-    </div>
+<!-- DIFFERENCE -->
+<section class="bg-navy-900 text-white"><div class="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.2fr]">
+  <div class="reveal">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">{c.diffEyebrow}</p>
+    <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight md:text-5xl">{c.diffTitle}</h2>
   </div>
-</section>
+  <div data-reveal-children class="divide-y divide-white/15">
+    {c.diff.map((d,i)=>(<div class="flex gap-6 py-6 first:pt-0"><span class="font-serif text-3xl font-semibold text-gold-soft">{String(i+1).padStart(2,"0")}</span><div><h3 class="font-serif text-2xl font-semibold">{d.t}</h3><p class="mt-2 text-sm leading-relaxed text-white/70">{d.d}</p></div></div>))}
+  </div>
+</div></section>
 
-<!-- LEVELS (large photo tiles, overlaid serif title) -->
-<section class="bg-white">
-  <div class="mx-auto max-w-6xl px-6 py-24">
-    <div class="reveal text-center">
-      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold">{c.levelsEyebrow}</p>
-      <h2 class="mt-3 font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.levelsTitle}</h2>
-    </div>
-    <div data-reveal-children class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      {c.levels.map((l) => (
-        <a href={p(l.href)} class="group relative block aspect-[3/4] overflow-hidden rounded-[1.5rem]">
-          <Figure alt={l.t} class="absolute inset-0 h-full w-full" rounded="rounded-none" />
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/20 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-6 text-white">
-            <p class="text-xs font-semibold uppercase tracking-wide text-gold-soft">{l.a}</p>
-            <h3 class="mt-1 font-serif text-2xl font-semibold leading-tight">{l.t}</h3>
-          </div>
-        </a>
-      ))}
-    </div>
+<!-- LEVELS -->
+<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-24">
+  <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.levelsEyebrow}</p><h2 class="mt-3 font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.levelsTitle}</h2></div>
+  <div data-reveal-children class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {c.levels.map((l)=>(<a href={p(l.href)} class="group relative block aspect-[3/4] overflow-hidden">
+      <Figure alt={l.t} cat={l.cat} class="absolute inset-0 h-full w-full" rounded="rounded-none" />
+      <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/20 to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 p-6 text-white"><p class="text-xs font-semibold uppercase tracking-wide text-gold-soft">{l.a}</p><h3 class="mt-1 font-serif text-2xl font-semibold leading-tight">{l.t}</h3></div>
+    </a>))}
   </div>
-</section>
+</div></section>
 
-<!-- BY NUMBERS -->
-<section class="bg-cream">
-  <div class="mx-auto max-w-6xl px-6 py-24">
-    <h2 class="reveal text-center font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.numbersTitle}</h2>
-    <div data-reveal-children class="mt-14 grid grid-cols-2 gap-10 md:grid-cols-4">
-      {site.stats.map((s) => (
-        <div class="text-center"><p class="font-serif text-5xl font-semibold text-gold md:text-6xl"><span data-count-up={String(s.value)}>0</span>{s.suffix}</p><p class="mt-3 text-sm text-ink/65">{s.label}</p></div>
-      ))}
-    </div>
+<!-- BY NUMBERS: navy, gold, left-aligned -->
+<section class="bg-navy-900 text-white"><div class="mx-auto max-w-6xl px-6 py-24">
+  <p class="reveal font-serif text-3xl font-semibold text-gold-soft">{c.numbersTitle}</p>
+  <div data-reveal-children class="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
+    {site.stats.map((s)=>(<div><p class="font-serif text-6xl font-semibold text-gold md:text-7xl"><span data-count-up={String(s.value)}>0</span>{s.suffix}</p><p class="mt-3 text-sm text-white/65">{s.label}</p></div>))}
   </div>
-</section>
+</div></section>
 
 <!-- LOCATIONS -->
-<section class="bg-navy-900 text-white">
-  <div class="mx-auto max-w-6xl px-6 py-24">
-    <div class="reveal">
-      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gold-soft">{c.locEyebrow}</p>
-      <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight md:text-5xl">{c.locTitle}</h2>
-    </div>
-    <div data-reveal-children class="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
-      {branches.map((b) => (
-        <a href={p(`/schools/${b.slug}`)} class="group bg-navy-900 p-7 transition hover:bg-navy-700">
-          <p class="text-xs font-semibold uppercase tracking-wide text-gold-soft">{b.city}</p>
-          <h3 class="mt-1 font-serif text-2xl font-semibold">{b.name}</h3>
-          <p class="mt-2 text-sm text-white/60">{b.levels}</p>
-        </a>
-      ))}
-    </div>
-    <a href={p("/schools")} class="reveal mt-10 inline-block text-sm font-semibold text-gold-soft underline decoration-gold decoration-2 underline-offset-4 hover:text-white">{t("cta.seeMap")} →</a>
+<section class="bg-cream"><div class="mx-auto max-w-6xl px-6 py-24">
+  <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2></div>
+  <div data-reveal-children class="mt-12 grid gap-px overflow-hidden bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
+    {branches.map((b)=>(<a href={p(`/schools/${b.slug}`)} class="group bg-cream p-7 transition hover:bg-white"><p class="text-xs font-semibold uppercase tracking-wide text-gold">{b.city}</p><h3 class="mt-1 font-serif text-2xl font-semibold text-navy-900">{b.name}</h3><p class="mt-2 text-sm text-ink/65">{b.levels}</p></a>))}
   </div>
-</section>
+  <a href={p("/schools")} class={`mt-10 ${btnLine}`}>{t("cta.seeMap")}</a>
+</div></section>
 
 <!-- VISIT -->
-<section class="bg-cream">
-  <div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
-    <div class="rule-gold mx-auto mb-8"></div>
-    <h2 class="font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.visitTitle}</h2>
-    <p class="mx-auto mt-5 max-w-lg text-ink/70">{c.visitBody}</p>
-    <a href={p("/contact")} class="mt-9 inline-block rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-navy-900 transition hover:brightness-95">{t("cta.visit")}</a>
-  </div>
-</section>
+<section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
+  <div class="rule-gold mx-auto mb-8"></div>
+  <h2 class="font-serif text-4xl font-semibold md:text-5xl">{c.visitTitle}</h2>
+  <p class="mx-auto mt-5 max-w-lg text-white/70">{c.visitBody}</p>
+  <a href={p("/contact")} class="mt-9 inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.visit}</a>
+</div></section>
