@@ -1,0 +1,35 @@
+---
+import { useT, localizePath, type Locale } from "../../i18n/ui";
+import Figure from "../Figure.astro";
+import pagesKo from "../../data/pages.json";
+import pagesEn from "../../data/en/pages.json";
+interface Props { locale: Locale; pageKey: string; }
+const { locale, pageKey } = Astro.props;
+const t = useT(locale);
+const p = (path: string) => localizePath(path, locale);
+const data = (locale === "en" ? pagesEn : pagesKo) as Record<string, any>;
+const c = data[pageKey];
+---
+<section class="bg-navy-900 text-white">
+  <div class="reveal mx-auto max-w-6xl px-5 py-20">
+    <p class="text-sm font-semibold uppercase tracking-wide text-gold">{c.eyebrow}</p>
+    <h1 class="mt-2 font-serif text-4xl font-semibold md:text-5xl">{c.title}</h1>
+    <p class="mt-5 max-w-2xl text-white/75">{c.intro}</p>
+  </div>
+</section>
+<section class="bg-white">
+  <div class="mx-auto max-w-6xl px-5 py-16">
+    <div class="grid gap-10 md:grid-cols-2">
+      <Figure alt={c.title} class="reveal aspect-[4/3]" />
+      <div data-reveal-children class="flex flex-col justify-center gap-6">
+        {c.sections.map((s: any) => (
+          <div>
+            <h2 class="font-serif text-xl font-semibold text-navy-900">{s.h}</h2>
+            <p class="mt-2 leading-relaxed text-ink/75">{s.b}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <a href={p("/admissions")} class="reveal mt-12 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{t("nav.apply")}</a>
+  </div>
+</section>

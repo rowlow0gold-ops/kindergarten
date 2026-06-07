@@ -1,0 +1,22 @@
+---
+import { localizePath, type Locale } from "../../i18n/ui";
+import evKo from "../../data/events.json";
+import evEn from "../../data/en/events.json";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const p = (path: string) => localizePath(path, locale);
+const items = (locale === "en" ? evEn : evKo).slice().sort((a,b)=>a.date.localeCompare(b.date));
+const title = locale === "en" ? "Visits & Info Sessions" : "행사 · 설명회";
+---
+<section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-5 py-20"><h1 class="font-serif text-4xl font-semibold md:text-5xl">{title}</h1></div></section>
+<section class="bg-cream"><div class="mx-auto max-w-4xl px-5 py-16">
+  <div data-reveal-children class="grid gap-5 sm:grid-cols-2">
+    {items.map((e)=>(
+      <a href={p(`/events/${e.slug}`)} class="group rounded-2xl bg-white p-6 shadow-sm transition hover:shadow-md">
+        <div class="flex items-center gap-3 text-xs"><span class="rounded-full bg-cream px-2.5 py-1 font-semibold text-navy">{e.category}</span><time class="text-ink/50">{e.date}</time></div>
+        <h2 class="mt-2 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{e.title}</h2>
+        <p class="mt-1 text-sm text-ink/70">{e.time} · {e.location}</p>
+      </a>
+    ))}
+  </div>
+</div></section>

@@ -1,0 +1,18 @@
+---
+import { localizePath, type Locale } from "../../i18n/ui";
+interface Props { locale: Locale; item: any; }
+const { locale, item } = Astro.props;
+const p = (path: string) => localizePath(path, locale);
+const back = locale === "en" ? "← All events" : "← 행사 전체보기";
+const visit = locale === "en" ? "Book a visit" : "방문 예약";
+---
+<section class="bg-navy-900 text-white"><div class="mx-auto max-w-3xl px-5 py-16">
+  <a href={p("/events")} class="text-sm text-white/70 hover:text-gold-soft">{back}</a>
+  <div class="reveal mt-6 flex items-center gap-3 text-xs"><span class="rounded-full bg-white/10 px-2.5 py-1 font-semibold text-gold-soft">{item.category}</span><time class="text-white/60">{item.date}</time></div>
+  <h1 class="reveal mt-2 font-serif text-3xl font-semibold md:text-4xl">{item.title}</h1>
+  <p class="reveal mt-3 text-white/75">{item.time} · {item.location}</p>
+</div></section>
+<section class="bg-white"><div class="reveal mx-auto max-w-3xl px-5 py-14">
+  <p class="text-lg leading-relaxed text-ink/80">{item.body}</p>
+  <a href={p("/contact")} class="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{visit}</a>
+</div></section>

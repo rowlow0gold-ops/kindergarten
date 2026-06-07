@@ -1,0 +1,5 @@
+[
+  { "slug": "info-session-jun", "date": "2026-06-20", "time": "10:00 – 11:30", "location": "Gangnam Campus", "category": "Info session", "title": "2027 Admissions Info Session (June)", "excerpt": "An information session for prospective 2027 students.", "body": "We introduce Hanbit's philosophy and curriculum and tour the campus. Pre-booking is recommended." },
+  { "slug": "trial-lesson-jul", "date": "2026-07-04", "time": "10:00 – 11:30", "location": "Haeundae Campus", "category": "Trial lesson", "title": "Preschool & Kindergarten Trial Lesson (July)", "excerpt": "A hands-on science trial lesson for your child.", "body": "Experience a Hanbit lesson first-hand through a trial class your child takes part in." },
+  { "slug": "open-day-aug", "date": "2026-08-23", "time": "13:30 – 15:00", "location": "Yuseong Campus", "category": "Open day", "title": "Yuseong Campus Open Day", "excerpt": "Tour our Daejeon Yuseong campus in person.", "body": "An open day to tour facilities and classrooms and meet our teachers." }
+]

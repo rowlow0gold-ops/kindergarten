@@ -1,0 +1,8 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import NewsDetail from "../../../components/page/NewsDetail.astro";
+import news from "../../../data/en/news.json";
+export function getStaticPaths(){ return news.map((n)=>({ params:{ slug:n.slug }, props:{ item:n } })); }
+const { item } = Astro.props;
+---
+<Layout title={`${item.title} · Hanbit International School of Science`}><NewsDetail locale="en" item={item} /></Layout>

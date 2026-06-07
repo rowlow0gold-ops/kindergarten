@@ -1,0 +1,8 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import EventDetail from "../../../components/page/EventDetail.astro";
+import events from "../../../data/en/events.json";
+export function getStaticPaths(){ return events.map((e)=>({ params:{ slug:e.slug }, props:{ item:e } })); }
+const { item } = Astro.props;
+---
+<Layout title={`${item.title} · Hanbit International School of Science`}><EventDetail locale="en" item={item} /></Layout>
