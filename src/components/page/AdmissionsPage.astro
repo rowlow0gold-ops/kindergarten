@@ -10,16 +10,14 @@ interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useT(locale);
 const p = (path: string) => localizePath(path, locale);
-const tuition = locale === "en" ? tEn : tKo;
+const tuition = (locale === "en" ? tEn : tKo) as any;
 const faq = (locale === "en" ? faqEn : faqKo).admissions;
 const branches = locale === "en" ? branchesEn : branchesKo;
+const first = branches[0];
+const firstRows = tuition.campuses[first.slug];
 const c = {
-  ko: { title:"입학 안내", sub:"2027학년도 신입생을 모집합니다.",
-    feesTitle:"학비 안내", examTitle:"전형료", exam:[{k:"유아부 체험 수업",v:"₩20,000"},{k:"유치부 전형료",v:"₩90,000"}],
-    byCampus:"캠퍼스별 연간 학비", pick:"캠퍼스를 선택하세요", faqTitle:"입학 FAQ", apply:"지원하기" },
-  en: { title:"Admissions", sub:"Now accepting applications for 2027.",
-    feesTitle:"Fees", examTitle:"Examination fees", exam:[{k:"Preschool trial lesson",v:"₩20,000"},{k:"Kindergarten fee",v:"₩90,000"}],
-    byCampus:"Annual tuition by campus", pick:"Select a campus", faqTitle:"Admissions FAQ", apply:"Apply" },
+  ko: { title:"입학 안내", sub:"2027학년도 신입생을 모집합니다.", feesTitle:"학비 안내", examTitle:"전형료", examLabels:{item:"항목",fee:"금액"}, exam:[{k:"유아부 체험 수업",v:"₩20,000"},{k:"유치부 전형료",v:"₩90,000"}], byCampus:"캠퍼스별 연간 학비", pick:"캠퍼스를 선택하세요", faqTitle:"입학 FAQ", apply:"지원하기" },
+  en: { title:"Admissions", sub:"Now accepting applications for 2027.", feesTitle:"Fees", examTitle:"Examination fees", examLabels:{item:"Item",fee:"Fee"}, exam:[{k:"Preschool trial lesson",v:"₩20,000"},{k:"Kindergarten fee",v:"₩90,000"}], byCampus:"Annual tuition by campus", pick:"Select a campus", faqTitle:"Admissions FAQ", apply:"Apply" },
 }[locale];
 ---
 <section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20 text-center">
@@ -27,38 +25,37 @@ const c = {
   <p class="mt-4 text-white/70">{c.sub}</p>
 </div></section>
 
-<!-- FEES: examination fees + annual tuition merged -->
 <section id="tuition" class="bg-cream"><div class="mx-auto max-w-5xl px-6 py-20">
   <div class="rule-gold mb-6"></div>
   <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.feesTitle}</h2>
 
   <h3 class="reveal mt-10 font-serif text-xl font-semibold text-navy-900">{c.examTitle}</h3>
-  <dl class="mt-5 max-w-xl divide-y divide-black/10 border-y border-black/10">
-    {c.exam.map((f)=>(<div class="flex items-center justify-between py-3.5"><dt class="text-sm text-ink/80">{f.k}</dt><dd class="font-serif text-lg font-semibold text-navy">{f.v}</dd></div>))}
-  </dl>
+  <table class="mt-5 w-full max-w-xl overflow-hidden rounded-xl border border-black/10 text-left text-sm">
+    <thead class="bg-navy-900 text-white"><tr><th class="px-5 py-3 font-semibold">{c.examLabels.item}</th><th class="px-5 py-3 font-semibold">{c.examLabels.fee}</th></tr></thead>
+    <tbody>{c.exam.map((f)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{f.k}</td><td class="px-5 py-4 text-ink/80">{f.v}</td></tr>))}</tbody>
+  </table>
 
   <h3 class="reveal mt-14 font-serif text-xl font-semibold text-navy-900">{c.byCampus}</h3>
   <p class="mt-1 text-sm text-ink/55">{c.pick}</p>
   <div data-campus-picker class="mt-5 flex flex-wrap gap-2">
     {branches.map((b,i)=>(
-      <button type="button" data-campus data-name={b.name} data-city={b.city} data-address={b.address} data-hours={b.hours}
+      <button type="button" data-campus data-name={b.name} data-city={b.city} data-address={b.address} data-hours={b.hours} data-rows={JSON.stringify(tuition.campuses[b.slug])}
         class:list={["campus-chip rounded-none border px-4 py-2 text-sm font-medium transition", i===0 ? "border-navy-900 bg-navy-900 text-white" : "border-navy/25 text-navy hover:bg-white"]}>{b.name}</button>
     ))}
   </div>
 
   <div class="mt-6 rounded-2xl border border-black/10 bg-white p-6">
-    <p class="text-xs font-semibold uppercase tracking-wide text-gold"><span data-campus-city>{branches[0].city}</span></p>
-    <p class="mt-1 font-serif text-2xl font-semibold text-navy-900" data-campus-name>{branches[0].name}</p>
-    <p class="mt-1 text-sm text-ink/65"><span data-campus-address>{branches[0].address}</span> · <span data-campus-hours>{branches[0].hours}</span></p>
+    <p class="text-xs font-semibold uppercase tracking-wide text-gold" data-campus-city>{first.city}</p>
+    <p class="mt-1 font-serif text-2xl font-semibold text-navy-900" data-campus-name>{first.name}</p>
+    <p class="mt-1 text-sm text-ink/65"><span data-campus-address>{first.address}</span> · <span data-campus-hours>{first.hours}</span></p>
     <table class="mt-6 w-full overflow-hidden rounded-xl border border-black/10 text-left text-sm">
       <thead class="bg-navy-900 text-white"><tr><th class="px-5 py-3 font-semibold">{tuition.labels.level}</th><th class="px-5 py-3 font-semibold">{tuition.labels.year}</th><th class="px-5 py-3 font-semibold">{tuition.labels.entrance}</th></tr></thead>
-      <tbody>{tuition.rows.map((r)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}</tbody>
+      <tbody data-fee-body>{firstRows.map((r:any)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}</tbody>
     </table>
     <p class="mt-4 text-xs text-ink/55">{tuition.note}</p>
   </div>
 </div></section>
 
-<!-- FAQ -->
 <section id="faq" class="bg-white"><div class="mx-auto max-w-3xl px-6 py-20">
   <div class="rule-gold mb-6"></div>
   <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.faqTitle}</h2>
@@ -75,11 +72,18 @@ const c = {
   const picker = document.querySelector("[data-campus-picker]");
   if (picker) {
     const chips = Array.from(picker.querySelectorAll<HTMLButtonElement>("[data-campus]"));
-    const set = (el: HTMLElement, key: string) => { const t = document.querySelector(`[data-campus-${key}]`); if (t) t.textContent = el.dataset[key] || ""; };
+    const body = document.querySelector("[data-fee-body]");
+    const setText = (key: string, val: string) => { const el = document.querySelector(`[data-campus-${key}]`); if (el) el.textContent = val; };
+    const renderRows = (rows: { level: string; year: string; entrance: string }[]) => {
+      if (!body) return;
+      body.innerHTML = rows.map((r) => `<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">${r.level}</td><td class="px-5 py-4 text-ink/80">${r.year}</td><td class="px-5 py-4 text-ink/80">${r.entrance}</td></tr>`).join("");
+    };
     chips.forEach((chip) => chip.addEventListener("click", () => {
       chips.forEach((x) => { x.classList.remove("border-navy-900","bg-navy-900","text-white"); x.classList.add("border-navy/25","text-navy"); });
       chip.classList.add("border-navy-900","bg-navy-900","text-white"); chip.classList.remove("border-navy/25","text-navy");
-      set(chip,"name"); set(chip,"city"); set(chip,"address"); set(chip,"hours");
+      setText("name", chip.dataset.name || ""); setText("city", chip.dataset.city || "");
+      setText("address", chip.dataset.address || ""); setText("hours", chip.dataset.hours || "");
+      try { renderRows(JSON.parse(chip.dataset.rows || "[]")); } catch {}
     }));
   }
 </script>

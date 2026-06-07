@@ -1,8 +1,12 @@
 {
-  "note": "※ Example figures for this demo. Actual fees vary by campus, class and programme — please contact the campus.",
-  "rows": [
-    { "level": "Preschool (ages 1.5–3)", "year": "₩9,600,000", "entrance": "₩1,000,000" },
-    { "level": "Kindergarten (ages 3–6)", "year": "₩10,800,000", "entrance": "₩1,000,000" }
-  ],
-  "labels": { "level": "Level", "year": "Annual fee", "entrance": "Entrance fee" }
+  "note": "※ Example figures for this demo. Actual fees vary by class and programme — please contact the campus.",
+  "labels": { "level": "Level", "year": "Annual fee", "entrance": "Entrance fee" },
+  "campuses": {
+    "seoul-gangnam":   [{"level":"Preschool (ages 1.5–3)","year":"₩10,800,000","entrance":"₩1,200,000"},{"level":"Kindergarten (ages 3–6)","year":"₩12,000,000","entrance":"₩1,200,000"}],
+    "seoul-seocho":    [{"level":"Preschool (ages 1.5–3)","year":"₩10,200,000","entrance":"₩1,200,000"},{"level":"Kindergarten (ages 3–6)","year":"₩11,400,000","entrance":"₩1,200,000"}],
+    "busan-haeundae":  [{"level":"Preschool (ages 1.5–3)","year":"₩9,000,000","entrance":"₩1,000,000"},{"level":"Kindergarten (ages 3–6)","year":"₩10,200,000","entrance":"₩1,000,000"}],
+    "daejeon-yuseong": [{"level":"Preschool (ages 1.5–3)","year":"₩8,400,000","entrance":"₩900,000"},{"level":"Kindergarten (ages 3–6)","year":"₩9,600,000","entrance":"₩900,000"}],
+    "daegu-suseong":   [{"level":"Preschool (ages 1.5–3)","year":"₩8,400,000","entrance":"₩900,000"},{"level":"Kindergarten (ages 3–6)","year":"₩9,600,000","entrance":"₩900,000"}],
+    "gwangju-namgu":   [{"level":"Preschool (ages 1.5–3)","year":"₩7,800,000","entrance":"₩800,000"},{"level":"Kindergarten (ages 3–6)","year":"₩9,000,000","entrance":"₩800,000"}]
+  }
 }
