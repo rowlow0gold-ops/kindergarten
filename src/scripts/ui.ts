@@ -87,12 +87,30 @@ function initRotator() {
   });
 }
 
+function initTabs() {
+  document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLElement>("[data-tab]"));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>("[data-panel]"));
+    if (!tabs.length) return;
+    const activate = (key: string) => {
+      tabs.forEach((b) => { const on = b.dataset.tab === key; b.classList.toggle("is-active", on); b.setAttribute("aria-selected", String(on)); });
+      panels.forEach((pn) => pn.classList.toggle("hidden", pn.dataset.panel !== key));
+      try { history.replaceState(null, "", "#" + key); } catch {}
+    };
+    tabs.forEach((b) => b.addEventListener("click", () => { if (b.dataset.tab) { activate(b.dataset.tab); window.scrollTo({ top: (root.offsetTop - 80), behavior: "smooth" }); } }));
+    const hash = location.hash.replace("#", "");
+    const first = tabs[0].dataset.tab as string;
+    activate(tabs.some((b) => b.dataset.tab === hash) ? hash : first);
+  });
+}
+
 function boot() {
   initScrollReveal();
   initHeaderScrollState();
   initMobileMenu();
   initCountUp();
   initRotator();
+  initTabs();
 }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

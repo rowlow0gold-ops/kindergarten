@@ -41,3 +41,6 @@ h1.font-serif, .display { font-weight: 600; }
   .float-slow { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+[data-tab] { border-bottom: 2px solid transparent; color: var(--color-ink); opacity: .55; transition: opacity .2s ease, color .2s ease, border-color .2s ease; }
+[data-tab].is-active { opacity: 1; color: var(--color-navy); border-bottom-color: var(--color-gold); }

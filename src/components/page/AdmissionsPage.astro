@@ -1,80 +1,77 @@
 ---
 import { useT, localizePath, type Locale } from "../../i18n/ui";
+import tKo from "../../data/tuition.json";
+import tEn from "../../data/en/tuition.json";
+import faqKo from "../../data/faq.json";
+import faqEn from "../../data/en/faq.json";
+import branchesKo from "../../data/branches.json";
+import branchesEn from "../../data/en/branches.json";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useT(locale);
 const p = (path: string) => localizePath(path, locale);
+const tuition = locale === "en" ? tEn : tKo;
+const faq = (locale === "en" ? faqEn : faqKo).admissions;
+const branches = locale === "en" ? branchesEn : branchesKo;
 const c = {
-  ko: {
-    title: "입학 안내", sub: "2027학년도 신입생을 모집합니다.",
-    stepsTitle: "지원 절차",
-    steps: [
-      { t: "입학 설명회 참석", d: "캠퍼스 투어와 설명회에서 한빛의 교육을 직접 확인하세요." },
-      { t: "원서 및 서류 제출", d: "지원서, 필요 서류, 전형료를 제출합니다." },
-      { t: "전형 및 학부모 면담", d: "학생 활동 관찰과 학부모 면담을 진행합니다." },
-      { t: "합격 및 등록", d: "합격 안내 후 등록 절차를 완료합니다." },
-    ],
-    feesTitle: "전형료 안내",
-    fees: [
-      { k: "유아부 체험 수업", v: "₩20,000" },
-      { k: "유치부 전형료", v: "₩90,000" },
-      { k: "초등부 전형료", v: "₩250,000" },
-      { k: "중등부 전형료", v: "₩350,000" },
-    ],
-    feeNote: "※ 데모용 예시 금액입니다. 실제 학비·전형료는 캠퍼스별로 안내됩니다.",
-    cta: "문의하기",
-  },
-  en: {
-    title: "Admissions", sub: "Now accepting applications for 2027.",
-    stepsTitle: "Application Process",
-    steps: [
-      { t: "Attend an info session", d: "See Hanbit's education first-hand on a campus tour or session." },
-      { t: "Submit application & documents", d: "Submit the application, required documents and the fee." },
-      { t: "Assessment & parent meeting", d: "A student observation and a parent meeting take place." },
-      { t: "Offer & enrolment", d: "Complete enrolment after the offer of admission." },
-    ],
-    feesTitle: "Examination Fees",
-    fees: [
-      { k: "Preschool trial lesson", v: "₩20,000" },
-      { k: "Kindergarten fee", v: "₩90,000" },
-      { k: "Primary fee", v: "₩250,000" },
-      { k: "Secondary fee", v: "₩350,000" },
-    ],
-    feeNote: "※ Example figures for this demo. Actual tuition & fees are provided per campus.",
-    cta: "Contact us",
-  },
+  ko: { title:"입학 안내", sub:"2027학년도 신입생을 모집합니다.", tabOverview:"입학 개요", tabTuition:"학비 안내", tabFaq:"입학 FAQ",
+    stepsTitle:"지원 절차", steps:[{t:"입학 설명회 참석",d:"캠퍼스 투어와 설명회에서 한빛의 교육을 직접 확인하세요."},{t:"원서 및 서류 제출",d:"지원서, 필요 서류, 전형료를 제출합니다."},{t:"전형 및 학부모 면담",d:"학생 활동 관찰과 학부모 면담을 진행합니다."},{t:"합격 및 등록",d:"합격 안내 후 등록 절차를 완료합니다."}],
+    examTitle:"전형료", exam:[{k:"유아부 체험 수업",v:"₩20,000"},{k:"유치부 전형료",v:"₩90,000"},{k:"초등부 전형료",v:"₩250,000"},{k:"중등부 전형료",v:"₩350,000"}],
+    tuitionTitle:"연간 학비 (예시)", byCampus:"캠퍼스별 상세 학비", apply:"지원하기" },
+  en: { title:"Admissions", sub:"Now accepting applications for 2027.", tabOverview:"Overview", tabTuition:"Tuition & Fees", tabFaq:"Admissions FAQ",
+    stepsTitle:"Application Process", steps:[{t:"Attend an info session",d:"See Hanbit's education first-hand on a campus tour or session."},{t:"Submit application & documents",d:"Submit the application, required documents and the fee."},{t:"Assessment & parent meeting",d:"A student observation and a parent meeting take place."},{t:"Offer & enrolment",d:"Complete enrolment after the offer of admission."}],
+    examTitle:"Examination fees", exam:[{k:"Preschool trial lesson",v:"₩20,000"},{k:"Kindergarten fee",v:"₩90,000"},{k:"Primary fee",v:"₩250,000"},{k:"Secondary fee",v:"₩350,000"}],
+    tuitionTitle:"Annual tuition (example)", byCampus:"Tuition by campus", apply:"Apply" },
 }[locale];
 ---
-<section class="bg-navy-900 text-white">
-  <div class="reveal mx-auto max-w-6xl px-5 py-20 text-center">
-    <h1 class="font-serif text-4xl font-semibold md:text-5xl">{c.title}</h1>
-    <p class="mt-4 text-white/70">{c.sub}</p>
+<section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20 text-center">
+  <h1 class="font-serif text-5xl font-semibold md:text-6xl">{c.title}</h1>
+  <p class="mt-4 text-white/70">{c.sub}</p>
+</div></section>
+
+<div data-tabs>
+  <div class="sticky top-[68px] z-30 border-b border-black/10 bg-white">
+    <nav class="mx-auto flex max-w-5xl justify-center gap-8 px-6">
+      <button data-tab="overview" class="py-4 text-sm font-semibold">{c.tabOverview}</button>
+      <button data-tab="tuition" class="py-4 text-sm font-semibold">{c.tabTuition}</button>
+      <button data-tab="faq" class="py-4 text-sm font-semibold">{c.tabFaq}</button>
+    </nav>
   </div>
-</section>
-<section class="bg-white">
-  <div class="mx-auto max-w-5xl px-5 py-16">
-    <h2 class="reveal font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{c.stepsTitle}</h2>
-    <div data-reveal-children class="mt-10 grid gap-6 md:grid-cols-2">
-      {c.steps.map((s, i) => (
-        <div class="flex gap-4 rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-          <span class="font-serif text-3xl font-semibold text-gold">{String(i + 1).padStart(2, "0")}</span>
-          <div><h3 class="font-serif text-lg font-semibold text-navy-900">{s.t}</h3><p class="mt-2 text-sm leading-relaxed text-ink/70">{s.d}</p></div>
-        </div>
-      ))}
+
+  <!-- OVERVIEW -->
+  <div data-panel="overview" class="bg-white"><div class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.stepsTitle}</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {c.steps.map((s,i)=>(<div class="flex gap-4 border-t border-black/10 pt-6"><span class="font-serif text-3xl font-semibold text-gold">{String(i+1).padStart(2,"0")}</span><div><h3 class="font-serif text-xl font-semibold text-navy-900">{s.t}</h3><p class="mt-2 text-sm leading-relaxed text-ink/70">{s.d}</p></div></div>))}
     </div>
-  </div>
-</section>
-<section class="bg-cream">
-  <div class="reveal mx-auto max-w-3xl px-5 py-16">
-    <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{c.feesTitle}</h2>
-    <dl class="mt-8 divide-y divide-black/10 rounded-2xl bg-white px-6">
-      {c.fees.map((f) => (
-        <div class="flex items-center justify-between py-4">
-          <dt class="text-sm text-ink/80">{f.k}</dt><dd class="font-serif text-lg font-semibold text-navy">{f.v}</dd>
-        </div>
-      ))}
+    <h3 class="mt-14 font-serif text-2xl font-semibold text-navy-900">{c.examTitle}</h3>
+    <dl class="mt-6 max-w-xl divide-y divide-black/10 border-y border-black/10">
+      {c.exam.map((f)=>(<div class="flex items-center justify-between py-3.5"><dt class="text-sm text-ink/80">{f.k}</dt><dd class="font-serif text-lg font-semibold text-navy">{f.v}</dd></div>))}
     </dl>
-    <p class="mt-4 text-xs text-ink/55">{c.feeNote}</p>
-    <a href={p("/contact")} class="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{c.cta}</a>
-  </div>
-</section>
+  </div></div>
+
+  <!-- TUITION -->
+  <div data-panel="tuition" class="hidden bg-white"><div class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.tuitionTitle}</h2>
+    <table class="mt-8 w-full overflow-hidden rounded-2xl border border-black/10 text-left text-sm">
+      <thead class="bg-cream text-navy"><tr><th class="px-5 py-3 font-semibold">{tuition.labels.level}</th><th class="px-5 py-3 font-semibold">{tuition.labels.year}</th><th class="px-5 py-3 font-semibold">{tuition.labels.entrance}</th></tr></thead>
+      <tbody>{tuition.rows.map((r)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}</tbody>
+    </table>
+    <p class="mt-4 text-xs text-ink/55">{tuition.note}</p>
+    <h3 class="mt-12 font-serif text-xl font-semibold text-navy-900">{c.byCampus}</h3>
+    <div class="mt-5 flex flex-wrap gap-2">
+      {branches.map((b)=>(<a href={p(`/admissions/tuition/${b.slug}`)} class="rounded-full border border-navy/20 px-4 py-2 text-sm font-medium text-navy transition hover:bg-cream">{b.name}</a>))}
+    </div>
+  </div></div>
+
+  <!-- FAQ -->
+  <div data-panel="faq" class="hidden bg-white"><div class="mx-auto max-w-3xl px-6 py-16">
+    <div class="space-y-3">
+      {faq.map((f)=>(<details class="group rounded-xl border border-black/10 p-1"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 font-serif text-lg font-semibold text-navy-900">{f.q}<svg class="shrink-0 transition group-open:rotate-180" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></summary><p class="px-4 pb-4 leading-relaxed text-ink/75">{f.a}</p></details>))}
+    </div>
+  </div></div>
+</div>
+
+<section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 py-16 text-center">
+  <a href={p("/contact")} class="inline-block rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-navy-900 transition hover:brightness-95">{c.apply}</a>
+</div></section>
