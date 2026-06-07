@@ -1,9 +1,8 @@
 {
-  "note": "※ Example figures for this demo. Actual tuition varies by campus, age and programme — please contact the campus.",
+  "note": "※ Example figures for this demo. Actual fees vary by campus, class and programme — please contact the campus.",
   "rows": [
-    { "level": "Preschool & Kindergarten", "year": "₩9,600,000", "entrance": "₩1,000,000" },
-    { "level": "Primary", "year": "₩12,000,000", "entrance": "₩1,500,000" },
-    { "level": "Secondary", "year": "₩14,000,000", "entrance": "₩1,500,000" }
+    { "level": "Preschool (ages 1.5–3)", "year": "₩9,600,000", "entrance": "₩1,000,000" },
+    { "level": "Kindergarten (ages 3–6)", "year": "₩10,800,000", "entrance": "₩1,000,000" }
   ],
-  "labels": { "level": "Level", "year": "Annual tuition", "entrance": "Entrance fee" }
+  "labels": { "level": "Level", "year": "Annual fee", "entrance": "Entrance fee" }
 }

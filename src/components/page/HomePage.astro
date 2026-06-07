@@ -14,13 +14,12 @@ const p = (path: string) => localizePath(path, locale);
 const site = locale === "en" ? siteEn : siteKo;
 const branches = locale === "en" ? branchesEn : branchesKo;
 const c = {
-  ko: { heroTitle:"STEM 학습을 삶으로", heroSub:"유아부부터 중등부까지 · 전국 5개 도시 캠퍼스", missionTitle:"독립적으로 사고하고 더 나은 사회에 기여하는 미래의 혁신가를 키웁니다.", introEyebrow:"교육 철학", introTitle:"대한민국 유일의\n국제 과학 학교", introBody:"21세기 아이의 잠재력을 여는 데에는 탄탄한 STEM 기초가 필수입니다. 유아부터 중등까지 이어지는 한빛의 고유 STEM 교육과정을 만나보세요. 초기에 쌓은 과학적 탐구와 실험의 기초는 프로그래밍, 공학, 기술, 기업가정신으로 이어집니다.", curriculum:"교육과정 보기", diffEyebrow:"한빛의 차별점", diffTitle:"과학의 시선으로,\n아이의 모든 면을 키웁니다", diff:[{t:"전인 교육",d:"비판적 사고, 정서적 회복탄력성, 사회성, 신체 발달까지 균형 있게."},{t:"프로젝트 기반 학습",d:"아이의 호기심을 따라 개별 맞춤 활동과 멘토링으로."},{t:"연령별 심화 프로그램",d:"방과후·토요학교·시즌 프로그램으로 모든 연령이 과학을 경험."},{t:"혁신과 기업가정신",d:"창의력과 문제 해결력, 협업 역량을 기릅니다."}], levelsEyebrow:"실생활을 위한 과학", levelsTitle:"한빛에서의 배움", levels:[{t:"유아 · 유치부",a:"만 1.5–6세",href:"/learning/preschool-kindergarten",cat:"kindergarten,children"},{t:"초등부",a:"만 6–11세",href:"/learning/primary",cat:"primary,school,children"},{t:"중등부",a:"만 11–15세",href:"/learning/secondary",cat:"students,classroom,science"},{t:"IGCSE · A-Level",a:"케임브리지",href:"/learning/igcse-a-level",cat:"students,laptop,study"}], numbersTitle:"숫자로 보는 한빛", locEyebrow:"서울 · 부산 · 대전 · 대구 · 광주", locTitle:"하나의 한빛,\n다섯 도시", visitTitle:"다음 단계: 방문 예약", visitBody:"캠퍼스 투어와 입학 설명회에서 한빛을 직접 만나보세요.", explore:"캠퍼스 보기", visit:"방문 예약" },
-  en: { heroTitle:"Bringing STEM Learning to Life", heroSub:"Preschool to Secondary · campuses in 5 cities", missionTitle:"We raise independent thinkers and future innovators ready to contribute to a better society.", introEyebrow:"Our philosophy", introTitle:"Korea's International\nScience School", introBody:"A strong STEM foundation is essential to unlocking a child's potential in the 21st century. Explore Hanbit's proprietary STEM curriculum — a continuous pathway from preschool to secondary. Early inquiry and experimentation progress into programming, engineering, technology and entrepreneurship.", curriculum:"See the curriculum", diffEyebrow:"The Hanbit Difference", diffTitle:"Through the lens of science,\nwe develop the whole child", diff:[{t:"Whole-child development",d:"Critical thinking, emotional resilience, social aptitude and physical well-being, in balance."},{t:"Project-based learning",d:"Guided by each child's curiosity, with tailored activities and mentorship."},{t:"Enrichment for every age",d:"Afterschool, Saturday and seasonal programs let every age experience science."},{t:"Innovation & entrepreneurship",d:"We build creativity, problem-solving and collaboration."}], levelsEyebrow:"Science for the real world", levelsTitle:"Learning at Hanbit", levels:[{t:"Preschool & Kindergarten",a:"Ages 1.5–6",href:"/learning/preschool-kindergarten",cat:"kindergarten,children"},{t:"Primary",a:"Ages 6–11",href:"/learning/primary",cat:"primary,school,children"},{t:"Secondary",a:"Ages 11–15",href:"/learning/secondary",cat:"students,classroom,science"},{t:"IGCSE · A-Level",a:"Cambridge",href:"/learning/igcse-a-level",cat:"students,laptop,study"}], numbersTitle:"Hanbit by the Numbers", locEyebrow:"Seoul · Busan · Daejeon · Daegu · Gwangju", locTitle:"One Hanbit,\nFive Cities", visitTitle:"Next Steps: Schedule a Visit", visitBody:"Meet Hanbit in person on a campus tour or at an information session.", explore:"Explore campuses", visit:"Schedule a visit" }
+  ko: { heroTitle:"STEM 학습을 삶으로", heroSub:"유아·유치 과정 · 전국 5개 도시 캠퍼스", missionTitle:"독립적으로 사고하고 더 나은 사회에 기여하는 미래의 혁신가를, 생애 첫 배움에서부터 키웁니다.", introEyebrow:"교육 철학", introTitle:"대한민국 대표\n국제 과학 유치원", introBody:"21세기 아이의 잠재력을 여는 데에는 탄탄한 기초가 필수입니다. 한빛은 유아·유치 시기에 과학적 탐구와 실험, 영어의 기초를 놀이와 함께 단단히 다지며, 호기심을 평생의 배움으로 이어줍니다.", curriculum:"교육과정 보기", diffEyebrow:"한빛의 차별점", diffTitle:"과학의 시선으로,\n아이의 모든 면을 키웁니다", diff:[{t:"전인 교육",d:"비판적 사고, 정서적 회복탄력성, 사회성, 신체 발달까지 균형 있게."},{t:"프로젝트 기반 놀이 학습",d:"아이의 호기심을 따라 개별 맞춤 활동과 교사의 세심한 돌봄으로."},{t:"풍부한 특별 활동",d:"방과후·토요반·시즌 프로그램으로 다양한 경험을 제공."},{t:"영어와 과학의 기초",d:"원어민 교사와 함께 영어와 탐구의 기초를 자연스럽게."}], levelsEyebrow:"생애 첫 배움", levelsTitle:"한빛에서의 배움", levels:[{t:"엄마와 아이",a:"10–18개월",href:"/enrichment/mother-toddler",cat:"baby,toddler,parent"},{t:"프리스쿨",a:"만 1.5–3세",href:"/learning/preschool-kindergarten",cat:"preschool,toddler,children"},{t:"유치부",a:"만 3–6세",href:"/learning/preschool-kindergarten",cat:"kindergarten,children,classroom"},{t:"방과후 · 특별활동",a:"전 연령",href:"/enrichment/afterschool",cat:"children,art,activity"}], numbersTitle:"숫자로 보는 한빛", locEyebrow:"서울 · 부산 · 대전 · 대구 · 광주", locTitle:"하나의 한빛,\n다섯 도시", visitTitle:"다음 단계: 방문 예약", visitBody:"캠퍼스 투어와 입학 설명회에서 한빛을 직접 만나보세요.", explore:"캠퍼스 보기", visit:"방문 예약" },
+  en: { heroTitle:"Bringing STEM Learning to Life", heroSub:"Preschool & Kindergarten · campuses in 5 cities", missionTitle:"We raise independent thinkers and future innovators — starting from a child's very first years of learning.", introEyebrow:"Our philosophy", introTitle:"Korea's leading\nscience kindergarten", introBody:"A strong foundation is essential to unlocking a child's potential. In the preschool and kindergarten years, Hanbit builds the foundations of scientific inquiry, experimentation and English through play — turning curiosity into a lifelong love of learning.", curriculum:"See the curriculum", diffEyebrow:"The Hanbit Difference", diffTitle:"Through the lens of science,\nwe develop the whole child", diff:[{t:"Whole-child development",d:"Critical thinking, emotional resilience, social aptitude and physical well-being, in balance."},{t:"Project-based play learning",d:"Guided by each child's curiosity, with tailored activities and attentive teachers."},{t:"Rich enrichment activities",d:"Afterschool, Saturday and seasonal programs offer varied experiences."},{t:"English & science foundations",d:"Native-speaking teachers build English and inquiry naturally."}], levelsEyebrow:"A child's first learning", levelsTitle:"Learning at Hanbit", levels:[{t:"Mother & Toddler",a:"10–18 months",href:"/enrichment/mother-toddler",cat:"baby,toddler,parent"},{t:"Preschool",a:"Ages 1.5–3",href:"/learning/preschool-kindergarten",cat:"preschool,toddler,children"},{t:"Kindergarten",a:"Ages 3–6",href:"/learning/preschool-kindergarten",cat:"kindergarten,children,classroom"},{t:"Afterschool & enrichment",a:"All ages",href:"/enrichment/afterschool",cat:"children,art,activity"}], numbersTitle:"Hanbit by the Numbers", locEyebrow:"Seoul · Busan · Daejeon · Daegu · Gwangju", locTitle:"One Hanbit,\nFive Cities", visitTitle:"Next Steps: Schedule a Visit", visitBody:"Meet Hanbit in person on a campus tour or at an information session.", explore:"Explore campuses", visit:"Schedule a visit" }
 }[locale];
 const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-navy-700";
 const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
-<!-- HERO: full-bleed photo, light wash, gold left headline -->
 <section class="relative isolate overflow-hidden bg-cream">
   <img src={media.heroImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
   <div class="absolute inset-0 bg-gradient-to-r from-white/92 via-white/60 to-white/20"></div>
@@ -35,13 +34,11 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <div class="relative"><CurvedDivider color="#f7f1e3" /></div>
 </section>
 
-<!-- MISSION -->
 <section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 pb-24 pt-4 text-center">
   <div class="rule-gold mx-auto mb-8"></div>
   <p class="font-serif text-3xl font-medium leading-snug text-navy-900 md:text-4xl">{c.missionTitle}</p>
 </div></section>
 
-<!-- INTRO: text left, image bleeds to right edge -->
 <section class="bg-white">
   <div class="grid items-stretch md:grid-cols-2">
     <div class="reveal flex flex-col justify-center px-6 py-24 md:ml-auto md:max-w-xl md:py-32 md:pr-14">
@@ -51,11 +48,10 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
       <p class="leading-relaxed text-ink/75">{c.introBody}</p>
       <a href={p("/learning")} class={`mt-9 ${btnLine}`}>{c.curriculum}</a>
     </div>
-    <Figure alt={locale === "en" ? "Students doing a science experiment" : "과학 실험을 하는 학생들"} cat="science,laboratory,children" class="min-h-[360px] md:min-h-full" rounded="rounded-none" />
+    <Figure alt={locale === "en" ? "Children exploring science" : "과학을 탐구하는 아이들"} cat="kindergarten,children,science" class="min-h-[360px] md:min-h-full" rounded="rounded-none" />
   </div>
 </section>
 
-<!-- DIFFERENCE -->
 <section class="bg-navy-900 text-white"><div class="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.2fr]">
   <div class="reveal">
     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">{c.diffEyebrow}</p>
@@ -66,7 +62,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<!-- LEVELS -->
 <section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-24">
   <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.levelsEyebrow}</p><h2 class="mt-3 font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.levelsTitle}</h2></div>
   <div data-reveal-children class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -78,7 +73,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<!-- BY NUMBERS: navy, gold, left-aligned -->
 <section class="bg-navy-900 text-white"><div class="mx-auto max-w-6xl px-6 py-24">
   <p class="reveal font-serif text-3xl font-semibold text-gold-soft">{c.numbersTitle}</p>
   <div data-reveal-children class="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
@@ -86,7 +80,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<!-- LOCATIONS -->
 <section class="bg-cream"><div class="mx-auto max-w-6xl px-6 py-24">
   <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2></div>
   <div data-reveal-children class="mt-12 grid gap-px overflow-hidden bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
@@ -95,7 +88,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <a href={p("/schools")} class={`mt-10 ${btnLine}`}>{t("cta.seeMap")}</a>
 </div></section>
 
-<!-- VISIT -->
 <section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
   <div class="rule-gold mx-auto mb-8"></div>
   <h2 class="font-serif text-4xl font-semibold md:text-5xl">{c.visitTitle}</h2>

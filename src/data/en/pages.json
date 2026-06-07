@@ -2,19 +2,19 @@
   "learning-vision": {
     "eyebrow": "Learning",
     "title": "Vision & Core Curriculum",
-    "intro": "Hanbit explores the world through the lens of science, with a continuous STEM journey from preschool to secondary.",
+    "intro": "Hanbit explores the world through the lens of science, with a science-play learning journey designed for the preschool and kindergarten years.",
     "sections": [
       {
         "h": "Learning begins with inquiry",
-        "b": "Every lesson starts with a question. Children observe, hypothesise and experiment, building the foundations of scientific thinking."
+        "b": "Every activity starts with a question. Children observe, hypothesise and experiment, building the foundations of scientific thinking."
       },
       {
-        "h": "Project-based learning",
-        "b": "Following the engineering design process, students define, design, build and improve — turning learning into real-world capability."
+        "h": "Science through play",
+        "b": "Play and inquiry become one, so English and science foundations grow naturally."
       },
       {
-        "h": "Cambridge pathway",
-        "b": "Primary and secondary combine with the Cambridge curriculum for a world-recognised learning path."
+        "h": "Attentive care",
+        "b": "Small classes and specialist teachers warmly support every child growth."
       }
     ]
   },
@@ -30,51 +30,6 @@
       {
         "h": "Age-based stages",
         "b": "A continuous path from Pre1 (Newton) through K1 (Da Vinci), K2 (Darwin) and Y1 (Einstein)."
-      }
-    ]
-  },
-  "learning-primary": {
-    "eyebrow": "Ages 6–11",
-    "title": "Primary Curriculum",
-    "intro": "A robust, world-class education combining our STEM programme with the Cambridge curriculum.",
-    "sections": [
-      {
-        "h": "Specialist teachers",
-        "b": "Subject specialists lead deep learning in small classes."
-      },
-      {
-        "h": "Leading STEM facilities",
-        "b": "Students build and explore in modern labs and workshops."
-      }
-    ]
-  },
-  "learning-secondary": {
-    "eyebrow": "Ages 11–15",
-    "title": "Secondary Curriculum",
-    "intro": "University and start-up links nurture innovation and entrepreneurship, leading into Cambridge IGCSE.",
-    "sections": [
-      {
-        "h": "STEM, innovation & entrepreneurship",
-        "b": "Real-world projects and mentorship build self-directed capability."
-      },
-      {
-        "h": "Cambridge IGCSE",
-        "b": "A world-recognised qualification that lays the foundation for higher study."
-      }
-    ]
-  },
-  "learning-igcse": {
-    "eyebrow": "Cambridge",
-    "title": "IGCSE & A-Level",
-    "intro": "The Cambridge international curriculum, from core and elective subjects through to advanced A-Level.",
-    "sections": [
-      {
-        "h": "Core subjects",
-        "b": "English, mathematics and the sciences (physics, chemistry, biology) form a strong academic base."
-      },
-      {
-        "h": "A-Level pathway",
-        "b": "Advanced subject choices build expertise aligned to university and career goals."
       }
     ]
   },
@@ -96,15 +51,15 @@
   "about-history": {
     "eyebrow": "About",
     "title": "History & Milestones",
-    "intro": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit.",
+    "intro": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit early education.",
     "sections": [
       {
         "h": "A record of growth",
-        "b": "From our first preschool campus to primary and secondary programmes, the Cambridge curriculum, and nationwide expansion."
+        "b": "From our first preschool & kindergarten campus to a five-city network."
       },
       {
         "h": "The next decade",
-        "b": "Onward to five city campuses and our secondary & A-Level pathway."
+        "b": "Widening access to science-centred early education for more families."
       }
     ]
   },
@@ -126,15 +81,15 @@
   "enrichment-saturday": {
     "eyebrow": "Saturday school",
     "title": "Saturday School",
-    "intro": "Learning continues on weekends, with programmes for preschool, kindergarten and primary.",
+    "intro": "Learning continues on weekends, with programmes for preschool and kindergarten.",
     "sections": [
       {
         "h": "Preschool & kindergarten",
         "b": "Play- and inquiry-based activities make learning joyful."
       },
       {
-        "h": "Primary",
-        "b": "Level-based classes focus on English and science."
+        "h": "English & science focus",
+        "b": "A weekend focus on English and science activities."
       }
     ]
   },

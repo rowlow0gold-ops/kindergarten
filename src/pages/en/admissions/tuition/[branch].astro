@@ -5,4 +5,4 @@ import branches from "../../../../data/en/branches.json";
 export function getStaticPaths(){ return branches.map((b)=>({ params:{ branch:b.slug }, props:{ branch:b } })); }
 const { branch } = Astro.props;
 ---
-<Layout title={`${branch.name} Tuition · Hanbit International School of Science`}><TuitionDetail locale="en" branch={branch} /></Layout>
+<Layout title={`${branch.name} Tuition · Hanbit International Kindergarten`}><TuitionDetail locale="en" branch={branch} /></Layout>
