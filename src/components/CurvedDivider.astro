@@ -1,0 +1,8 @@
+---
+interface Props { color?: string; flip?: boolean; }
+const { color = "#f7f1e3", flip = false } = Astro.props;
+---
+<svg class="curve-top" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style={flip ? "transform: rotate(180deg)" : ""} aria-hidden="true">
+  <path d="M0 48 C 360 0, 1080 0, 1440 48 L 1440 48 L 0 48 Z" fill={color} />
+  <path d="M0 48 C 360 0, 1080 0, 1440 48" fill="none" stroke="#c19a3e" stroke-width="2" />
+</svg>
