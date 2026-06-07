@@ -1,0 +1,52 @@
+---
+import { useT, localizePath, type Locale } from "../../i18n/ui";
+import Figure from "../Figure.astro";
+interface Branch { slug: string; name: string; city: string; flagship: boolean; levels: string; ages: string; address: string; phone: string; hours: string; access: string; intro: string; }
+interface Props { locale: Locale; branch: Branch; }
+const { locale, branch } = Astro.props;
+const t = useT(locale);
+const p = (path: string) => localizePath(path, locale);
+const L = {
+  ko: { back: "← 캠퍼스 전체보기", levels: "운영 과정", ages: "연령", address: "주소", phone: "전화", hours: "운영 시간", access: "오시는 길", visit: "방문 예약", gallery: "캠퍼스 둘러보기" },
+  en: { back: "← All campuses", levels: "Programmes", ages: "Ages", address: "Address", phone: "Phone", hours: "Hours", access: "Getting here", visit: "Schedule a visit", gallery: "Campus gallery" },
+}[locale];
+const rows = [
+  { k: L.levels, v: branch.levels }, { k: L.ages, v: branch.ages }, { k: L.address, v: branch.address },
+  { k: L.phone, v: branch.phone }, { k: L.hours, v: branch.hours }, { k: L.access, v: branch.access },
+];
+---
+<section class="bg-navy-900 text-white">
+  <div class="mx-auto max-w-6xl px-5 py-16">
+    <a href={p("/schools")} class="text-sm text-white/70 transition hover:text-gold-soft">{L.back}</a>
+    <p class="reveal mt-6 text-sm font-semibold uppercase tracking-wide text-gold">{branch.city}{branch.flagship ? " · ★" : ""}</p>
+    <h1 class="reveal mt-1 font-serif text-4xl font-semibold md:text-5xl">{branch.name}</h1>
+  </div>
+</section>
+<section class="bg-white">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2">
+    <Figure alt={branch.name} class="reveal aspect-[4/3]" />
+    <div class="reveal">
+      <p class="leading-relaxed text-ink/80">{branch.intro}</p>
+      <dl class="mt-8 divide-y divide-black/5 border-y border-black/5">
+        {rows.map((r) => (
+          <div class="grid grid-cols-[110px_1fr] gap-3 py-3">
+            <dt class="text-sm font-semibold text-navy">{r.k}</dt>
+            <dd class="text-sm text-ink/75">{r.v}</dd>
+          </div>
+        ))}
+      </dl>
+      <a href={p("/contact")} class="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{L.visit}</a>
+    </div>
+  </div>
+</section>
+<section class="bg-cream">
+  <div class="mx-auto max-w-6xl px-5 py-16">
+    <h2 class="reveal font-serif text-2xl font-semibold text-navy-900">{L.gallery}</h2>
+    <div data-reveal-children class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <Figure alt={`${branch.name} 1`} class="aspect-square" />
+      <Figure alt={`${branch.name} 2`} class="aspect-square" />
+      <Figure alt={`${branch.name} 3`} class="aspect-square" />
+      <Figure alt={`${branch.name} 4`} class="aspect-square" />
+    </div>
+  </div>
+</section>

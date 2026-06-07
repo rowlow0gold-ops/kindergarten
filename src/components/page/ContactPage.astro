@@ -1,0 +1,49 @@
+---
+import { useT, localizePath, type Locale } from "../../i18n/ui";
+import siteKo from "../../data/site.json";
+import siteEn from "../../data/en/site.json";
+import branchesKo from "../../data/branches.json";
+import branchesEn from "../../data/en/branches.json";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useT(locale);
+const site = locale === "en" ? siteEn : siteKo;
+const branches = locale === "en" ? branchesEn : branchesKo;
+const c = {
+  ko: { title: "문의하기", sub: "궁금한 점을 남겨주시면 빠르게 답변드리겠습니다.", name: "이름", email: "이메일", phone: "연락처", msg: "문의 내용", send: "보내기", demoNote: "※ 데모 양식입니다. 실제 전송은 연결되어 있지 않습니다.", dirTitle: "캠퍼스 전화 안내" },
+  en: { title: "Contact Us", sub: "Leave us a message and we'll get back to you shortly.", name: "Name", email: "Email", phone: "Phone", msg: "Message", send: "Send", demoNote: "※ Demo form — not connected to a live inbox.", dirTitle: "Campus Phone Directory" },
+}[locale];
+---
+<section class="bg-navy-900 text-white">
+  <div class="reveal mx-auto max-w-6xl px-5 py-20 text-center">
+    <h1 class="font-serif text-4xl font-semibold md:text-5xl">{c.title}</h1>
+    <p class="mt-4 text-white/70">{c.sub}</p>
+  </div>
+</section>
+<section class="bg-white">
+  <div class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-2">
+    <form class="reveal space-y-4" onsubmit="event.preventDefault(); this.querySelector('[data-done]').classList.remove('hidden');">
+      <div><label class="text-sm font-medium text-navy">{c.name}</label><input type="text" class="mt-1 w-full rounded-xl border border-black/15 px-4 py-3 text-sm outline-none focus:border-gold" /></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="text-sm font-medium text-navy">{c.email}</label><input type="email" class="mt-1 w-full rounded-xl border border-black/15 px-4 py-3 text-sm outline-none focus:border-gold" /></div>
+        <div><label class="text-sm font-medium text-navy">{c.phone}</label><input type="tel" class="mt-1 w-full rounded-xl border border-black/15 px-4 py-3 text-sm outline-none focus:border-gold" /></div>
+      </div>
+      <div><label class="text-sm font-medium text-navy">{c.msg}</label><textarea rows="5" class="mt-1 w-full rounded-xl border border-black/15 px-4 py-3 text-sm outline-none focus:border-gold"></textarea></div>
+      <button type="submit" class="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{c.send}</button>
+      <p data-done class="hidden text-sm font-medium text-green-700">✓ {locale === "en" ? "Thanks! (demo)" : "감사합니다! (데모)"}</p>
+      <p class="text-xs text-ink/55">{c.demoNote}</p>
+    </form>
+    <div class="reveal">
+      <h2 class="font-serif text-xl font-semibold text-navy-900">{c.dirTitle}</h2>
+      <p class="mt-2 text-sm text-ink/70">{site.email}</p>
+      <ul class="mt-5 divide-y divide-black/5 border-y border-black/5">
+        {branches.map((b) => (
+          <li class="flex items-center justify-between py-3">
+            <span class="text-sm text-ink/80">{b.name} <span class="text-ink/50">· {b.city}</span></span>
+            <a href={`tel:${b.phone}`} class="text-sm font-medium text-navy hover:text-gold">{b.phone}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

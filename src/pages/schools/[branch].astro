@@ -1,0 +1,10 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BranchPage from "../../components/page/BranchPage.astro";
+import branches from "../../data/branches.json";
+export function getStaticPaths() {
+  return branches.map((b) => ({ params: { branch: b.slug }, props: { branch: b } }));
+}
+const { branch } = Astro.props;
+---
+<Layout title={`${branch.name} · 한빛국제과학학교`}><BranchPage locale="ko" branch={branch} /></Layout>

@@ -1,0 +1,12 @@
+{
+  "name": "한빛국제과학학교",
+  "short": "한빛",
+  "email": "admissions@school.minhojan-world.site",
+  "phone": "02-1234-5678",
+  "stats": [
+    { "value": 120, "suffix": "+", "label": "교직원" },
+    { "value": 1200, "suffix": "+", "label": "재학생" },
+    { "value": 1, "suffix": "", "label": "플래그십 캠퍼스" },
+    { "value": 5, "suffix": "", "label": "도시 캠퍼스" }
+  ]
+}

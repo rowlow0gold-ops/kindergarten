@@ -1,0 +1,150 @@
+---
+import { useT, localizePath, type Locale } from "../../i18n/ui";
+import Figure from "../Figure.astro";
+import Molecule from "../Molecule.astro";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useT(locale);
+const p = (path: string) => localizePath(path, locale);
+const c = {
+  ko: {
+    years: "10년.",
+    rotate: ["자신감", "호기심", "역량"],
+    rotatePre: "아이들이 ", rotatePost: " 을 키웁니다",
+    lead: "작은 질문에서 담대한 아이디어로",
+    banner: "교육을 향한 10년의 진심과 성장",
+    msgTitle: "설립자의 메시지",
+    msgBody: "한빛은 지난 10년간 아이 한 명 한 명의 호기심을 존중하며, 과학의 시선으로 세상을 탐구하는 미래의 혁신가를 길러왔습니다. 우리의 여정은 이제 다섯 도시로 이어집니다.",
+    msgName: "설립자 · 교장",
+    tlTitle: "우리를 만든 순간들",
+    tlLabel: "성장의 기록",
+    timeline: [
+      { y: "2016–2018", t: "첫 발걸음", d: "서울에서 첫 유아·유치 캠퍼스를 열고 과학 중심 교육을 시작했습니다." },
+      { y: "2019–2021", t: "성장의 시간", d: "수도권으로 캠퍼스를 확장하고 STEM 교육과정을 체계화했습니다." },
+      { y: "2022–2023", t: "전환점", d: "초등 과정을 신설하고 케임브리지 교육과정을 도입했습니다." },
+      { y: "2024–2025", t: "한빛의 정체성", d: "한빛 브랜드를 확립하고 전국 거점으로 도약했습니다." },
+      { y: "2026", t: "미래를 향해", d: "다섯 도시 캠퍼스와 중등·A-Level 과정으로 나아갑니다." },
+    ],
+    storiesTitle: "학부모의 이야기",
+    quote: "선생님들이 정해진 교육과정을 아이 한 명 한 명에 맞춰 풀어내는 점이 정말 훌륭합니다. 감사합니다, 한빛!",
+    quoteBy: "유치부 학부모, 강남 캠퍼스",
+    ctaTitle: "한빛과 함께하시겠어요?",
+  },
+  en: {
+    years: "10 Years.",
+    rotate: ["Confidence", "Curiosity", "Competence"],
+    rotatePre: "Helping children grow with ", rotatePost: "",
+    lead: "From first questions to fearless ideas",
+    banner: "Honoring a decade of purpose & progress in education",
+    msgTitle: "A Message From Our Founder",
+    msgBody: "For ten years, Hanbit has honored each child's curiosity, raising future innovators who explore the world through the lens of science. Our journey now reaches five cities.",
+    msgName: "Founder & Principal",
+    tlTitle: "Milestones That Shaped Us",
+    tlLabel: "Visual timeline",
+    timeline: [
+      { y: "2016–2018", t: "A Vision Takes Root", d: "We opened our first preschool & kindergarten campus in Seoul with a science-centred approach." },
+      { y: "2019–2021", t: "Growing Momentum", d: "We expanded across the capital region and formalised our STEM curriculum." },
+      { y: "2022–2023", t: "A Pivotal Moment", d: "We launched our primary programme and adopted the Cambridge curriculum." },
+      { y: "2024–2025", t: "Our Identity", d: "We established the Hanbit brand and grew into a nationwide network." },
+      { y: "2026", t: "Looking Forward", d: "Onward to five city campuses and our secondary & A-Level pathway." },
+    ],
+    storiesTitle: "Stories From Our Families",
+    quote: "The teachers are brilliant at adapting a structured curriculum to each child's needs. Thank you, Hanbit!",
+    quoteBy: "Kindergarten Parent, Gangnam Campus",
+    ctaTitle: "Ready to join Hanbit?",
+  },
+}[locale];
+---
+<!-- HERO -->
+<section class="relative overflow-hidden bg-navy-900 text-white">
+  <div class="absolute inset-0 opacity-[0.16]" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+  <div class="relative mx-auto max-w-6xl px-5 py-28 text-center md:py-36">
+    <h1 class="reveal font-serif text-6xl font-semibold text-gold md:text-8xl">{c.years}</h1>
+  </div>
+  <div class="h-10 bg-cream" style="border-top-left-radius: 60% 100%; border-top-right-radius: 60% 100%;"></div>
+</section>
+
+<!-- ROTATING -->
+<section class="bg-cream">
+  <div class="reveal mx-auto flex max-w-4xl flex-col items-center px-5 pb-16 text-center">
+    <Molecule class="w-16 h-16" />
+    <p class="mt-5 font-serif text-2xl font-medium text-navy-900 md:text-4xl">
+      {c.rotatePre}<span data-rotate={JSON.stringify(c.rotate)} class="text-gold transition-opacity duration-300">{c.rotate[0]}</span>{c.rotatePost}
+    </p>
+  </div>
+</section>
+
+<!-- COLLAGE -->
+<section class="bg-white">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-2">
+    <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-5xl">{c.lead}</h2>
+    <div data-reveal-children class="grid grid-cols-2 gap-4">
+      <Figure alt={locale === "en" ? "Children exploring" : "탐구하는 아이들"} class="aspect-square" />
+      <Figure alt={locale === "en" ? "Science class" : "과학 수업"} class="aspect-square mt-8" />
+      <Figure alt={locale === "en" ? "On stage" : "무대 위 발표"} class="aspect-square -mt-4" />
+      <Figure alt={locale === "en" ? "Project work" : "프로젝트 활동"} class="aspect-square mt-4" />
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<section class="relative bg-navy-900">
+  <Figure alt={locale === "en" ? "Our community" : "한빛 공동체"} class="aspect-[16/6] opacity-40" rounded="rounded-none" />
+  <div class="absolute inset-0 flex items-center">
+    <div class="reveal mx-auto flex max-w-6xl items-center gap-5 px-5">
+      <Molecule class="hidden w-20 h-20 shrink-0 text-gold-soft sm:block" />
+      <h2 class="font-serif text-2xl font-semibold text-white md:text-4xl">{c.banner}</h2>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER MESSAGE -->
+<section class="bg-cream">
+  <div class="reveal mx-auto max-w-4xl px-5 py-20">
+    <div class="rounded-3xl border border-gold/30 bg-white p-8 md:p-12">
+      <h2 class="font-serif text-2xl font-semibold text-gold md:text-3xl">{c.msgTitle}</h2>
+      <div class="mt-6 grid items-center gap-6 sm:grid-cols-[140px_1fr]">
+        <Figure alt={locale === "en" ? "Founder portrait" : "설립자 사진"} class="aspect-square" rounded="rounded-2xl" />
+        <div>
+          <p class="leading-relaxed text-ink/80">{c.msgBody}</p>
+          <p class="mt-4 text-sm font-semibold text-navy">{c.msgName}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUAL TIMELINE -->
+<section class="bg-navy-900 text-white">
+  <div class="mx-auto max-w-6xl px-5 py-20">
+    <p class="reveal text-sm font-semibold uppercase tracking-wide text-gold">{c.tlLabel}</p>
+    <h2 class="reveal mt-2 font-serif text-3xl font-semibold md:text-4xl">{c.tlTitle}</h2>
+    <div class="reveal mt-10 flex snap-x gap-5 overflow-x-auto pb-4">
+      {c.timeline.map((m) => (
+        <div class="w-72 shrink-0 snap-start rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+          <Figure alt={m.t} class="aspect-[4/3]" rounded="rounded-xl" />
+          <p class="mt-4 text-sm font-semibold text-gold">{m.y}</p>
+          <h3 class="mt-1 font-serif text-lg font-semibold text-white">{m.t}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/70">{m.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="bg-cream">
+  <div class="reveal mx-auto max-w-3xl px-5 py-20 text-center">
+    <p class="text-sm font-semibold uppercase tracking-wide text-gold">{c.storiesTitle}</p>
+    <p class="mt-6 font-serif text-xl font-medium leading-relaxed text-navy-900 md:text-2xl">“{c.quote}”</p>
+    <p class="mt-5 text-sm italic text-ink/70">— {c.quoteBy}</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-white">
+  <div class="reveal mx-auto max-w-3xl px-5 py-20 text-center">
+    <h2 class="font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{c.ctaTitle}</h2>
+    <a href={p("/admissions")} class="mt-8 inline-block rounded-full bg-gold px-7 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{t("nav.apply")}</a>
+  </div>
+</section>

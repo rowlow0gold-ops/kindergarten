@@ -1,0 +1,12 @@
+{
+  "name": "Hanbit International School of Science",
+  "short": "Hanbit",
+  "email": "admissions@school.minhojan-world.site",
+  "phone": "02-1234-5678",
+  "stats": [
+    { "value": 120, "suffix": "+", "label": "Educators & staff" },
+    { "value": 1200, "suffix": "+", "label": "Students" },
+    { "value": 1, "suffix": "", "label": "Flagship campus" },
+    { "value": 5, "suffix": "", "label": "City campuses" }
+  ]
+}
