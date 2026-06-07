@@ -15,7 +15,9 @@ const nav = [
   { label: L("학교 소개", "About"), children: [
     { label: L("설립자 메시지", "Founder's message"), href: p("/about/founders") },
     { label: L("연혁", "History"), href: p("/about/history") },
+    { label: L("리더십 · 자문", "Leadership & advisors"), href: p("/about/leadership") },
     { label: L("10주년", "10 Years"), href: p("/about/milestones") },
+    { label: L("채용", "Careers"), href: p("/about/careers") },
   ]},
   { label: L("캠퍼스", "Campuses"), href: p("/schools") },
   { label: L("교육과정", "Learning"), children: [
@@ -24,17 +26,24 @@ const nav = [
     { label: L("초등부", "Primary"), href: p("/learning/primary") },
     { label: L("중등부", "Secondary"), href: p("/learning/secondary") },
     { label: L("IGCSE · A-Level", "IGCSE & A-Level"), href: p("/learning/igcse-a-level") },
+    { label: L("이노베이터 프로그램", "Innovator program"), href: p("/learning/innovator") },
+    { label: L("교육과정 FAQ", "Academics FAQ"), href: p("/learning/faq") },
   ]},
   { label: L("방과후 · 특별", "Enrichment"), children: [
     { label: L("방과후", "Afterschool"), href: p("/enrichment/afterschool") },
     { label: L("토요학교", "Saturday school"), href: p("/enrichment/saturday") },
     { label: L("엄마와 아이", "Mother & toddler"), href: p("/enrichment/mother-toddler") },
+    { label: L("STEAM 페어", "STEAM Fair"), href: p("/enrichment/steam-fair") },
   ]},
   { label: L("소식", "News"), children: [
     { label: L("뉴스 · 공지", "News & notices"), href: p("/news") },
     { label: L("행사 · 설명회", "Visits & info sessions"), href: p("/events") },
   ]},
-  { label: L("입학 안내", "Admissions"), href: p("/admissions") },
+  { label: L("입학 안내", "Admissions"), children: [
+    { label: L("입학 개요", "Overview"), href: p("/admissions") },
+    { label: L("학비 안내", "Tuition & fees"), href: p("/admissions/tuition") },
+    { label: L("입학 FAQ", "Admissions FAQ"), href: p("/admissions/faq") },
+  ]},
   { label: L("문의", "Contact"), href: p("/contact") },
 ];
 ---

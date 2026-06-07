@@ -1,0 +1,35 @@
+---
+import { localizePath, type Locale } from "../../i18n/ui";
+import Figure from "../Figure.astro";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const p = (path: string) => localizePath(path, locale);
+const c = locale === "en" ? {
+  title: "STEAM Fair", lead: "A decade of discovery — students' science and engineering, on stage.",
+  intro: "Every year, our students design, build and present projects at the STEAM Fair — a celebration of curiosity, creativity and collaboration.",
+  tlTitle: "A decade of themes",
+  timeline: [ {y:"2019",t:"Ad Astra"},{y:"2022",t:"Bio Futures"},{y:"2024",t:"AI & Future Technology"},{y:"2025",t:"Utopia"},{y:"2026",t:"Infinity & Beyond"} ],
+} : {
+  title: "STEAM 페어", lead: "10년의 발견 — 학생들의 과학과 공학을 무대 위에서.",
+  intro: "매년 학생들이 직접 설계하고 만든 프로젝트를 STEAM 페어에서 전시·발표합니다. 호기심과 창의력, 협업을 기념하는 자리입니다.",
+  tlTitle: "10년의 테마",
+  timeline: [ {y:"2019",t:"Ad Astra"},{y:"2022",t:"바이오 퓨처스"},{y:"2024",t:"AI와 미래 기술"},{y:"2025",t:"유토피아"},{y:"2026",t:"인피니티 앤 비욘드"} ],
+};
+---
+<section class="relative overflow-hidden bg-navy-900 text-white">
+  <div class="absolute inset-0 opacity-[0.15]" style="background-image: radial-gradient(circle,#fff 1px,transparent 1px); background-size: 24px 24px;"></div>
+  <div class="relative mx-auto max-w-6xl px-5 py-24 text-center">
+    <h1 class="reveal font-serif text-4xl font-semibold text-gold md:text-6xl">{c.title}</h1>
+    <p class="reveal mx-auto mt-5 max-w-xl text-white/80">{c.lead}</p>
+  </div>
+</section>
+<section class="bg-white"><div class="mx-auto max-w-6xl grid items-center gap-10 px-5 py-16 md:grid-cols-2">
+  <p class="reveal font-serif text-xl leading-relaxed text-navy-900 md:text-2xl">{c.intro}</p>
+  <Figure alt={locale==="en"?"Students at the STEAM Fair":"STEAM 페어의 학생들"} class="reveal aspect-[4/3]" />
+</div></section>
+<section class="bg-cream"><div class="mx-auto max-w-6xl px-5 py-16">
+  <h2 class="reveal font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{c.tlTitle}</h2>
+  <div class="reveal mt-8 flex snap-x gap-5 overflow-x-auto pb-4">
+    {c.timeline.map((m)=>(<div class="w-56 shrink-0 snap-start rounded-2xl bg-white p-6 shadow-sm"><p class="font-serif text-2xl font-semibold text-gold">{m.y}</p><p class="mt-2 font-serif text-lg text-navy-900">{m.t}</p></div>))}
+  </div>
+</div></section>

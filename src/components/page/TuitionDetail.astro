@@ -1,0 +1,26 @@
+---
+import { localizePath, type Locale } from "../../i18n/ui";
+import tKo from "../../data/tuition.json";
+import tEn from "../../data/en/tuition.json";
+interface Props { locale: Locale; branch: any; }
+const { locale, branch } = Astro.props;
+const p = (path: string) => localizePath(path, locale);
+const data = locale === "en" ? tEn : tKo;
+const back = locale === "en" ? "← All campuses" : "← 캠퍼스 전체보기";
+const apply = locale === "en" ? "Apply" : "지원하기";
+---
+<section class="bg-navy-900 text-white"><div class="mx-auto max-w-4xl px-5 py-16">
+  <a href={p("/admissions/tuition")} class="text-sm text-white/70 hover:text-gold-soft">{back}</a>
+  <p class="reveal mt-6 text-sm font-semibold uppercase tracking-wide text-gold">{branch.city}</p>
+  <h1 class="reveal mt-1 font-serif text-3xl font-semibold md:text-4xl">{branch.name} · {locale==="en"?"Tuition":"학비"}</h1>
+</div></section>
+<section class="bg-white"><div class="reveal mx-auto max-w-3xl px-5 py-14">
+  <table class="w-full overflow-hidden rounded-2xl border border-black/10 text-left text-sm">
+    <thead class="bg-cream text-navy"><tr><th class="px-5 py-3 font-semibold">{data.labels.level}</th><th class="px-5 py-3 font-semibold">{data.labels.year}</th><th class="px-5 py-3 font-semibold">{data.labels.entrance}</th></tr></thead>
+    <tbody>
+      {data.rows.map((r)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}
+    </tbody>
+  </table>
+  <p class="mt-4 text-xs text-ink/55">{data.note}</p>
+  <a href={p("/admissions")} class="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{apply}</a>
+</div></section>

@@ -1,0 +1,9 @@
+{
+  "note": "※ Example figures for this demo. Actual tuition varies by campus, age and programme — please contact the campus.",
+  "rows": [
+    { "level": "Preschool & Kindergarten", "year": "₩9,600,000", "entrance": "₩1,000,000" },
+    { "level": "Primary", "year": "₩12,000,000", "entrance": "₩1,500,000" },
+    { "level": "Secondary", "year": "₩14,000,000", "entrance": "₩1,500,000" }
+  ],
+  "labels": { "level": "Level", "year": "Annual tuition", "entrance": "Entrance fee" }
+}

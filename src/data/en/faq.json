@@ -1,0 +1,14 @@
+{
+  "admissions": [
+    { "q": "When does the application period begin?", "a": "Applications open after each information session. Exact dates are on the Visits & Info Sessions page." },
+    { "q": "Can my child join with no English at all?", "a": "Our preschool & kindergarten programme is designed so children new to English can adapt step by step." },
+    { "q": "Is mid-year entry possible?", "a": "Mid-year transfers are possible where places are available. Please contact the campus." },
+    { "q": "What are the fees and tuition?", "a": "Examination fees are on the Admissions page; tuition varies by campus and age level (demo figures)." }
+  ],
+  "academics": [
+    { "q": "What is your educational philosophy?", "a": "Exploring the world through the lens of science, building critical thinking, collaboration and creativity." },
+    { "q": "Who are your teachers?", "a": "Subject specialists and native-speaking teachers run small classes together." },
+    { "q": "What is the main language of instruction?", "a": "Lessons are primarily in English, with Korean support by age and subject." },
+    { "q": "How does the Cambridge curriculum work?", "a": "We adopt the Cambridge international curriculum in primary and secondary, leading to IGCSE and A-Level." }
+  ]
+}

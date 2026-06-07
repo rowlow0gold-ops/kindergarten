@@ -1,12 +1,167 @@
 {
-  "learning-vision": { "eyebrow": "Learning", "title": "Vision & Core Curriculum", "intro": "Hanbit explores the world through the lens of science, with a continuous STEM journey from preschool to secondary.", "sections": [ { "h": "Learning begins with inquiry", "b": "Every lesson starts with a question. Children observe, hypothesise and experiment, building the foundations of scientific thinking." }, { "h": "Project-based learning", "b": "Following the engineering design process, students define, design, build and improve — turning learning into real-world capability." }, { "h": "Cambridge pathway", "b": "Primary and secondary combine with the Cambridge curriculum for a world-recognised learning path." } ] },
-  "learning-preschool": { "eyebrow": "Ages 1.5–6", "title": "Preschool & Kindergarten Curriculum", "intro": "English and science foundations grow alongside social, emotional and intellectual development.", "sections": [ { "h": "Six foundational skills", "b": "Motivation, scientific curiosity, literacy, physical rhythm, English, and social-emotional growth, built step by step." }, { "h": "Age-based stages", "b": "A continuous path from Pre1 (Newton) through K1 (Da Vinci), K2 (Darwin) and Y1 (Einstein)." } ] },
-  "learning-primary": { "eyebrow": "Ages 6–11", "title": "Primary Curriculum", "intro": "A robust, world-class education combining our STEM programme with the Cambridge curriculum.", "sections": [ { "h": "Specialist teachers", "b": "Subject specialists lead deep learning in small classes." }, { "h": "Leading STEM facilities", "b": "Students build and explore in modern labs and workshops." } ] },
-  "learning-secondary": { "eyebrow": "Ages 11–15", "title": "Secondary Curriculum", "intro": "University and start-up links nurture innovation and entrepreneurship, leading into Cambridge IGCSE.", "sections": [ { "h": "STEM, innovation & entrepreneurship", "b": "Real-world projects and mentorship build self-directed capability." }, { "h": "Cambridge IGCSE", "b": "A world-recognised qualification that lays the foundation for higher study." } ] },
-  "learning-igcse": { "eyebrow": "Cambridge", "title": "IGCSE & A-Level", "intro": "The Cambridge international curriculum, from core and elective subjects through to advanced A-Level.", "sections": [ { "h": "Core subjects", "b": "English, mathematics and the sciences (physics, chemistry, biology) form a strong academic base." }, { "h": "A-Level pathway", "b": "Advanced subject choices build expertise aligned to university and career goals." } ] },
-  "about-founders": { "eyebrow": "About", "title": "Founder's Message", "intro": "Hanbit honors each child's curiosity, raising future innovators who contribute to a better society.", "sections": [ { "h": "Our mission", "b": "We raise children who understand the world through science, think for themselves, and collaborate." }, { "h": "Our promise", "b": "We build a safe, warm place to learn that every family can trust." } ] },
-  "about-history": { "eyebrow": "About", "title": "History & Milestones", "intro": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit.", "sections": [ { "h": "A record of growth", "b": "From our first preschool campus to primary and secondary programmes, the Cambridge curriculum, and nationwide expansion." }, { "h": "The next decade", "b": "Onward to five city campuses and our secondary & A-Level pathway." } ] },
-  "enrichment-afterschool": { "eyebrow": "Afterschool", "title": "Afterschool Programs", "intro": "A range of afterschool programmes for Hanbit and non-Hanbit students alike.", "sections": [ { "h": "Arts & movement", "b": "Ballet, dance, art, music/piano and PE develop expression and physical growth." }, { "h": "Science & digital", "b": "STEM Academy, science and digital creative build thinking and creativity." } ] },
-  "enrichment-saturday": { "eyebrow": "Saturday school", "title": "Saturday School", "intro": "Learning continues on weekends, with programmes for preschool, kindergarten and primary.", "sections": [ { "h": "Preschool & kindergarten", "b": "Play- and inquiry-based activities make learning joyful." }, { "h": "Primary", "b": "Level-based classes focus on English and science." } ] },
-  "enrichment-mother-toddler": { "eyebrow": "Ages 10–18 months", "title": "Mother & Toddler Program", "intro": "A first taste of learning — a programme for infants and parents together.", "sections": [ { "h": "First steps together", "b": "Sensory play and interaction nurture emotional security and curiosity." } ] }
+  "learning-vision": {
+    "eyebrow": "Learning",
+    "title": "Vision & Core Curriculum",
+    "intro": "Hanbit explores the world through the lens of science, with a continuous STEM journey from preschool to secondary.",
+    "sections": [
+      {
+        "h": "Learning begins with inquiry",
+        "b": "Every lesson starts with a question. Children observe, hypothesise and experiment, building the foundations of scientific thinking."
+      },
+      {
+        "h": "Project-based learning",
+        "b": "Following the engineering design process, students define, design, build and improve — turning learning into real-world capability."
+      },
+      {
+        "h": "Cambridge pathway",
+        "b": "Primary and secondary combine with the Cambridge curriculum for a world-recognised learning path."
+      }
+    ]
+  },
+  "learning-preschool": {
+    "eyebrow": "Ages 1.5–6",
+    "title": "Preschool & Kindergarten Curriculum",
+    "intro": "English and science foundations grow alongside social, emotional and intellectual development.",
+    "sections": [
+      {
+        "h": "Six foundational skills",
+        "b": "Motivation, scientific curiosity, literacy, physical rhythm, English, and social-emotional growth, built step by step."
+      },
+      {
+        "h": "Age-based stages",
+        "b": "A continuous path from Pre1 (Newton) through K1 (Da Vinci), K2 (Darwin) and Y1 (Einstein)."
+      }
+    ]
+  },
+  "learning-primary": {
+    "eyebrow": "Ages 6–11",
+    "title": "Primary Curriculum",
+    "intro": "A robust, world-class education combining our STEM programme with the Cambridge curriculum.",
+    "sections": [
+      {
+        "h": "Specialist teachers",
+        "b": "Subject specialists lead deep learning in small classes."
+      },
+      {
+        "h": "Leading STEM facilities",
+        "b": "Students build and explore in modern labs and workshops."
+      }
+    ]
+  },
+  "learning-secondary": {
+    "eyebrow": "Ages 11–15",
+    "title": "Secondary Curriculum",
+    "intro": "University and start-up links nurture innovation and entrepreneurship, leading into Cambridge IGCSE.",
+    "sections": [
+      {
+        "h": "STEM, innovation & entrepreneurship",
+        "b": "Real-world projects and mentorship build self-directed capability."
+      },
+      {
+        "h": "Cambridge IGCSE",
+        "b": "A world-recognised qualification that lays the foundation for higher study."
+      }
+    ]
+  },
+  "learning-igcse": {
+    "eyebrow": "Cambridge",
+    "title": "IGCSE & A-Level",
+    "intro": "The Cambridge international curriculum, from core and elective subjects through to advanced A-Level.",
+    "sections": [
+      {
+        "h": "Core subjects",
+        "b": "English, mathematics and the sciences (physics, chemistry, biology) form a strong academic base."
+      },
+      {
+        "h": "A-Level pathway",
+        "b": "Advanced subject choices build expertise aligned to university and career goals."
+      }
+    ]
+  },
+  "about-founders": {
+    "eyebrow": "About",
+    "title": "Founder's Message",
+    "intro": "Hanbit honors each child's curiosity, raising future innovators who contribute to a better society.",
+    "sections": [
+      {
+        "h": "Our mission",
+        "b": "We raise children who understand the world through science, think for themselves, and collaborate."
+      },
+      {
+        "h": "Our promise",
+        "b": "We build a safe, warm place to learn that every family can trust."
+      }
+    ]
+  },
+  "about-history": {
+    "eyebrow": "About",
+    "title": "History & Milestones",
+    "intro": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit.",
+    "sections": [
+      {
+        "h": "A record of growth",
+        "b": "From our first preschool campus to primary and secondary programmes, the Cambridge curriculum, and nationwide expansion."
+      },
+      {
+        "h": "The next decade",
+        "b": "Onward to five city campuses and our secondary & A-Level pathway."
+      }
+    ]
+  },
+  "enrichment-afterschool": {
+    "eyebrow": "Afterschool",
+    "title": "Afterschool Programs",
+    "intro": "A range of afterschool programmes for Hanbit and non-Hanbit students alike.",
+    "sections": [
+      {
+        "h": "Arts & movement",
+        "b": "Ballet, dance, art, music/piano and PE develop expression and physical growth."
+      },
+      {
+        "h": "Science & digital",
+        "b": "STEM Academy, science and digital creative build thinking and creativity."
+      }
+    ]
+  },
+  "enrichment-saturday": {
+    "eyebrow": "Saturday school",
+    "title": "Saturday School",
+    "intro": "Learning continues on weekends, with programmes for preschool, kindergarten and primary.",
+    "sections": [
+      {
+        "h": "Preschool & kindergarten",
+        "b": "Play- and inquiry-based activities make learning joyful."
+      },
+      {
+        "h": "Primary",
+        "b": "Level-based classes focus on English and science."
+      }
+    ]
+  },
+  "enrichment-mother-toddler": {
+    "eyebrow": "Ages 10–18 months",
+    "title": "Mother & Toddler Program",
+    "intro": "A first taste of learning — a programme for infants and parents together.",
+    "sections": [
+      {
+        "h": "First steps together",
+        "b": "Sensory play and interaction nurture emotional security and curiosity."
+      }
+    ]
+  },
+  "about-careers": {
+    "eyebrow": "About",
+    "title": "Working at Hanbit",
+    "intro": "We are looking for passionate educators to help raise future innovators.",
+    "sections": [
+      {
+        "h": "Who we look for",
+        "b": "Enthusiastic educators, active listeners and life-long learners who respect education and want to help children thrive."
+      },
+      {
+        "h": "How to apply",
+        "b": "Apply with your CV via the Contact page. We recruit on a rolling basis."
+      }
+    ]
+  }
 }
