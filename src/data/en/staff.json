@@ -1,6 +1,6 @@
 [
-  { "name": "Minho Kim", "title": "Founder & Director", "group": "Leadership", "bio": "Founded Hanbit with a vision for science-centred early education." },
-  { "name": "Seoyeon Lee", "title": "Deputy Director", "group": "Leadership", "bio": "Oversees preschool and kindergarten curriculum operations." },
-  { "name": "Jihoon Park", "title": "Curriculum Director", "group": "Leadership", "bio": "Designs the inquiry- and science-play-based curriculum." },
-  { "name": "Eunyoung Choi", "title": "Science Advisor", "group": "Advisors", "bio": "Advises on inquiry-based early-years science education." }
+  { "name": "Minho Kim", "title": "Founder & Director", "group": "Leadership", "bio": "Founded Hanbit with a vision for English-centred early education." },
+  { "name": "Seoyeon Lee", "title": "Deputy Director", "group": "Leadership", "bio": "Oversees kindergarten curriculum operations." },
+  { "name": "Jihoon Park", "title": "Curriculum Director", "group": "Leadership", "bio": "Designs the English-immersion, play-based curriculum." },
+  { "name": "Eunyoung Choi", "title": "English Education Advisor", "group": "Advisors", "bio": "Advises on early-years English education." }
 ]
