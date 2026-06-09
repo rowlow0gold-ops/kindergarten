@@ -72,15 +72,15 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-24">
-  <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2></div>
+<section class="relative overflow-hidden text-white" style="background-color:#2a47b8; background-image: radial-gradient(circle at 25% 15%, rgba(255,255,255,0.10), transparent 55%), radial-gradient(circle at 85% 85%, rgba(0,0,0,0.18), transparent 55%)"><div class="mx-auto max-w-6xl px-6 py-24">
+  <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight md:text-5xl">{c.locTitle}</h2></div>
   <div class="mt-12 mx-auto max-w-2xl">
     <ol data-reveal-children class="w-full">
       {branches.map((b,i)=>(
-        <li><a href={p(`/schools/${b.slug}`)} class="group flex items-center gap-4 border-b border-black/10 py-4">
-          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-900 font-serif text-sm font-semibold text-gold-soft">{i+1}</span>
-          <span class="flex-1"><span class="font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{b.name}</span><span class="text-sm text-ink/55"> · {b.city}</span></span>
-          <span class="text-gold opacity-0 transition group-hover:opacity-100">→</span>
+        <li><a href={p(`/schools/${b.slug}`)} class="group flex items-center gap-4 border-b border-white/20 py-4">
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 font-serif text-sm font-semibold text-gold-soft">{i+1}</span>
+          <span class="flex-1"><span class="font-serif text-lg font-semibold text-white">{b.name}</span><span class="text-sm text-white/60"> · {b.city}</span></span>
+          <span class="text-gold-soft opacity-0 transition group-hover:opacity-100">→</span>
         </a></li>
       ))}
     </ol>
