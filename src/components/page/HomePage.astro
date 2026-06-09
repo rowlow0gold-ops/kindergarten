@@ -2,7 +2,6 @@
 import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
 import CurvedDivider from "../CurvedDivider.astro";
-import KoreaMap from "../KoreaMap.astro";
 import Shapes from "../Shapes.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
@@ -75,8 +74,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 
 <section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-24">
   <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2></div>
-  <div class="mt-12 grid items-center gap-12 md:grid-cols-2">
-    <div class="reveal flex justify-center"><KoreaMap branches={branches} /></div>
+  <div class="mt-12 mx-auto max-w-2xl">
     <ol data-reveal-children class="w-full">
       {branches.map((b,i)=>(
         <li><a href={p(`/schools/${b.slug}`)} class="group flex items-center gap-4 border-b border-black/10 py-4">
@@ -87,7 +85,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
       ))}
     </ol>
   </div>
-  <a href={p("/schools")} class={`mt-12 ${btnLine}`}>{t("cta.seeMap")}</a>
 </div></section>
 
 <section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
