@@ -66,10 +66,10 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 
 
 
-<section class="bg-navy-900 text-white"><div class="mx-auto max-w-6xl px-6 py-24">
-  <p class="reveal font-serif text-3xl font-semibold text-gold-soft">{c.numbersTitle}</p>
+<section class="bg-cream"><div class="mx-auto max-w-6xl px-6 py-24">
+  <p class="reveal font-serif text-3xl font-semibold text-navy-900">{c.numbersTitle}</p>
   <div data-reveal-children class="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
-    {site.stats.map((s)=>(<div><p class="font-serif text-6xl font-semibold text-gold md:text-7xl"><span data-count-up={String(s.value)}>0</span>{s.suffix}</p><p class="mt-3 text-sm text-white/65">{s.label}</p></div>))}
+    {site.stats.map((s)=>(<div><p class="font-serif text-6xl font-semibold text-gold md:text-7xl"><span data-count-up={String(s.value)}>0</span>{s.suffix}</p><p class="mt-3 text-sm text-ink/65">{s.label}</p></div>))}
   </div>
 </div></section>
 
@@ -90,9 +90,9 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <a href={p("/schools")} class={`mt-12 ${btnLine}`}>{t("cta.seeMap")}</a>
 </div></section>
 
-<section class="relative text-white" style="background-color:#2a47b8; clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 100%, 0 86%)"><div class="reveal mx-auto max-w-3xl px-6 pb-36 pt-24 text-center">
+<section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
   <div class="rule-gold mx-auto mb-8"></div>
   <h2 class="font-serif text-4xl font-semibold md:text-5xl">{c.visitTitle}</h2>
-  <p class="mx-auto mt-5 max-w-lg text-white/80">{c.visitBody}</p>
+  <p class="mx-auto mt-5 max-w-lg text-white/70">{c.visitBody}</p>
   <a href={p("/contact")} class="mt-9 inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.visit}</a>
 </div></section>
