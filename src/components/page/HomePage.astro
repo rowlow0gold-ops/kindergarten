@@ -2,6 +2,8 @@
 import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
 import CurvedDivider from "../CurvedDivider.astro";
+import KoreaMap from "../KoreaMap.astro";
+import Shapes from "../Shapes.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
 import branchesKo from "../../data/branches.json";
@@ -34,7 +36,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <div class="relative"><CurvedDivider color="#f7f1e3" /></div>
 </section>
 
-<section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 pb-24 pt-4 text-center">
+<section class="relative overflow-hidden bg-cream"><Shapes class="opacity-90" /><div class="reveal relative mx-auto max-w-3xl px-6 pb-24 pt-4 text-center">
   <div class="rule-gold mx-auto mb-8"></div>
   <p class="font-serif text-3xl font-medium leading-snug text-navy-900 md:text-4xl">{c.missionTitle}</p>
 </div></section>
@@ -62,16 +64,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-24">
-  <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.levelsEyebrow}</p><h2 class="mt-3 font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.levelsTitle}</h2></div>
-  <div data-reveal-children class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    {c.levels.map((l)=>(<a href={p(l.href)} class="group relative block aspect-[3/4] overflow-hidden">
-      <Figure alt={l.t} cat={l.cat} class="absolute inset-0 h-full w-full" rounded="rounded-none" />
-      <div class="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/20 to-transparent"></div>
-      <div class="absolute inset-x-0 bottom-0 p-6 text-white"><p class="text-xs font-semibold uppercase tracking-wide text-gold-soft">{l.a}</p><h3 class="mt-1 font-serif text-2xl font-semibold leading-tight">{l.t}</h3></div>
-    </a>))}
-  </div>
-</div></section>
+
 
 <section class="bg-navy-900 text-white"><div class="mx-auto max-w-6xl px-6 py-24">
   <p class="reveal font-serif text-3xl font-semibold text-gold-soft">{c.numbersTitle}</p>
@@ -82,15 +75,24 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 
 <section class="bg-cream"><div class="mx-auto max-w-6xl px-6 py-24">
   <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2></div>
-  <div data-reveal-children class="mt-12 grid gap-px overflow-hidden bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
-    {branches.map((b)=>(<a href={p(`/schools/${b.slug}`)} class="group bg-cream p-7 transition hover:bg-white"><p class="text-xs font-semibold uppercase tracking-wide text-gold">{b.city}</p><h3 class="mt-1 font-serif text-2xl font-semibold text-navy-900">{b.name}</h3><p class="mt-2 text-sm text-ink/65">{b.levels}</p></a>))}
+  <div class="mt-12 grid items-center gap-12 md:grid-cols-2">
+    <div class="reveal flex justify-center"><KoreaMap branches={branches} /></div>
+    <ol data-reveal-children class="w-full">
+      {branches.map((b,i)=>(
+        <li><a href={p(`/schools/${b.slug}`)} class="group flex items-center gap-4 border-b border-black/10 py-4">
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-900 font-serif text-sm font-semibold text-gold-soft">{i+1}</span>
+          <span class="flex-1"><span class="font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{b.name}</span><span class="text-sm text-ink/55"> · {b.city}</span></span>
+          <span class="text-gold opacity-0 transition group-hover:opacity-100">→</span>
+        </a></li>
+      ))}
+    </ol>
   </div>
-  <a href={p("/schools")} class={`mt-10 ${btnLine}`}>{t("cta.seeMap")}</a>
+  <a href={p("/schools")} class={`mt-12 ${btnLine}`}>{t("cta.seeMap")}</a>
 </div></section>
 
-<section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
+<section class="relative text-white" style="background-color:#2a47b8; clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 100%, 0 86%)"><div class="reveal mx-auto max-w-3xl px-6 pb-36 pt-24 text-center">
   <div class="rule-gold mx-auto mb-8"></div>
   <h2 class="font-serif text-4xl font-semibold md:text-5xl">{c.visitTitle}</h2>
-  <p class="mx-auto mt-5 max-w-lg text-white/70">{c.visitBody}</p>
+  <p class="mx-auto mt-5 max-w-lg text-white/80">{c.visitBody}</p>
   <a href={p("/contact")} class="mt-9 inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.visit}</a>
 </div></section>

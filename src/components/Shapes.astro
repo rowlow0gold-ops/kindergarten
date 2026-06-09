@@ -1,0 +1,12 @@
+---
+interface Props { class?: string; }
+const { class: cls = "" } = Astro.props;
+---
+<div class={`pointer-events-none absolute inset-0 overflow-hidden ${cls}`} aria-hidden="true">
+  <span class="float-slow absolute right-[7%] top-[16%] block h-14 w-14 rounded-full" style="background:#6fd3b0; animation-delay:-1s"></span>
+  <span class="float-slow absolute left-[5%] top-[34%] block h-24 w-14" style="background:#e07a55; border-radius:0 9999px 9999px 0; animation-delay:-3s"></span>
+  <span class="float-slow absolute bottom-[14%] left-[16%] block h-10 w-10 rounded-full" style="background:#7aa0ef; animation-delay:-2s"></span>
+  <svg class="float-slow absolute right-[14%] bottom-[16%]" width="68" height="68" viewBox="0 0 68 68" style="animation-delay:-4s">
+    <path d="M8 58 A50 50 0 0 1 58 8 L44 22 A30 30 0 0 0 22 44 Z" fill="#ec85b5" />
+  </svg>
+</div>
