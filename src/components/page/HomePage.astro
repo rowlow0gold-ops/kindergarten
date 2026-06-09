@@ -26,7 +26,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <div class="absolute inset-0 bg-gradient-to-r from-white/92 via-white/60 to-white/20"></div>
   <div class="relative mx-auto max-w-6xl px-6 py-36 md:py-52">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
-    <p class="reveal mt-6 max-w-md text-base font-medium text-navy-900/80 md:text-lg">{c.heroSub}</p>
+    <p class="reveal mt-6 text-base font-medium text-navy-900/80 md:whitespace-nowrap md:text-lg">{c.heroSub}</p>
     <div class="reveal mt-10 flex flex-wrap gap-4">
       <a href={p("/schools")} class={btnFill}>{c.explore}</a>
       <a href={p("/admissions")} class={btnLine}>{c.visit}</a>
