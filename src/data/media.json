@@ -1,1 +1,4 @@
-{ "heroImage": "https://picsum.photos/seed/hanbithero/1600/1000" }
+{
+  "heroImage": "https://picsum.photos/seed/hanbithero/1600/1000",
+  "heroVideo": "https://videos.pexels.com/video-files/4328587/4328587-hd_1280_720_30fps.mp4"
+}

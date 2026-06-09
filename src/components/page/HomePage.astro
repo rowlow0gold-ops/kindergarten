@@ -22,7 +22,7 @@ const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-se
 const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
 <section class="relative isolate overflow-hidden bg-cream">
-  <img src={media.heroImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
+  <video autoplay muted loop playsinline poster={media.heroImage} src={media.heroVideo} class="absolute inset-0 h-full w-full object-cover"></video>
   <div class="absolute inset-0 bg-gradient-to-r from-white/92 via-white/60 to-white/20"></div>
   <div class="relative mx-auto max-w-6xl px-6 py-36 md:py-52">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
