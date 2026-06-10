@@ -1,6 +1,98 @@
 [
-  { "slug": "gwangju-open", "date": "2026-05-20", "category": "Notice", "title": "Gwangju Nam-gu Campus Opening", "excerpt": "Our Honam-region hub, the Gwangju Nam-gu campus, opens.", "body": "Hanbit opens a new kindergarten campus in Nam-gu, Gwangju, bringing English-immersion early education with native-speaking teachers to families in the Honam region." },
-  { "slug": "2027-admissions", "date": "2026-05-08", "category": "Admissions", "title": "2027 Admissions Now Open", "excerpt": "Applications for the 2027 school year are open across all campuses.", "body": "We are accepting applications across our kindergarten programme for 2027. Information session dates are on the Events page." },
-  { "slug": "english-day", "date": "2026-04-15", "category": "Events", "title": "English Musical Day 2026", "excerpt": "Children's English musical performances, all in one place.", "body": "Our annual English Musical Day returns this year, with children singing and acting on stage in English." },
-  { "slug": "phonics", "date": "2026-03-02", "category": "Programs", "title": "New Phonics English Program", "excerpt": "A new play-based way to learn English.", "body": "We have introduced a new phonics programme where kindergarten children learn English through sounds and play." }
+  {
+    "slug": "summer-camp-2026",
+    "date": "2026-06-05",
+    "category": "Events",
+    "title": "Summer English Camp Registration Open",
+    "excerpt": "Sign up for our summer English camp with native teachers.",
+    "body": "This July we run a month-long summer English camp with native teachers. Water play, English cooking and outdoor adventures let children experience English naturally."
+  },
+  {
+    "slug": "library-renewal",
+    "date": "2026-05-28",
+    "category": "Notice",
+    "title": "English Library Renovation Complete",
+    "excerpt": "Our 3,000-book English picture-book library has been renewed.",
+    "body": "Each campus English library has been refreshed with over 3,000 age-graded English picture books and cozy reading nooks to encourage a love of reading."
+  },
+  {
+    "slug": "gwangju-open",
+    "date": "2026-05-20",
+    "category": "Notice",
+    "title": "Gwangju Nam-gu Campus Opening",
+    "excerpt": "Our Honam-region hub, the Gwangju Nam-gu campus, opens.",
+    "body": "Hanbit opens a new kindergarten campus in Nam-gu, Gwangju, bringing English-immersion early education with native-speaking teachers to families in the Honam region."
+  },
+  {
+    "slug": "parent-session-june",
+    "date": "2026-05-18",
+    "category": "Events",
+    "title": "June Parent Information Session",
+    "excerpt": "An information session for new and current families.",
+    "body": "On the second Saturday of June, each campus hosts a parent session introducing Hanbit's English-immersion curriculum and daily routine. Reserve a spot in advance."
+  },
+  {
+    "slug": "2027-admissions",
+    "date": "2026-05-08",
+    "category": "Admissions",
+    "title": "2027 Admissions Now Open",
+    "excerpt": "Applications for the 2027 school year are open across all campuses.",
+    "body": "We are accepting applications across our kindergarten programme for 2027. Information session dates are on the Events page."
+  },
+  {
+    "slug": "native-teachers-2026",
+    "date": "2026-04-30",
+    "category": "Learning",
+    "title": "2026 Native Teaching Team Joins",
+    "excerpt": "Meet the native teachers joining us this year.",
+    "body": "Native teachers with rich early-childhood experience have joined the Hanbit family. Co-teaching with homeroom teachers strengthens our English-immersion environment."
+  },
+  {
+    "slug": "english-day",
+    "date": "2026-04-15",
+    "category": "Events",
+    "title": "English Musical Day 2026",
+    "excerpt": "Children's English musical performances, all in one place.",
+    "body": "Our annual English Musical Day returns this year, with children singing and acting on stage in English."
+  },
+  {
+    "slug": "spring-field-trip",
+    "date": "2026-04-08",
+    "category": "Events",
+    "title": "Spring Nature Field Trip",
+    "excerpt": "Children met spring in the woods and fields, in English.",
+    "body": "We held a spring nature field trip to nearby woods and parks. Children observed flowers and insects and described them in English, learning through all five senses."
+  },
+  {
+    "slug": "health-checkup",
+    "date": "2026-03-20",
+    "category": "Notice",
+    "title": "Regular Health Check-up Notice",
+    "excerpt": "A spring health check-up for all children.",
+    "body": "Together with our partner clinic, we hold a spring health check-up for all children. Schedules and preparation details are shared via our family newsletter."
+  },
+  {
+    "slug": "new-uniform",
+    "date": "2026-03-10",
+    "category": "Notice",
+    "title": "New Uniform Design Unveiled",
+    "excerpt": "A new uniform with more comfort and freedom to move.",
+    "body": "Designed for active little ones, our new uniform uses softer, eco-friendly fabrics. Ordering details will be announced separately."
+  },
+  {
+    "slug": "phonics",
+    "date": "2026-03-02",
+    "category": "Programs",
+    "title": "New Phonics English Program",
+    "excerpt": "A new play-based way to learn English.",
+    "body": "We have introduced a new phonics programme where kindergarten children learn English through sounds and play."
+  },
+  {
+    "slug": "reading-award",
+    "date": "2026-02-25",
+    "category": "Learning",
+    "title": "English Reading Awards Ceremony",
+    "excerpt": "We celebrated children who read steadily all term.",
+    "body": "Wrapping up the autumn-winter English reading challenge, we held a reading awards ceremony, celebrating children who grew closer to books a little each day."
+  }
 ]
