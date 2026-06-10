@@ -3,6 +3,7 @@ import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
 import CurvedDivider from "../CurvedDivider.astro";
 import Shapes from "../Shapes.astro";
+import ScheduleArt from "../ScheduleArt.astro";
 import KoreaMap from "../KoreaMap.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
@@ -88,11 +89,14 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<section class="bg-cream"><div class="reveal mx-auto max-w-3xl px-6 py-24 text-center">
-  <div class="rule-gold mx-auto mb-8"></div>
-  <h2 class="font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.visitTitle}</h2>
-  <p class="mx-auto mt-5 max-w-lg text-ink/70">{c.visitBody}</p>
-  <a href={p("/contact")} class="mt-9 inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.visit}</a>
+<section class="bg-cream"><div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-2">
+  <div class="reveal flex justify-center"><ScheduleArt class="w-full max-w-sm" /></div>
+  <div class="reveal">
+    <div class="rule-gold mb-8"></div>
+    <h2 class="font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.visitTitle}</h2>
+    <p class="mt-5 max-w-lg text-ink/70">{c.visitBody}</p>
+    <a href={p("/contact")} class="mt-9 inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.visit}</a>
+  </div>
 </div></section>
 
 <script define:vars={{ vids: media.heroVideos }}>
