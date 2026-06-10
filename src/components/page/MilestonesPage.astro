@@ -79,7 +79,7 @@ const c = {
   <div class="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-2">
     <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-5xl">{c.lead}</h2>
     <div data-reveal-children class="grid grid-cols-2 gap-4">
-      <Figure src="https://images.pexels.com/photos/32707142/pexels-photo-32707142.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Nature" : "자연"} class="aspect-square" rounded="rounded-2xl" />
+      <Figure src="https://images.pexels.com/photos/36928656/pexels-photo-36928656.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Nature" : "자연"} class="aspect-square" rounded="rounded-2xl" />
       <Figure src="https://images.pexels.com/photos/2080960/pexels-photo-2080960.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Forest" : "숲"} class="aspect-square mt-8" rounded="rounded-2xl" />
       <Figure src="https://images.pexels.com/photos/31621101/pexels-photo-31621101.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Outdoors" : "야외" } class="aspect-square -mt-4" rounded="rounded-2xl" />
       <Figure src="https://images.pexels.com/photos/24705717/pexels-photo-24705717.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Garden" : "정원"} class="aspect-square mt-4" rounded="rounded-2xl" />
@@ -119,13 +119,18 @@ const c = {
   <div class="mx-auto max-w-6xl px-5 py-20">
     <p class="reveal text-sm font-semibold uppercase tracking-wide text-gold">{c.tlLabel}</p>
     <h2 class="reveal mt-2 font-serif text-3xl font-semibold md:text-4xl">{c.tlTitle}</h2>
-    <div class="reveal mt-10 flex snap-x gap-5 overflow-x-auto pb-4">
+    <div data-reveal-children class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {c.timeline.map((m) => (
-        <div class="w-72 shrink-0 snap-start rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <Figure alt={m.t} class="aspect-[4/3]" rounded="rounded-xl" />
-          <p class="mt-4 text-sm font-semibold text-gold">{m.y}</p>
-          <h3 class="mt-1 font-serif text-lg font-semibold text-white">{m.t}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">{m.d}</p>
+        <div class="group overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:ring-gold/60">
+          <div class="relative aspect-[4/3] overflow-hidden">
+            <Figure alt={m.t} class="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-110" rounded="rounded-none" />
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/20 to-transparent"></div>
+            <span class="absolute left-4 top-4 rounded-full bg-gold px-3 py-1 font-serif text-sm font-semibold text-navy-900">{m.y}</span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-xl font-semibold text-white">{m.t}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">{m.d}</p>
+          </div>
         </div>
       ))}
     </div>
