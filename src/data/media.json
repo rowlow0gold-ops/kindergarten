@@ -1,4 +1,8 @@
 {
   "heroImage": "https://picsum.photos/seed/hanbithero/1600/1000",
-  "heroVideo": "https://videos.pexels.com/video-files/8363818/8363818-hd_1920_1080_30fps.mp4"
+  "heroVideos": [
+    "https://videos.pexels.com/video-files/8363818/8363818-hd_1920_1080_30fps.mp4",
+    "https://videos.pexels.com/video-files/8363873/8363873-hd_1920_1080_30fps.mp4",
+    "https://videos.pexels.com/video-files/8363831/8363831-hd_1920_1080_30fps.mp4"
+  ]
 }
