@@ -19,12 +19,12 @@ const noticeLabel = locale === "en" ? "Notices" : "공지";
     <div class="flex flex-col">
       <div class="rule-gold mb-5"></div>
       <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{newsLabel}</h2>
-      <ul data-list="news" class="mt-6 flex-1 divide-y divide-black/5">
+      <ul data-list="news" class="mt-6 h-[34rem] divide-y divide-black/5">
         {news.map((n) => (
-          <li class="py-5"><a href={p(`/news/${n.slug}`)} class="group block">
+          <li class="flex h-[6.8rem] flex-col justify-center"><a href={p(`/news/${n.slug}`)} class="group block">
             <div class="flex items-center gap-3 text-xs"><span class="rounded-full bg-cream px-2.5 py-1 font-semibold text-navy">{n.category}</span><time class="text-ink/50">{n.date}</time></div>
-            <h3 class="mt-2 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
-            <p class="mt-1 text-sm text-ink/70">{n.excerpt}</p>
+            <h3 class="mt-2 line-clamp-1 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
+            <p class="mt-1 line-clamp-2 text-sm text-ink/70">{n.excerpt}</p>
           </a></li>
         ))}
       </ul>
@@ -33,12 +33,12 @@ const noticeLabel = locale === "en" ? "Notices" : "공지";
     <div class="flex flex-col">
       <div class="rule-gold mb-5"></div>
       <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{noticeLabel}</h2>
-      <ul data-list="notices" class="mt-6 flex-1 divide-y divide-black/5">
+      <ul data-list="notices" class="mt-6 h-[34rem] divide-y divide-black/5">
         {notices.map((n) => (
-          <li class="py-5"><a href={p(`/news/${n.slug}`)} class="group block">
+          <li class="flex h-[6.8rem] flex-col justify-center"><a href={p(`/news/${n.slug}`)} class="group block">
             <div class="flex items-center gap-3 text-xs"><span class="rounded-full bg-cream px-2.5 py-1 font-semibold text-navy">{n.category}</span><time class="text-ink/50">{n.date}</time></div>
-            <h3 class="mt-2 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
-            <p class="mt-1 text-sm text-ink/70">{n.excerpt}</p>
+            <h3 class="mt-2 line-clamp-1 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
+            <p class="mt-1 line-clamp-2 text-sm text-ink/70">{n.excerpt}</p>
           </a></li>
         ))}
       </ul>
