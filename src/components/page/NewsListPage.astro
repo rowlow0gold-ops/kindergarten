@@ -5,18 +5,74 @@ import newsEn from "../../data/en/news.json";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const p = (path: string) => localizePath(path, locale);
-const items = (locale === "en" ? newsEn : newsKo).slice().sort((a, b) => b.date.localeCompare(a.date));
+const all = (locale === "en" ? newsEn : newsKo).slice().sort((a, b) => b.date.localeCompare(a.date));
+const noticeCats = locale === "en" ? ["Notice"] : ["공지"];
+const notices = all.filter((n) => noticeCats.includes(n.category));
+const news = all.filter((n) => !noticeCats.includes(n.category));
 const title = locale === "en" ? "News & Notices" : "뉴스 · 공지";
+const newsLabel = locale === "en" ? "News" : "뉴스";
+const noticeLabel = locale === "en" ? "Notices" : "공지";
 ---
 <section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20 text-center"><h1 class="font-serif text-5xl font-semibold md:text-6xl">{title}</h1></div></section>
-<section class="bg-white"><div class="mx-auto max-w-4xl px-6 py-16">
-  <ul data-reveal-children class="divide-y divide-black/5">
-    {items.map((n) => (
-      <li class="py-6"><a href={p(`/news/${n.slug}`)} class="group block">
-        <div class="flex items-center gap-3 text-xs"><span class="rounded-full bg-cream px-2.5 py-1 font-semibold text-navy">{n.category}</span><time class="text-ink/50">{n.date}</time></div>
-        <h3 class="mt-2 font-serif text-xl font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
-        <p class="mt-1 text-sm text-ink/70">{n.excerpt}</p>
-      </a></li>
-    ))}
-  </ul>
+<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-16">
+  <div class="grid gap-12 lg:grid-cols-2">
+    <div>
+      <div class="rule-gold mb-5"></div>
+      <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{newsLabel}</h2>
+      <ul data-list="news" class="mt-6 divide-y divide-black/5">
+        {news.map((n) => (
+          <li class="py-5"><a href={p(`/news/${n.slug}`)} class="group block">
+            <div class="flex items-center gap-3 text-xs"><span class="rounded-full bg-cream px-2.5 py-1 font-semibold text-navy">{n.category}</span><time class="text-ink/50">{n.date}</time></div>
+            <h3 class="mt-2 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
+            <p class="mt-1 text-sm text-ink/70">{n.excerpt}</p>
+          </a></li>
+        ))}
+      </ul>
+      <nav data-pager="news" class="mt-6 flex flex-wrap gap-2"></nav>
+    </div>
+    <div>
+      <div class="rule-gold mb-5"></div>
+      <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{noticeLabel}</h2>
+      <ul data-list="notices" class="mt-6 divide-y divide-black/5">
+        {notices.map((n) => (
+          <li class="py-5"><a href={p(`/news/${n.slug}`)} class="group block">
+            <div class="flex items-center gap-3 text-xs"><span class="rounded-full bg-cream px-2.5 py-1 font-semibold text-navy">{n.category}</span><time class="text-ink/50">{n.date}</time></div>
+            <h3 class="mt-2 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
+            <p class="mt-1 text-sm text-ink/70">{n.excerpt}</p>
+          </a></li>
+        ))}
+      </ul>
+      <nav data-pager="notices" class="mt-6 flex flex-wrap gap-2"></nav>
+    </div>
+  </div>
 </div></section>
+<script is:inline>
+(function () {
+  var PER = 5;
+  document.querySelectorAll("[data-list]").forEach(function (list) {
+    var key = list.getAttribute("data-list");
+    var items = Array.prototype.slice.call(list.children);
+    var pager = document.querySelector('[data-pager="' + key + '"]');
+    var pages = Math.ceil(items.length / PER) || 1;
+    var cur = 1;
+    function mk(label, target, disabled, active) {
+      var b = document.createElement("button");
+      b.textContent = label;
+      b.className = "px-3 py-1.5 rounded-md text-sm font-semibold " + (active ? "bg-navy text-white" : "bg-cream text-navy hover:bg-navy/10") + (disabled ? " opacity-40 cursor-not-allowed" : "");
+      if (disabled || active) b.disabled = true;
+      else b.onclick = function () { cur = target; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: "smooth" }); };
+      return b;
+    }
+    function render() {
+      items.forEach(function (el, i) { el.style.display = (i >= (cur - 1) * PER && i < cur * PER) ? "" : "none"; });
+      if (!pager) return;
+      pager.innerHTML = "";
+      if (pages <= 1) return;
+      pager.appendChild(mk("‹", cur - 1, cur === 1, false));
+      for (var pp = 1; pp <= pages; pp++) pager.appendChild(mk(String(pp), pp, false, pp === cur));
+      pager.appendChild(mk("›", cur + 1, cur === pages, false));
+    }
+    render();
+  });
+})();
+</script>
