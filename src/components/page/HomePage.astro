@@ -23,7 +23,7 @@ const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-se
 const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
 <section class="relative isolate overflow-hidden bg-cream">
-  <video id="heroVid" autoplay muted loop playsinline poster={media.heroImage} src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
+  <video id="heroVid" autoplay muted playsinline poster={media.heroImage} src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
   <div class="absolute inset-0 bg-gradient-to-r from-white/92 via-white/60 to-white/20"></div>
   <div class="relative mx-auto max-w-6xl px-6 py-36 md:py-52">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
@@ -99,7 +99,11 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 <script define:vars={{ vids: media.heroVideos }}>
   const v = document.getElementById("heroVid");
   if (v && Array.isArray(vids) && vids.length > 1) {
-    let i = 0;
-    setInterval(() => { i = (i + 1) % vids.length; v.src = vids[i]; const p = v.play(); if (p && p.catch) p.catch(() => {}); }, 10000);
+    let i = 0, timer;
+    const play = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const next = () => { i = (i + 1) % vids.length; v.src = vids[i]; play(); schedule(); };
+    const schedule = () => { clearTimeout(timer); timer = setTimeout(next, 10000); };
+    v.addEventListener("ended", next);
+    schedule();
   }
 </script>
