@@ -1,0 +1,113 @@
+---
+import Figure from "../Figure.astro";
+import { localizePath, type Locale } from "../../i18n/ui";
+import brKo from "../../data/branches.json";
+import brEn from "../../data/en/branches.json";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const en = locale === "en";
+const p = (path: string) => localizePath(path, locale);
+const branches = en ? brEn : brKo;
+
+const eyebrow = en ? "Enrichment" : "방과후 · 특별";
+const title = en ? "Afterschool Programs" : "방과후 프로그램";
+const intro = en
+  ? "Beyond the school day, Hanbit children explore the arts, movement, music and English through hands-on programs led by specialist and native teachers — joyful learning that builds confidence and curiosity."
+  : "정규 일과를 마친 뒤에도 한빛 아이들은 예술, 신체, 음악, 영어를 직접 경험합니다. 전문 강사와 원어민 교사가 이끄는 즐거운 활동으로 자신감과 호기심을 키웁니다.";
+
+const programs = en ? [
+  { t: "Ballet", d: "Beautiful posture, balance, flexibility and rhythm through gentle, age-appropriate ballet." },
+  { t: "Dance & Performing Arts", d: "Imagination, expression and stage confidence through dance and performance." },
+  { t: "Rhythmic Movement", d: "Moving to music to build coordination, balance and a sense of beat." },
+  { t: "Art Studio", d: "Painting, drawing and crafts across many materials to grow creativity." },
+  { t: "Music & Piano", d: "Melodies and percussion made joyful with the colored-note method." },
+  { t: "Physical Education", d: "Gross-motor skills, teamwork and confidence through active play." },
+  { t: "English Plus", d: "Phonics, reading and conversation to deepen English fluency." },
+  { t: "Story & Drama", d: "English stories and role-play that build speaking confidence." },
+  { t: "Little Chefs", d: "Cooking together in English — following recipes with all five senses." },
+  { t: "Soccer & Ball Sports", d: "Coordination, fitness and fair play on the field." },
+] : [
+  { t: "발레", d: "연령에 맞는 발레로 바른 자세, 균형, 유연성, 리듬감을 기릅니다." },
+  { t: "무용 · 공연 예술", d: "무용과 공연을 통해 상상력과 표현력, 무대 자신감을 키웁니다." },
+  { t: "리듬 무브먼트", d: "음악에 맞춰 몸을 움직이며 협응력과 박자 감각을 익힙니다." },
+  { t: "아트 스튜디오", d: "다양한 재료로 그리고 만들며 창의력을 자유롭게 펼칩니다." },
+  { t: "음악 · 피아노", d: "컬러 음표 방식으로 멜로디와 타악기를 즐겁게 배웁니다." },
+  { t: "체육", d: "활발한 신체 놀이로 대근육 발달과 협동, 자신감을 기릅니다." },
+  { t: "영어 플러스", d: "파닉스, 영어 독서, 회화로 영어 실력을 한층 깊이 있게." },
+  { t: "스토리 · 드라마", d: "영어 동화와 역할 놀이로 말하기 자신감을 키웁니다." },
+  { t: "리틀 셰프", d: "영어로 요리하며 오감과 표현을 함께 배웁니다." },
+  { t: "축구 · 볼 스포츠", d: "운동장에서 협응력과 체력, 페어플레이 정신을 기릅니다." },
+];
+
+const avail: Record<string, { sat: boolean; camp: boolean }> = {
+  "seoul-gangnam": { sat: true, camp: true },
+  "busan-haeundae": { sat: true, camp: true },
+  "daejeon-yuseong": { sat: true, camp: true },
+  "daegu-suseong": { sat: false, camp: false },
+  "gwangju-namgu": { sat: true, camp: true },
+};
+const yes = en ? "Available" : "운영";
+const no = en ? "—" : "미운영";
+const cols = en
+  ? ["Campus", "Age", "Afterschool", "Saturday School", "Seasonal Camp"]
+  : ["캠퍼스", "연령", "방과후", "토요학교", "계절 캠프"];
+const tag = (ok: boolean) => ok
+  ? `<span class="inline-block rounded-full bg-teal-100 px-2.5 py-1 text-xs font-semibold text-teal-700">${yes}</span>`
+  : `<span class="inline-block rounded-full bg-black/5 px-2.5 py-1 text-xs font-semibold text-ink/40">${no}</span>`;
+---
+<section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20">
+  <p class="text-sm font-semibold uppercase tracking-wide text-gold">{eyebrow}</p>
+  <h1 class="mt-2 font-serif text-4xl font-semibold md:text-5xl">{title}</h1>
+  <p class="mt-5 max-w-2xl text-white/75">{intro}</p>
+</div></section>
+
+<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-16">
+  <div class="rule-gold mb-6"></div>
+  <h2 class="reveal font-serif text-3xl font-semibold text-navy-900">{en ? "Our Programs" : "운영 프로그램"}</h2>
+  <div data-reveal-children class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {programs.map((pr) => (
+      <div class="group overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="relative aspect-[4/3] overflow-hidden">
+          <Figure alt={pr.t} class="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-110" rounded="rounded-none" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-serif text-lg font-semibold text-navy-900">{pr.t}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-ink/70">{pr.d}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div></section>
+
+<section class="bg-cream"><div class="mx-auto max-w-6xl px-6 py-16">
+  <div class="rule-gold mb-6"></div>
+  <h2 class="reveal font-serif text-3xl font-semibold text-navy-900">{en ? "Availability by Campus" : "캠퍼스별 운영 안내"}</h2>
+  <div class="reveal mt-8 overflow-x-auto rounded-2xl bg-white ring-1 ring-black/5">
+    <table class="w-full text-left text-sm">
+      <thead><tr class="border-b border-black/10 text-navy-900">
+        {cols.map((c) => (<th class="px-5 py-4 font-semibold">{c}</th>))}
+      </tr></thead>
+      <tbody>
+        {branches.map((b: any) => (
+          <tr class="border-b border-black/5 last:border-0">
+            <td class="px-5 py-4 font-semibold text-navy-900">{b.name}</td>
+            <td class="px-5 py-4 text-ink/70">{en ? "Ages 3–6" : "만 3–6세"}</td>
+            <td class="px-5 py-4" set:html={tag(true)} />
+            <td class="px-5 py-4" set:html={tag(avail[b.slug]?.sat ?? false)} />
+            <td class="px-5 py-4" set:html={tag(avail[b.slug]?.camp ?? false)} />
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-4 text-xs text-ink/50">{en ? "Programs and schedules may vary by campus and term. Contact your campus for current details." : "프로그램과 일정은 캠퍼스와 학기에 따라 달라질 수 있습니다. 자세한 내용은 각 캠퍼스로 문의해 주세요."}</p>
+</div></section>
+
+<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-16 text-center">
+  <h2 class="reveal font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{en ? "Questions about enrichment?" : "방과후 프로그램이 궁금하신가요?"}</h2>
+  <p class="reveal mx-auto mt-3 max-w-xl text-ink/70">{en ? "Our bilingual team is happy to help with programs, schedules and registration." : "이중언어 상담팀이 프로그램과 일정, 신청을 친절히 안내해 드립니다."}</p>
+  <div class="reveal mt-7 flex flex-wrap justify-center gap-3">
+    <a href={p("/admissions")} class="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy-900 transition hover:brightness-95">{en ? "Apply" : "입학 신청"}</a>
+    <a href={p("/contact")} class="rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-navy-900">{en ? "Contact us" : "문의하기"}</a>
+  </div>
+</div></section>
