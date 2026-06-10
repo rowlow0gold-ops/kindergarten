@@ -3,21 +3,21 @@ interface Branch { slug: string; name: string; city: string; }
 interface Props { branches: Branch[]; }
 const { branches } = Astro.props;
 const pos: Record<string, [number, number]> = {
-  "seoul-gangnam": [95, 88], "busan-haeundae": [150, 230], "daejeon-yuseong": [110, 150],
-  "daegu-suseong": [140, 192], "gwangju-namgu": [86, 222],
+  "seoul-gangnam": [80, 84], "busan-haeundae": [174, 236], "daejeon-yuseong": [114, 150],
+  "daegu-suseong": [158, 190], "gwangju-namgu": [94, 216],
 };
 ---
-<svg viewBox="0 0 220 340" class="h-auto w-full max-w-[17rem]" role="img" aria-label="Campus map of Korea" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 240 310" class="h-auto w-full max-w-[17rem]" role="img" aria-label="Campus map of Korea" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="land" cx="42%" cy="30%" r="80%">
+    <radialGradient id="land" cx="42%" cy="28%" r="82%">
       <stop offset="0%" stop-color="rgba(255,255,255,0.24)" />
       <stop offset="100%" stop-color="rgba(255,255,255,0.06)" />
     </radialGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
   </defs>
-  <path d="M60 58 C82 46 120 44 146 56 C156 74 162 104 170 136 C176 158 168 180 162 198 C158 214 152 226 158 240 C151 250 137 250 126 246 C113 254 97 252 84 258 C74 262 65 253 66 240 C72 222 55 208 60 190 C66 172 55 156 64 138 C70 121 55 103 62 85 C66 73 56 65 60 58 Z" fill="url(#land)" stroke="rgba(255,255,255,0.6)" stroke-width="1.6" stroke-linejoin="round" />
+  <path d="M44 70 C50 54 64 44 78 42 C110 34 150 28 190 36 C200 64 210 100 212 134 C213 168 202 200 190 232 C184 248 176 258 180 264 C168 268 156 260 150 270 C140 282 126 272 116 280 C104 288 92 280 82 286 C74 290 66 282 68 270 C72 248 56 230 62 210 C68 188 56 168 66 148 C72 128 56 108 64 88 C68 80 56 76 44 70 Z" fill="url(#land)" stroke="rgba(255,255,255,0.6)" stroke-width="1.6" stroke-linejoin="round" />
   {branches.map((b, i) => {
-    const [x, y] = pos[b.slug] ?? [110, 170];
+    const [x, y] = pos[b.slug] ?? [120, 160];
     return (
       <g>
         <circle cx={x} cy={y} r="11" fill="none" stroke="#ddbd76" stroke-width="2">
