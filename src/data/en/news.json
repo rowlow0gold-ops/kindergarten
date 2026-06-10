@@ -1,5 +1,13 @@
 [
   {
+    "slug": "closure-notice-june",
+    "date": "2026-06-08",
+    "category": "Notice",
+    "title": "June Discretionary Closure Day",
+    "excerpt": "The third Friday of June is a discretionary closure day.",
+    "body": "The third Friday of June is a discretionary closure day for staff training. Families needing emergency care should apply to their campus in advance."
+  },
+  {
     "slug": "summer-camp-2026",
     "date": "2026-06-05",
     "category": "Events",
@@ -8,12 +16,28 @@
     "body": "This July we run a month-long summer English camp with native teachers. Water play, English cooking and outdoor adventures let children experience English naturally."
   },
   {
+    "slug": "bus-route-update",
+    "date": "2026-05-30",
+    "category": "Notice",
+    "title": "Shuttle Bus Route Update",
+    "excerpt": "Some shuttle routes and times are being adjusted.",
+    "body": "Reflecting traffic conditions, some shuttle bus routes and pickup times are being adjusted. The updated timetable is shared via newsletter and the app."
+  },
+  {
     "slug": "library-renewal",
     "date": "2026-05-28",
     "category": "Notice",
     "title": "English Library Renovation Complete",
     "excerpt": "Our 3,000-book English picture-book library has been renewed.",
     "body": "Each campus English library has been refreshed with over 3,000 age-graded English picture books and cozy reading nooks to encourage a love of reading."
+  },
+  {
+    "slug": "meal-menu-june",
+    "date": "2026-05-25",
+    "category": "Notice",
+    "title": "June Meal Menu",
+    "excerpt": "Here is the June lunch menu.",
+    "body": "Please find the June lunch menu prepared by our nutritionist. Allergen-containing foods are marked separately on the menu for your reference."
   },
   {
     "slug": "gwangju-open",
@@ -30,6 +54,14 @@
     "title": "June Parent Information Session",
     "excerpt": "An information session for new and current families.",
     "body": "On the second Saturday of June, each campus hosts a parent session introducing Hanbit's English-immersion curriculum and daily routine. Reserve a spot in advance."
+  },
+  {
+    "slug": "app-maintenance",
+    "date": "2026-05-15",
+    "category": "Notice",
+    "title": "Parent App Maintenance Notice",
+    "excerpt": "The app will be briefly unavailable for maintenance.",
+    "body": "To keep the service stable, we will perform parent-app maintenance. Access may be temporarily limited during the maintenance window."
   },
   {
     "slug": "2027-admissions",
