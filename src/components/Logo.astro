@@ -1,0 +1,13 @@
+---
+interface Props { class?: string; }
+const { class: cls = "h-8 w-8" } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <circle cx="20" cy="20" r="6.5" fill="var(--color-gold)" />
+  <g stroke="var(--color-gold)" stroke-width="2.4" stroke-linecap="round">
+    <line x1="31.5" y1="20" x2="37" y2="20" /><line x1="8.5" y1="20" x2="3" y2="20" />
+    <line x1="20" y1="31.5" x2="20" y2="37" /><line x1="20" y1="8.5" x2="20" y2="3" />
+    <line x1="28.1" y1="28.1" x2="32" y2="32" /><line x1="11.9" y1="11.9" x2="8" y2="8" />
+    <line x1="11.9" y1="28.1" x2="8" y2="32" /><line x1="28.1" y1="11.9" x2="32" y2="8" />
+  </g>
+</svg>

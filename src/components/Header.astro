@@ -1,5 +1,6 @@
 ---
 import { useT, localizePath, type Locale } from "../i18n/ui";
+import Logo from "./Logo.astro";
 import siteKo from "../data/site.json";
 import siteEn from "../data/en/site.json";
 interface Props { locale: Locale; }
@@ -39,7 +40,7 @@ const nav = [
 ---
 <header class="site-header is-scrolled sticky top-0 z-50 bg-white">
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
-    <a href={p("/")} class="font-serif text-lg font-semibold text-navy-900 leading-tight shrink-0">{site.name}</a>
+    <a href={p("/")} class="flex shrink-0 items-center gap-2.5"><Logo class="h-8 w-8" /><span class="font-serif text-lg font-semibold leading-tight text-navy-900">{site.name}</span></a>
     <nav class="hidden items-center gap-1 lg:flex">
       {nav.map((n) => (
         n.children ? (
