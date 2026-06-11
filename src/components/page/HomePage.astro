@@ -25,7 +25,7 @@ const c = {
 const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-navy-700";
 const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
-<section class="relative isolate overflow-hidden bg-cream">
+<section class="relative isolate flex min-h-[78vh] flex-col justify-center overflow-hidden bg-cream md:min-h-[88vh]">
   <video id="heroVid" autoplay muted playsinline poster={media.heroImage} src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
   <div class="relative mx-auto max-w-6xl px-6 py-36 md:py-52">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
@@ -38,8 +38,8 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <div class="relative"><CurvedDivider color="#f7f1e3" /></div>
 </section>
 
-<section class="relative overflow-hidden bg-cream"><Shapes class="opacity-90" /><div class="reveal relative mx-auto max-w-3xl px-6 pb-24 pt-4 text-center">
-  <div class="rule-gold mx-auto mb-8"></div>
+<section class="relative overflow-hidden bg-cream"><Shapes class="opacity-90" /><div class="reveal relative mx-auto max-w-3xl px-6 pb-12 pt-2 text-center">
+  <div class="rule-gold mx-auto mb-5"></div>
   <p class="font-serif text-3xl font-medium leading-snug text-navy-900 md:text-4xl">{c.missionTitle}</p>
 </div></section>
 
