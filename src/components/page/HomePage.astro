@@ -75,8 +75,8 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hqfjb1AGtWh3LlNwGZxN6kbZxr0HoBjg/E04D/aGRiUu8dY/ekfjAdgCBSyEZAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style is:global>
   #hbMap .leaflet-tile { filter: grayscale(1) brightness(1.05) sepia(1) hue-rotate(178deg) saturate(1.7) contrast(0.95); }
   #hbMap .leaflet-container { background: #e8f0fb; font: inherit; }
@@ -121,7 +121,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
     <div class="rule-gold mb-8"></div>
     <h2 class="font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.visitTitle}</h2>
     <p class="mt-5 max-w-lg text-ink/70">{c.visitBody}</p>
-    <a href={p("/contact")} class="mt-9 inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.visit}</a>
+    <a href={p("/contact")} class={`mt-9 ${btnFill}`}>{c.visit}</a>
   </div>
 </div></section>
 
