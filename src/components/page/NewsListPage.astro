@@ -65,9 +65,6 @@ const chip = (c: string) => chipMap[c] ?? "bg-cream text-navy";
           </a></li>
         ))}
       </ul>
-      <div data-more="news" class="mt-7 flex justify-center">
-        <button class="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-2.5 text-sm font-semibold text-navy ring-1 ring-black/5 transition hover:bg-navy hover:text-white"><span class="-mt-1 text-lg leading-none tracking-widest">···</span><span>{moreLabel}</span></button>
-      </div>
     </div>
 
     <div class="flex flex-col">
@@ -87,27 +84,30 @@ const chip = (c: string) => chipMap[c] ?? "bg-cream text-navy";
           </a></li>
         ))}
       </ul>
-      <div data-more="notices" class="mt-7 flex justify-center">
-        <button class="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-2.5 text-sm font-semibold text-navy ring-1 ring-black/5 transition hover:bg-navy hover:text-white"><span class="-mt-1 text-lg leading-none tracking-widest">···</span><span>{moreLabel}</span></button>
-      </div>
     </div>
+  </div>
+  <div data-more class="mt-10 flex justify-center">
+    <button class="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-2.5 text-sm font-semibold text-navy ring-1 ring-black/5 transition hover:bg-navy hover:text-white"><span class="-mt-1 text-lg leading-none tracking-widest">···</span><span>{moreLabel}</span></button>
   </div>
 </div></section>
 <script is:inline>
 (function () {
   var STEP = 5;
-  document.querySelectorAll("[data-list]").forEach(function (list) {
-    var key = list.getAttribute("data-list");
-    var items = Array.prototype.slice.call(list.children);
-    var wrap = document.querySelector([data-more=' + key + ']);
-    var btn = wrap ? wrap.querySelector("button") : null;
-    var shown = STEP;
-    function render() {
-      items.forEach(function (el, i) { el.style.display = i < shown ? "" : "none"; });
-      if (wrap) wrap.style.display = shown >= items.length ? "none" : "flex";
-    }
-    if (btn) btn.onclick = function () { shown += STEP; render(); };
-    render();
+  var wrap = document.querySelector("[data-more]");
+  var btn = wrap ? wrap.querySelector("button") : null;
+  var lists = Array.prototype.slice.call(document.querySelectorAll("[data-list]")).map(function (list) {
+    return Array.prototype.slice.call(list.children);
   });
+  var shown = STEP;
+  function render() {
+    var anyHidden = false;
+    lists.forEach(function (items) {
+      items.forEach(function (el, i) { el.style.display = i < shown ? "" : "none"; });
+      if (items.length > shown) anyHidden = true;
+    });
+    if (wrap) wrap.style.display = anyHidden ? "flex" : "none";
+  }
+  if (btn) btn.onclick = function () { shown += STEP; render(); };
+  render();
 })();
 </script>
