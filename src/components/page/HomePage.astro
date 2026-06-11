@@ -102,7 +102,8 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   (function () {
     function init() {
       if (!window.L) { return setTimeout(init, 60); }
-      var map = L.map("hbMap", { scrollWheelZoom: false, zoomControl: false, dragging: true, attributionControl: true }).setView([36.4, 127.9], 7);
+      var map = L.map("hbMap", { scrollWheelZoom: false, zoomControl: false, dragging: false, doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false, attributionControl: true }).setView([36.4, 127.9], 7);
+      map.getContainer().style.cursor = "default";
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom: 19, subdomains: "abcd", attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(map);
       pts.forEach(function (pt) {
         var gold = pt.flagship;
