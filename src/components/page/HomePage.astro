@@ -4,7 +4,6 @@ import Figure from "../Figure.astro";
 import CurvedDivider from "../CurvedDivider.astro";
 import Shapes from "../Shapes.astro";
 import ScheduleArt from "../ScheduleArt.astro";
-import KoreaMap from "../KoreaMap.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
 import branchesKo from "../../data/branches.json";
@@ -73,19 +72,26 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   </div>
 </div></section>
 
-<section class="relative overflow-hidden text-white" style="background-color:#2a47b8; background-image: radial-gradient(circle at 25% 15%, rgba(255,255,255,0.10), transparent 55%), radial-gradient(circle at 85% 85%, rgba(0,0,0,0.18), transparent 55%)"><div class="pointer-events-none absolute inset-0 opacity-25 mix-blend-overlay" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')"></div><div class="relative mx-auto max-w-6xl px-6 py-24">
-  <div class="reveal"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-soft">{c.locEyebrow}</p><h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight md:text-5xl">{c.locTitle}</h2></div>
-  <div class="mt-12 grid items-center gap-12 md:grid-cols-2">
-    <div class="reveal flex justify-center"><KoreaMap branches={branches} /></div>
-    <ol data-reveal-children class="w-full">
-      {branches.map((b,i)=>(
-        <li><a href={p(`/schools/${b.slug}`)} class="group flex items-center gap-4 border-b border-white/20 py-4">
-          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 font-serif text-sm font-semibold text-gold-soft">{i+1}</span>
-          <span class="flex-1"><span class="font-serif text-lg font-semibold text-white">{b.name}</span><span class="text-sm text-white/60"> · {b.city}</span></span>
-          <span class="text-gold-soft opacity-0 transition group-hover:opacity-100">→</span>
-        </a></li>
-      ))}
-    </ol>
+<section class="relative overflow-hidden bg-white"><div class="mx-auto max-w-6xl px-6 py-24">
+  <div class="reveal mx-auto max-w-2xl text-center">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-navy/60">{c.locEyebrow}</p>
+    <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2>
+  </div>
+  <div data-reveal-children class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {branches.map((b,i)=>(
+      <a href={p(`/schools/${b.slug}`)} class="group relative block overflow-hidden rounded-3xl shadow-sm ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <div class="relative aspect-[4/3] overflow-hidden">
+          <Figure alt={b.name} cat="korea,city,architecture" class="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-110" rounded="rounded-none" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/35 to-transparent"></div>
+        </div>
+        <span class="absolute left-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-gold font-serif text-sm font-semibold text-navy-900 shadow">{i+1}</span>
+        <span class="absolute right-5 top-5 text-lg text-white/0 transition group-hover:translate-x-0.5 group-hover:text-white">→</span>
+        <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+          <h3 class="font-serif text-xl font-semibold">{b.name}</h3>
+          <p class="mt-0.5 text-sm text-white/75">{b.city} · {locale === "en" ? "Ages 3–6" : "만 3–6세"}</p>
+        </div>
+      </a>
+    ))}
   </div>
 </div></section>
 
