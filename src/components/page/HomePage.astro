@@ -16,7 +16,7 @@ const p = (path: string) => localizePath(path, locale);
 const site = locale === "en" ? siteEn : siteKo;
 const branches = locale === "en" ? branchesEn : branchesKo;
 const _coords = { "seoul-gangnam":[37.497,127.027], "busan-haeundae":[35.163,129.160], "daejeon-yuseong":[36.362,127.356], "daegu-suseong":[35.858,128.630], "gwangju-namgu":[35.133,126.902] };
-const mapPts = branches.map((b) => ({ label: b.city, lat: (_coords[b.slug] || [36.5,127.8])[0], lng: (_coords[b.slug] || [36.5,127.8])[1], href: p("/schools/" + b.slug), flagship: !!b.flagship }));
+const mapPts = branches.map((b) => ({ label: b.city, lat: (_coords[b.slug] || [36.5,127.8])[0], lng: (_coords[b.slug] || [36.5,127.8])[1], href: p("/schools/" + b.slug), flagship: false }));
 const seeMap = locale === "en" ? "See the map" : "캠퍼스 지도 보기";
 const c = {
   ko: { heroTitle:"영어 학습을 삶으로", heroSub:"유치 영어 과정 · 전국 5개 도시 캠퍼스", missionTitle:"독립적으로 사고하고 더 나은 사회에 기여하는 미래의 혁신가를, 생애 첫 배움에서부터 키웁니다.", introEyebrow:"교육 철학", introTitle:"대한민국 대표\n국제 영어 유치원", introBody:"21세기 아이의 잠재력을 여는 데에는 탄탄한 영어 기초가 필수입니다. 한빛은 유치 시기에 원어민 교사와 함께 영어를 놀이로 익히며, 자연스러운 영어 환경 속에서 호기심과 자신감을 키웁니다.", curriculum:"교육과정 보기", diffEyebrow:"한빛의 차별점", diffTitle:"영어가 자연스러운\n일상이 되는 유치원", diff:[{t:"원어민 영어 몰입",d:"하루 종일 영어로 소통하는 자연스러운 몰입 환경."},{t:"놀이 중심 영어 학습",d:"노래, 놀이, 이야기로 영어를 즐겁게 익힙니다."},{t:"전인 교육",d:"영어와 함께 사회성, 정서, 창의력을 균형 있게."},{t:"세심한 돌봄",d:"소규모 학급과 전문 교사진의 따뜻한 보살핌."}], levelsEyebrow:"생애 첫 배움", levelsTitle:"한빛에서의 배움", levels:[{t:"엄마와 아이",a:"10–18개월",href:"/enrichment/mother-toddler",cat:"baby,toddler,parent"},{t:"프리스쿨",a:"만 1.5–3세",href:"/learning/preschool-kindergarten",cat:"preschool,toddler,children"},{t:"유치부",a:"만 3–6세",href:"/learning/preschool-kindergarten",cat:"kindergarten,children,classroom"},{t:"방과후 · 특별활동",a:"전 연령",href:"/enrichment/afterschool",cat:"children,art,activity"}], numbersTitle:"숫자로 보는 한빛", locEyebrow:"서울 · 부산 · 대전 · 대구 · 광주", locTitle:"하나의 한빛,\n다섯 도시", visitTitle:"다음 단계: 방문 예약", visitBody:"캠퍼스 투어와 입학 설명회에서 한빛을 직접 만나보세요.", explore:"캠퍼스 보기", visit:"방문 예약" },
@@ -32,7 +32,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
     <p class="reveal mt-6 text-base font-medium text-navy-900 md:whitespace-nowrap md:text-lg">{c.heroSub}</p>
     <div class="reveal mt-10 flex flex-wrap gap-4">
       <a href={p("/schools")} class={btnFill}>{c.explore}</a>
-      <a href={p("/admissions")} class={btnLine}>{c.visit}</a>
+      <a href={p("/admissions")} class={btnFill}>{c.visit}</a>
     </div>
   </div>
   <div class="relative"><CurvedDivider color="#f7f1e3" /></div>
@@ -93,7 +93,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
       <div class="max-w-md" style="text-shadow:0 1px 14px rgba(255,255,255,0.95),0 1px 3px rgba(255,255,255,0.95)">
         <p class="text-sm font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p>
         <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2>
-        <a href={p("/schools")} class="pointer-events-auto mt-8 inline-block rounded-md bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:brightness-95">{seeMap}</a>
+        <a href={p("/schools")} class="pointer-events-auto mt-8 inline-block rounded-md bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white hover:brightness-95">{seeMap}</a>
       </div>
     </div>
   </div>
