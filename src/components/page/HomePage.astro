@@ -27,7 +27,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 ---
 <section class="relative isolate flex min-h-[78vh] flex-col justify-center overflow-hidden bg-cream md:min-h-[88vh]">
   <video id="heroVid" autoplay muted playsinline poster={media.heroImage} src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
-  <div class="relative mx-auto max-w-6xl px-6 py-36 md:py-52">
+  <div class="relative mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
     <p class="reveal mt-6 text-base font-medium text-navy-900 md:whitespace-nowrap md:text-lg">{c.heroSub}</p>
     <div class="reveal mt-10 flex flex-wrap gap-4">
@@ -35,7 +35,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
       <a href={p("/admissions")} class={btnFill}>{c.visit}</a>
     </div>
   </div>
-  <div class="relative"><CurvedDivider color="#f7f1e3" /></div>
+  <div class="absolute inset-x-0 bottom-0 z-10"><CurvedDivider color="#f7f1e3" /></div>
 </section>
 
 <section class="relative overflow-hidden bg-cream"><Shapes class="opacity-90" /><div class="reveal relative mx-auto max-w-3xl px-6 pb-12 pt-2 text-center">
