@@ -18,6 +18,7 @@ const chipMap: Record<string, string> = {
   "행사": "bg-amber-100 text-amber-700", "Events": "bg-amber-100 text-amber-700",
   "교육": "bg-teal-100 text-teal-700", "Learning": "bg-teal-100 text-teal-700",
   "입학": "bg-rose-100 text-rose-700", "Admissions": "bg-rose-100 text-rose-700",
+  "알림": "bg-rose-100 text-rose-700", "Alert": "bg-rose-100 text-rose-700",
 };
 const chip = (c: string) => chipMap[c] ?? "bg-cream text-navy";
 const link = (n: any) => p(n.href || ("/news/" + n.slug));
