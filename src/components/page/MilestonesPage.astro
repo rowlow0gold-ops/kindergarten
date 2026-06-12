@@ -192,38 +192,38 @@ const c = {
     var prev = document.querySelector("[data-tl-prev]");
     var next = document.querySelector("[data-tl-next]");
     var dots = document.querySelector("[data-tl-dots]");
-    function step() { return cards.length > 1 ? (cards[1].offsetLeft - cards[0].offsetLeft) : (cards[0] ? cards[0].offsetWidth : 320); }
+    var idx = 0, st;
+    function clamp(i) { return Math.max(0, Math.min(i, cards.length - 1)); }
     function maxLeft() { return track.scrollWidth - track.clientWidth; }
-    function current() {
-      if (track.scrollLeft >= maxLeft() - 2) return cards.length - 1;
-      return Math.max(0, Math.round(track.scrollLeft / step()));
+    function stepW() { return cards.length > 1 ? (cards[1].offsetLeft - cards[0].offsetLeft) : (cards[0] ? cards[0].offsetWidth : 320); }
+    function render() {
+      if (dots) for (var i = 0; i < dots.children.length; i++) dots.children[i].className = "h-2 rounded-full transition-all " + (i === idx ? "w-5 bg-gold" : "w-2 bg-white/30");
+      if (prev) prev.style.opacity = idx <= 0 ? "0.4" : "1";
+      if (next) next.style.opacity = idx >= cards.length - 1 ? "0.4" : "1";
     }
     function go(i) {
-      i = Math.max(0, Math.min(i, cards.length - 1));
-      var c = cards[i]; if (!c) return;
-      track.scrollTo({ left: Math.min(c.offsetLeft, maxLeft()), behavior: "smooth" });
+      idx = clamp(i);
+      var c = cards[idx];
+      if (c) track.scrollTo({ left: Math.min(c.offsetLeft, maxLeft()), behavior: "smooth" });
+      render();
     }
-    if (prev) prev.onclick = function () { go(current() - 1); };
-    if (next) next.onclick = function () { go(current() + 1); };
-    if (dots) {
-      for (var i = 0; i < cards.length; i++) {
-        var b = document.createElement("button");
-        b.setAttribute("aria-label", "Slide " + (i + 1));
-        (function (idx) { b.onclick = function () { go(idx); }; })(i);
-        dots.appendChild(b);
-      }
-      var update = function () {
-        var idx = current();
-        for (var i = 0; i < dots.children.length; i++) {
-          dots.children[i].className = "h-2 rounded-full transition-all " + (i === idx ? "w-5 bg-gold" : "w-2 bg-white/30");
-        }
-        if (prev) prev.style.opacity = idx <= 0 ? "0.4" : "1";
-        if (next) next.style.opacity = idx >= cards.length - 1 ? "0.4" : "1";
-      };
-      track.addEventListener("scroll", update);
-      window.addEventListener("resize", update);
-      update();
+    if (prev) prev.onclick = function () { go(idx - 1); };
+    if (next) next.onclick = function () { go(idx + 1); };
+    if (dots) for (var i = 0; i < cards.length; i++) {
+      var b = document.createElement("button");
+      b.setAttribute("aria-label", "Slide " + (i + 1));
+      (function (k) { b.onclick = function () { go(k); }; })(i);
+      dots.appendChild(b);
     }
+    track.addEventListener("scroll", function () {
+      clearTimeout(st);
+      st = setTimeout(function () {
+        idx = track.scrollLeft >= maxLeft() - 2 ? cards.length - 1 : clamp(Math.round(track.scrollLeft / stepW()));
+        render();
+      }, 120);
+    });
+    window.addEventListener("resize", render);
+    render();
   })();
 </script>
 </div>
