@@ -128,61 +128,92 @@ const c = {
 </script>
 
 
-<!-- BANNER -->
-<section class="relative bg-navy-900">
-  <Figure alt={locale === "en" ? "Our community" : "한빛 공동체"} class="aspect-[16/6] opacity-40" rounded="rounded-none" />
-  <div class="absolute inset-0 flex items-center">
-    <div class="reveal mx-auto flex max-w-6xl items-center gap-5 px-5">
-      <h2 class="font-serif text-2xl font-semibold text-white md:text-4xl">{c.banner}</h2>
+<!-- HONORING (founder + stories on one backdrop) -->
+<section class="relative overflow-hidden bg-navy-900 text-white">
+  <Figure alt={locale === "en" ? "Our community" : "한빛 공동체"} class="absolute inset-0 h-full w-full opacity-25" rounded="rounded-none" />
+  <div class="absolute inset-0 bg-navy-900/70"></div>
+  <div class="relative mx-auto max-w-6xl px-6 py-24">
+    <div class="reveal flex items-center gap-5">
+      <Logo class="h-16 w-16 shrink-0 md:h-20 md:w-20" />
+      <h2 class="font-serif text-2xl font-semibold leading-tight md:text-4xl">{c.banner}</h2>
     </div>
-  </div>
-</section>
-
-<!-- FOUNDER MESSAGE -->
-<section class="bg-cream">
-  <div class="reveal mx-auto max-w-4xl px-5 py-20">
-    <div class="rounded-3xl border border-gold/30 bg-white p-8 md:p-12">
-      <h2 class="font-serif text-2xl font-semibold text-gold md:text-3xl">{c.msgTitle}</h2>
-      <div class="mt-6 grid items-center gap-6 sm:grid-cols-[140px_1fr]">
-        <Figure alt={locale === "en" ? "Founder portrait" : "설립자 사진"} class="aspect-square" rounded="rounded-2xl" />
-        <div>
-          <p class="leading-relaxed text-ink/80">{c.msgBody}</p>
-          <p class="mt-4 text-sm font-semibold text-navy">{c.msgName}</p>
+    <div class="mt-14 grid items-stretch gap-8 lg:grid-cols-2">
+      <div class="reveal rounded-3xl bg-white/95 p-8 text-ink shadow-xl md:p-10">
+        <h3 class="font-serif text-2xl font-semibold text-gold md:text-3xl">{c.msgTitle}</h3>
+        <div class="mt-6 grid items-center gap-6 sm:grid-cols-[120px_1fr]">
+          <Figure alt={locale === "en" ? "Founder portrait" : "설립자 사진"} class="aspect-square" rounded="rounded-2xl" />
+          <div>
+            <p class="leading-relaxed text-ink/80">{c.msgBody}</p>
+            <p class="mt-4 text-sm font-semibold text-navy">{c.msgName}</p>
+          </div>
         </div>
+      </div>
+      <div class="reveal flex flex-col justify-center rounded-3xl bg-white/95 p-8 text-ink shadow-xl md:p-10">
+        <p class="text-sm font-semibold uppercase tracking-wide text-gold">{c.storiesTitle}</p>
+        <p class="mt-5 font-serif text-xl font-medium leading-relaxed text-navy-900 md:text-2xl">“{c.quote}”</p>
+        <p class="mt-6 text-sm italic text-ink/70">— {c.quoteBy}</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VISUAL TIMELINE -->
+<!-- VISUAL TIMELINE (carousel) -->
 <section class="bg-navy-900 text-white">
-  <div class="mx-auto max-w-6xl px-5 py-20">
+  <div class="mx-auto max-w-6xl px-6 py-20">
     <p class="reveal text-sm font-semibold uppercase tracking-wide text-gold">{c.tlLabel}</p>
-    <h2 class="reveal mt-2 font-serif text-3xl font-semibold md:text-4xl">{c.tlTitle}</h2>
-    <div data-reveal-children class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="reveal mt-2 flex items-end justify-between gap-4">
+      <h2 class="font-serif text-3xl font-semibold md:text-5xl">{c.tlTitle}</h2>
+      <div class="hidden gap-2 sm:flex">
+        <button data-tl-prev aria-label="Previous" class="grid h-11 w-11 place-items-center rounded-full text-lg ring-1 ring-white/25 transition hover:bg-white hover:text-navy-900">‹</button>
+        <button data-tl-next aria-label="Next" class="grid h-11 w-11 place-items-center rounded-full text-lg ring-1 ring-white/25 transition hover:bg-white hover:text-navy-900">›</button>
+      </div>
+    </div>
+    <div data-tl-track class="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4" style="scrollbar-width:none">
       {c.timeline.map((m) => (
-        <div class="group overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:ring-gold/60">
+        <div class="group w-[300px] shrink-0 snap-start overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-gold/60 sm:w-[340px]">
           <div class="relative aspect-[4/3] overflow-hidden">
             <Figure alt={m.t} class="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-110" rounded="rounded-none" />
-            <div class="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/20 to-transparent"></div>
-            <span class="absolute left-4 top-4 rounded-full bg-gold px-3 py-1 font-serif text-sm font-semibold text-navy-900">{m.y}</span>
           </div>
           <div class="p-6">
-            <h3 class="font-serif text-xl font-semibold text-white">{m.t}</h3>
+            <p class="font-serif text-sm font-semibold text-gold">{m.y}</p>
+            <h3 class="mt-1 font-serif text-xl font-semibold text-white">{m.t}</h3>
             <p class="mt-2 text-sm leading-relaxed text-white/70">{m.d}</p>
           </div>
         </div>
       ))}
     </div>
+    <div data-tl-dots class="mt-6 flex justify-center gap-2"></div>
   </div>
 </section>
-
-<!-- TESTIMONIAL -->
-<section class="bg-cream">
-  <div class="reveal mx-auto max-w-3xl px-5 py-20 text-center">
-    <p class="text-sm font-semibold uppercase tracking-wide text-gold">{c.storiesTitle}</p>
-    <p class="mt-6 font-serif text-xl font-medium leading-relaxed text-navy-900 md:text-2xl">“{c.quote}”</p>
-    <p class="mt-5 text-sm italic text-ink/70">— {c.quoteBy}</p>
-  </div>
-</section>
+<style is:global>[data-tl-track]::-webkit-scrollbar{display:none}</style>
+<script is:inline>
+  (function () {
+    var track = document.querySelector("[data-tl-track]");
+    if (!track) return;
+    var cards = track.children;
+    function step() { return cards.length ? cards[0].getBoundingClientRect().width + 24 : 320; }
+    var prev = document.querySelector("[data-tl-prev]");
+    var next = document.querySelector("[data-tl-next]");
+    if (prev) prev.onclick = function () { track.scrollBy({ left: -step(), behavior: "smooth" }); };
+    if (next) next.onclick = function () { track.scrollBy({ left: step(), behavior: "smooth" }); };
+    var dots = document.querySelector("[data-tl-dots]");
+    if (dots) {
+      for (var i = 0; i < cards.length; i++) {
+        var b = document.createElement("button");
+        b.className = "h-2 w-2 rounded-full bg-white/30 transition-all";
+        (function (idx) { b.onclick = function () { track.scrollTo({ left: idx * step(), behavior: "smooth" }); }; })(i);
+        dots.appendChild(b);
+      }
+      var upd = function () {
+        var idx = Math.round(track.scrollLeft / step());
+        for (var i = 0; i < dots.children.length; i++) {
+          dots.children[i].className = "h-2 rounded-full transition-all " + (i === idx ? "w-5 bg-gold" : "w-2 bg-white/30");
+        }
+      };
+      track.addEventListener("scroll", upd);
+      window.addEventListener("resize", upd);
+      upd();
+    }
+  })();
+</script>
 </div>
