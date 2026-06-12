@@ -80,8 +80,8 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   #hbMap .leaflet-tile { filter: grayscale(1) brightness(1.05) sepia(1) hue-rotate(178deg) saturate(1.7) contrast(0.95); }
   #hbMap .leaflet-container { background: #e8f0fb; font: inherit; }
   .hb-pin { position: relative; width: 90px; height: 72px; display: flex; flex-direction: column; align-items: center; }
-  .hb-pulse { position: absolute; left: 45px; top: 43px; width: 14px; height: 14px; border-radius: 9999px; background: #283566; transform: translate(-50%, -50%); animation: hbpulse 2s ease-out infinite; pointer-events: none; }
-  @keyframes hbpulse { 0% { transform: translate(-50%,-50%) scale(0.5); opacity: 0.55; } 70% { opacity: 0; } 100% { transform: translate(-50%,-50%) scale(3); opacity: 0; } }
+  .hb-pulse { position: absolute; left: 45px; top: 43px; width: 22px; height: 22px; border-radius: 9999px; background: #283566; transform: translate(-50%, -50%); animation: hbpulse 2.2s ease-out infinite; pointer-events: none; }
+  @keyframes hbpulse { 0% { transform: translate(-50%,-50%) scale(0.4); opacity: 0.6; } 70% { opacity: 0; } 100% { transform: translate(-50%,-50%) scale(6); opacity: 0; } }
   .hb-pin-svg { animation: hbdrop 2.6s ease-in-out infinite; transform-origin: center bottom; }
   @keyframes hbdrop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   .hb-pin-svg { filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
