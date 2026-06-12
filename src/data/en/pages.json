@@ -63,21 +63,6 @@
       }
     ]
   },
-  "about-careers": {
-    "eyebrow": "About",
-    "title": "Working at Hanbit",
-    "intro": "We are looking for passionate educators to grow alongside our children.",
-    "sections": [
-      {
-        "h": "Who we look for",
-        "b": "Enthusiastic educators, active listeners and life-long learners who respect education and want to help children thrive."
-      },
-      {
-        "h": "How to apply",
-        "b": "Apply with your CV via the Contact page. We recruit on a rolling basis."
-      }
-    ]
-  },
   "enrichment-afterschool": {
     "eyebrow": "Afterschool",
     "title": "Afterschool Programs",
