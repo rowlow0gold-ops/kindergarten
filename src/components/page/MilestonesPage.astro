@@ -130,7 +130,7 @@ const c = {
 
 <!-- HONORING (founder + stories on one backdrop) -->
 <section class="relative overflow-hidden bg-navy-900 text-white">
-  <img src="https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop" alt={locale === "en" ? "Trees" : "나무"} class="absolute inset-0 h-full w-full object-cover" />
+  <img src="https://images.pexels.com/photos/2080960/pexels-photo-2080960.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop" alt={locale === "en" ? "Trees" : "나무"} class="absolute inset-0 h-full w-full object-cover" />
   <div class="absolute inset-0 bg-navy-900/55"></div>
   <div class="relative mx-auto max-w-6xl px-6 py-24">
     <div class="reveal flex items-center gap-5">
@@ -154,12 +154,9 @@ const c = {
         <p class="mt-6 text-sm italic text-ink/70">— {c.quoteBy}</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- VISUAL TIMELINE (carousel) -->
-<section class="bg-navy-900 text-white">
-  <div class="mx-auto max-w-6xl px-6 py-20">
+    <!-- Milestones / Visual Timeline (sub-content) -->
+    <div class="mt-20">
     <p class="reveal text-sm font-semibold uppercase tracking-wide text-gold">{c.tlLabel}</p>
     <div class="reveal mt-2 flex items-end justify-between gap-4">
       <h2 class="font-serif text-3xl font-semibold md:text-5xl">{c.tlTitle}</h2>
@@ -183,6 +180,7 @@ const c = {
       ))}
     </div>
     <div data-tl-dots class="mt-6 flex justify-center gap-2"></div>
+    </div>
   </div>
 </section>
 <style is:global>[data-tl-track]::-webkit-scrollbar{display:none}</style>
