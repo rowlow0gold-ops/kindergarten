@@ -1,6 +1,7 @@
 ---
 import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
+import Logo from "../Logo.astro";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useT(locale);
@@ -74,11 +75,39 @@ const c = {
     <span class="absolute left-[40%] bottom-6 h-1.5 w-1.5 rounded-full bg-gold-soft opacity-50"></span>
   </div>
   <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 py-16 text-center">
+    <Logo class="mb-8 h-16 w-16 md:h-20 md:w-20" />
     <p class="font-serif text-3xl font-medium text-navy-900 md:text-5xl">
-      {c.rotatePre}<span data-rotate={JSON.stringify(c.rotate)} class="text-gold transition-opacity duration-300">{c.rotate[0]}</span>{c.rotatePost}
+      {c.rotatePre}<span data-typewriter={JSON.stringify(c.rotate)} class="text-gold"></span><span class="tw-cursor text-gold">|</span>{c.rotatePost}
     </p>
   </div>
 </section>
+<style is:global>
+  @keyframes twblink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  .tw-cursor { display: inline-block; margin-left: 1px; font-weight: 300; animation: twblink 1s steps(1) infinite; }
+</style>
+<script is:inline>
+  (function () {
+    var el = document.querySelector("[data-typewriter]");
+    if (!el) return;
+    var words = [];
+    try { words = JSON.parse(el.getAttribute("data-typewriter")); } catch (e) { return; }
+    if (words.length < 2) { el.textContent = words[0] || ""; return; }
+    var wi = 0, ci = 0, deleting = false;
+    function tick() {
+      var w = words[wi];
+      if (!deleting) {
+        ci++; el.textContent = w.slice(0, ci);
+        if (ci === w.length) { deleting = true; return setTimeout(tick, 1500); }
+        return setTimeout(tick, 95);
+      } else {
+        ci--; el.textContent = w.slice(0, ci);
+        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; return setTimeout(tick, 350); }
+        return setTimeout(tick, 45);
+      }
+    }
+    setTimeout(tick, 600);
+  })();
+</script>
 
 <!-- COLLAGE -->
 <section class="bg-white">
