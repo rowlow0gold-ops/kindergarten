@@ -75,11 +75,21 @@ const c = {
     <span class="absolute right-[28%] bottom-10 h-2 w-2 rounded-full bg-navy/20"></span>
     <span class="absolute left-[40%] bottom-6 h-1.5 w-1.5 rounded-full bg-gold-soft opacity-50"></span>
   </div>
-  <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 py-16 text-center">
+  <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pt-16 pb-6 text-center">
     <Logo class="mb-8 h-16 w-16 md:h-20 md:w-20" />
     <p class="font-serif text-3xl font-medium text-navy-900 md:text-5xl">
       {c.rotatePre}<span data-typewriter={JSON.stringify(c.rotate)} class="text-gold"></span><span class="tw-cursor text-gold">|</span>{c.rotatePost}
     </p>
+  </div>
+  <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-6 pb-24 md:grid-cols-2">
+    <h2 class="reveal font-serif text-3xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.lead}</h2>
+    <div data-reveal-children class="relative mx-auto h-[440px] w-full max-w-md sm:h-[500px]">
+      <div class="absolute left-0 top-6 aspect-[4/5] w-36 -rotate-[6deg] sm:w-44"><img src="https://images.pexels.com/photos/36928656/pexels-photo-36928656.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&fit=crop" alt={locale === "en" ? "Children" : "아이들"} loading="lazy" class="h-full w-full rounded-2xl object-cover shadow-xl ring-4 ring-white" /></div>
+      <div class="absolute left-[26%] top-0 z-30 aspect-[4/5] w-44 rotate-[3deg] sm:w-56"><img src="https://images.pexels.com/photos/2080960/pexels-photo-2080960.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&fit=crop" alt={locale === "en" ? "Play" : "놀이"} loading="lazy" class="h-full w-full rounded-2xl object-cover shadow-2xl ring-4 ring-white" /></div>
+      <div class="absolute right-0 top-12 z-20 aspect-square w-40 rotate-[7deg] sm:w-48"><img src="https://images.pexels.com/photos/31621101/pexels-photo-31621101.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop" alt={locale === "en" ? "Outdoors" : "야외"} loading="lazy" class="h-full w-full rounded-2xl object-cover shadow-xl ring-4 ring-white" /></div>
+      <div class="absolute left-[10%] bottom-0 z-20 aspect-square w-36 rotate-[5deg] sm:w-44"><img src="https://images.pexels.com/photos/24705717/pexels-photo-24705717.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop" alt={locale === "en" ? "Garden" : "정원"} loading="lazy" class="h-full w-full rounded-2xl object-cover shadow-xl ring-4 ring-white" /></div>
+      <div class="absolute right-[6%] bottom-4 z-10 aspect-[4/5] w-32 -rotate-[5deg] sm:w-40"><img src="https://images.pexels.com/photos/37026801/pexels-photo-37026801.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&fit=crop" alt={locale === "en" ? "Discovery" : "탐구"} loading="lazy" class="h-full w-full rounded-2xl object-cover shadow-xl ring-4 ring-white" /></div>
+    </div>
   </div>
 </section>
 <style is:global>
@@ -110,18 +120,6 @@ const c = {
   })();
 </script>
 
-<!-- COLLAGE -->
-<section class="bg-white">
-  <div class="mx-auto grid max-w-6xl items-center gap-8 px-5 py-20 md:grid-cols-2">
-    <h2 class="reveal font-serif text-3xl font-semibold text-navy-900 md:text-5xl">{c.lead}</h2>
-    <div data-reveal-children class="grid grid-cols-2 gap-4">
-      <Figure src="https://images.pexels.com/photos/36928656/pexels-photo-36928656.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Nature" : "자연"} class="aspect-square" rounded="rounded-2xl" />
-      <Figure src="https://images.pexels.com/photos/2080960/pexels-photo-2080960.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Forest" : "숲"} class="aspect-square mt-8" rounded="rounded-2xl" />
-      <Figure src="https://images.pexels.com/photos/31621101/pexels-photo-31621101.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Outdoors" : "야외" } class="aspect-square -mt-4" rounded="rounded-2xl" />
-      <Figure src="https://images.pexels.com/photos/24705717/pexels-photo-24705717.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&fit=crop" alt={locale === "en" ? "Garden" : "정원"} class="aspect-square mt-4" rounded="rounded-2xl" />
-    </div>
-  </div>
-</section>
 
 <!-- BANNER -->
 <section class="relative bg-navy-900">
