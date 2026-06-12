@@ -7,14 +7,9 @@ interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const p = (path: string) => localizePath(path, locale);
 const all = (locale === "en" ? newsEn : newsKo).slice().sort((a, b) => b.date.localeCompare(a.date));
-const noticeCats = locale === "en" ? ["Notice"] : ["공지"];
-const notices = all.filter((n) => noticeCats.includes(n.category));
-const newsAll = all.filter((n) => !noticeCats.includes(n.category));
-const featured = newsAll[0];
-const news = newsAll.slice(1);
+const featured = all[0];
+const rest = all.slice(1);
 const title = locale === "en" ? "News & Notices" : "뉴스 · 공지";
-const newsLabel = locale === "en" ? "News" : "뉴스";
-const noticeLabel = locale === "en" ? "Notices" : "공지";
 const featuredLabel = locale === "en" ? "Latest" : "최신 소식";
 const readMore = locale === "en" ? "Read more" : "자세히 보기";
 const moreLabel = locale === "en" ? "Show more" : "더 보기";
@@ -28,10 +23,10 @@ const chip = (c: string) => chipMap[c] ?? "bg-cream text-navy";
 const link = (n: any) => p(n.href || ("/news/" + n.slug));
 ---
 <section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20 text-center"><h1 class="font-serif text-5xl font-semibold md:text-6xl">{title}</h1></div></section>
-<section class="bg-white"><div class="mx-auto max-w-6xl px-6 py-16">
+<section class="bg-white"><div class="mx-auto max-w-4xl px-6 py-16">
 
   {featured && (
-    <a href={link(featured)} class="reveal group mb-14 grid overflow-hidden rounded-3xl bg-cream shadow-sm transition hover:shadow-md md:grid-cols-2">
+    <a href={link(featured)} class="reveal group mb-12 grid overflow-hidden rounded-3xl bg-cream shadow-sm transition hover:shadow-md md:grid-cols-2">
       <div class="relative aspect-[16/10] overflow-hidden md:aspect-auto">
         <Figure alt={featured.title} class="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-105" rounded="rounded-none" />
       </div>
@@ -48,45 +43,20 @@ const link = (n: any) => p(n.href || ("/news/" + n.slug));
     </a>
   )}
 
-  <div class="grid items-stretch gap-12 lg:grid-cols-2">
-    <div class="flex flex-col">
-      <div class="rule-gold mb-5"></div>
-      <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{newsLabel}</h2>
-      <ul data-list="news" class="mt-6 divide-y divide-black/5">
-        {news.map((n) => (
-          <li><a href={link(n)} class="group flex h-[7.5rem] items-center gap-4 py-2">
-            <div class="relative h-[6rem] w-[6rem] shrink-0 overflow-hidden rounded-2xl">
-              <Figure alt={n.title} class="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-110" rounded="rounded-none" />
-            </div>
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-2 text-xs"><span class={`rounded-full px-2.5 py-1 font-semibold ${chip(n.category)}`}>{n.category}</span><time class="text-ink/50">{n.date}</time></div>
-              <h3 class="mt-1.5 line-clamp-1 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
-              <p class="mt-1 line-clamp-2 text-sm text-ink/70">{n.excerpt}</p>
-            </div>
-          </a></li>
-        ))}
-      </ul>
-    </div>
-
-    <div class="flex flex-col">
-      <div class="rule-gold mb-5"></div>
-      <h2 class="font-serif text-2xl font-semibold text-navy-900 md:text-3xl">{noticeLabel}</h2>
-      <ul data-list="notices" class="mt-6 space-y-3">
-        {notices.map((n) => (
-          <li><a href={link(n)} class="group flex h-[6.75rem] items-center gap-4 rounded-2xl bg-cream/50 px-4 ring-1 ring-black/5 transition hover:bg-cream hover:ring-navy/15">
-            <span class={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${chip(n.category)}`}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            </span>
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-2 text-xs"><span class={`rounded-full px-2.5 py-1 font-semibold ${chip(n.category)}`}>{n.category}</span><time class="text-ink/50">{n.date}</time></div>
-              <h3 class="mt-1 line-clamp-1 font-serif text-base font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
-              <p class="mt-0.5 line-clamp-1 text-sm text-ink/70">{n.excerpt}</p>
-            </div>
-          </a></li>
-        ))}
-      </ul>
-    </div>
-  </div>
+  <ul data-list="news" class="divide-y divide-black/5">
+    {rest.map((n) => (
+      <li><a href={link(n)} class="group flex h-[7.5rem] items-center gap-4 py-2">
+        <div class="relative h-[6rem] w-[6rem] shrink-0 overflow-hidden rounded-2xl">
+          <Figure alt={n.title} class="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-110" rounded="rounded-none" />
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 text-xs"><span class={`rounded-full px-2.5 py-1 font-semibold ${chip(n.category)}`}>{n.category}</span><time class="text-ink/50">{n.date}</time></div>
+          <h3 class="mt-1.5 line-clamp-1 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
+          <p class="mt-1 line-clamp-2 text-sm text-ink/70">{n.excerpt}</p>
+        </div>
+      </a></li>
+    ))}
+  </ul>
   <div data-more class="mt-10 flex justify-center">
     <button class="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-2.5 text-sm font-semibold text-navy ring-1 ring-black/5 transition hover:bg-navy hover:text-white"><span class="-mt-1 text-lg leading-none tracking-widest">···</span><span>{moreLabel}</span></button>
   </div>
@@ -96,17 +66,11 @@ const link = (n: any) => p(n.href || ("/news/" + n.slug));
   var STEP = 5;
   var wrap = document.querySelector("[data-more]");
   var btn = wrap ? wrap.querySelector("button") : null;
-  var lists = Array.prototype.slice.call(document.querySelectorAll("[data-list]")).map(function (list) {
-    return Array.prototype.slice.call(list.children);
-  });
+  var items = Array.prototype.slice.call(document.querySelectorAll('[data-list="news"] > li'));
   var shown = STEP;
   function render() {
-    var anyHidden = false;
-    lists.forEach(function (items) {
-      items.forEach(function (el, i) { el.style.display = i < shown ? "" : "none"; });
-      if (items.length > shown) anyHidden = true;
-    });
-    if (wrap) wrap.style.display = anyHidden ? "flex" : "none";
+    items.forEach(function (el, i) { el.style.display = i < shown ? "" : "none"; });
+    if (wrap) wrap.style.display = items.length > shown ? "flex" : "none";
   }
   if (btn) btn.onclick = function () { shown += STEP; render(); };
   render();
