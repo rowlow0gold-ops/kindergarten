@@ -58,14 +58,22 @@ const c = {
 <section class="relative overflow-hidden bg-navy-900 text-white">
   <div class="absolute inset-0 opacity-[0.16]" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
   <div class="relative mx-auto max-w-6xl px-5 py-28 text-center md:py-36">
-    <h1 class="reveal font-serif text-7xl font-semibold uppercase text-gold md:text-9xl" style="font-variant-numeric: lining-nums; font-feature-settings: \lnum 1;">{c.years}</h1>
+    <h1 class="reveal font-serif text-6xl font-semibold text-gold md:text-8xl"><span class="text-7xl [font-variant-numeric:lining-nums] md:text-9xl">{c.years.match(/^\d+/)?.[0]}</span>{c.years.replace(/^\d+/, "")}</h1>
   </div>
   <div class="h-10 bg-cream" style="border-top-left-radius: 60% 100%; border-top-right-radius: 60% 100%;"></div>
 </section>
 
 <!-- ROTATING -->
-<section class="bg-cream">
-  <div class="reveal mx-auto flex max-w-4xl flex-col items-center px-5 pb-16 text-center">
+<section class="relative overflow-hidden bg-cream">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <svg class="absolute -left-12 -bottom-12 h-60 w-60 text-gold-soft opacity-[0.18]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="50" cy="50" r="20"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="44"/></svg>
+    <svg class="absolute right-6 top-2 h-32 w-32 text-navy opacity-[0.06]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="46"/></svg>
+    <svg class="absolute right-[14%] bottom-3 h-20 w-20 text-gold-soft opacity-[0.3]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V10"/><path d="M12 12C10.5 8.5 7 7 3 7c0 4 3 7 9 7z"/><path d="M12 13c1.3-3 4.5-4.5 8-4.5 0 3.6-3 6.5-8 6z"/></svg>
+    <span class="absolute left-[18%] top-7 h-2.5 w-2.5 rounded-full bg-gold-soft opacity-40"></span>
+    <span class="absolute right-[28%] bottom-10 h-2 w-2 rounded-full bg-navy/20"></span>
+    <span class="absolute left-[40%] bottom-6 h-1.5 w-1.5 rounded-full bg-gold-soft opacity-50"></span>
+  </div>
+  <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 py-16 text-center">
     <p class="font-serif text-3xl font-medium text-navy-900 md:text-5xl">
       {c.rotatePre}<span data-rotate={JSON.stringify(c.rotate)} class="inline-block w-[6.5em] text-left text-gold transition-opacity duration-300">{c.rotate[0]}</span>{c.rotatePost}
     </p>
