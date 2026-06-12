@@ -130,7 +130,7 @@ const c = {
 
 <!-- HONORING (founder + stories on one backdrop) -->
 <section class="relative overflow-hidden bg-navy-900 text-white">
-  <img src="https://images.pexels.com/photos/2080960/pexels-photo-2080960.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop" alt={locale === "en" ? "Trees" : "나무"} class="absolute inset-0 h-full w-full object-cover" />
+  <img src="https://picsum.photos/seed/660/1600/900" alt={locale === "en" ? "Our community" : "한빛 공동체"} class="absolute inset-0 h-full w-full object-cover" />
   <div class="absolute inset-0 bg-navy-900/55"></div>
   <div class="relative mx-auto max-w-6xl px-6 py-24">
     <div class="reveal flex items-center gap-5">
@@ -160,12 +160,12 @@ const c = {
     <p class="reveal text-sm font-semibold uppercase tracking-wide text-gold">{c.tlLabel}</p>
     <div class="reveal mt-2 flex items-end justify-between gap-4">
       <h2 class="font-serif text-3xl font-semibold md:text-5xl">{c.tlTitle}</h2>
-      <div class="hidden gap-2 sm:flex">
+      <div class="flex gap-2">
         <button data-tl-prev aria-label="Previous" class="grid h-11 w-11 place-items-center rounded-full text-lg ring-1 ring-white/25 transition hover:bg-white hover:text-navy-900">‹</button>
         <button data-tl-next aria-label="Next" class="grid h-11 w-11 place-items-center rounded-full text-lg ring-1 ring-white/25 transition hover:bg-white hover:text-navy-900">›</button>
       </div>
     </div>
-    <div data-tl-track class="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4" style="scrollbar-width:none">
+    <div data-tl-track class="relative mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4" style="scrollbar-width:none">
       {c.timeline.map((m) => (
         <div class="group w-[300px] shrink-0 snap-start overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-gold/60 sm:w-[340px]">
           <div class="relative aspect-[4/3] overflow-hidden">
@@ -189,28 +189,40 @@ const c = {
     var track = document.querySelector("[data-tl-track]");
     if (!track) return;
     var cards = track.children;
-    function step() { return cards.length ? cards[0].getBoundingClientRect().width + 24 : 320; }
     var prev = document.querySelector("[data-tl-prev]");
     var next = document.querySelector("[data-tl-next]");
-    if (prev) prev.onclick = function () { track.scrollBy({ left: -step(), behavior: "smooth" }); };
-    if (next) next.onclick = function () { track.scrollBy({ left: step(), behavior: "smooth" }); };
     var dots = document.querySelector("[data-tl-dots]");
+    function step() { return cards.length > 1 ? (cards[1].offsetLeft - cards[0].offsetLeft) : (cards[0] ? cards[0].offsetWidth : 320); }
+    function maxLeft() { return track.scrollWidth - track.clientWidth; }
+    function current() {
+      if (track.scrollLeft >= maxLeft() - 2) return cards.length - 1;
+      return Math.max(0, Math.round(track.scrollLeft / step()));
+    }
+    function go(i) {
+      i = Math.max(0, Math.min(i, cards.length - 1));
+      var c = cards[i]; if (!c) return;
+      track.scrollTo({ left: Math.min(c.offsetLeft, maxLeft()), behavior: "smooth" });
+    }
+    if (prev) prev.onclick = function () { go(current() - 1); };
+    if (next) next.onclick = function () { go(current() + 1); };
     if (dots) {
       for (var i = 0; i < cards.length; i++) {
         var b = document.createElement("button");
-        b.className = "h-2 w-2 rounded-full bg-white/30 transition-all";
-        (function (idx) { b.onclick = function () { track.scrollTo({ left: idx * step(), behavior: "smooth" }); }; })(i);
+        b.setAttribute("aria-label", "Slide " + (i + 1));
+        (function (idx) { b.onclick = function () { go(idx); }; })(i);
         dots.appendChild(b);
       }
-      var upd = function () {
-        var idx = Math.round(track.scrollLeft / step());
+      var update = function () {
+        var idx = current();
         for (var i = 0; i < dots.children.length; i++) {
           dots.children[i].className = "h-2 rounded-full transition-all " + (i === idx ? "w-5 bg-gold" : "w-2 bg-white/30");
         }
+        if (prev) prev.style.opacity = idx <= 0 ? "0.4" : "1";
+        if (next) next.style.opacity = idx >= cards.length - 1 ? "0.4" : "1";
       };
-      track.addEventListener("scroll", upd);
-      window.addEventListener("resize", upd);
-      upd();
+      track.addEventListener("scroll", update);
+      window.addEventListener("resize", update);
+      update();
     }
   })();
 </script>
