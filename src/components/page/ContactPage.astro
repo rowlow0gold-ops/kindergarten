@@ -39,7 +39,7 @@ const c = {
       <ul class="mt-5 divide-y divide-black/5 border-y border-black/5">
         {branches.map((b) => (
           <li class="flex items-center justify-between py-3">
-            <span class="text-sm text-ink/80">{b.name} <span class="text-ink/50">· {b.city}</span></span>
+            <span class="text-sm text-ink/80">{b.name}</span>
             <a href={`tel:${b.phone}`} class="text-sm font-medium text-navy hover:text-gold">{b.phone}</a>
           </li>
         ))}
