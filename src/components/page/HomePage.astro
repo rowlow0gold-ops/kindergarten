@@ -3,7 +3,6 @@ import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
 import CurvedDivider from "../CurvedDivider.astro";
 import Shapes from "../Shapes.astro";
-import ScheduleArt from "../ScheduleArt.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
 import branchesKo from "../../data/branches.json";
@@ -17,7 +16,7 @@ const site = locale === "en" ? siteEn : siteKo;
 const branches = locale === "en" ? branchesEn : branchesKo;
 const _coords = { "seoul-gangnam":[37.497,127.027], "busan-haeundae":[35.163,129.160], "daejeon-yuseong":[36.362,127.356], "daegu-suseong":[35.858,128.630], "gwangju-namgu":[35.133,126.902] };
 const mapPts = branches.map((b) => ({ label: b.city, lat: (_coords[b.slug] || [36.5,127.8])[0], lng: (_coords[b.slug] || [36.5,127.8])[1], href: p("/schools/" + b.slug), flagship: false }));
-const seeMap = locale === "en" ? "See the map" : "캠퍼스 지도 보기";
+const seeMap = locale === "en" ? "Find out the location" : "위치 찾아보기";
 const c = {
   ko: { heroTitle:"영어 학습을 삶으로", heroSub:"유치 영어 과정 · 전국 5개 도시 캠퍼스", missionTitle:"독립적으로 사고하고 더 나은 사회에 기여하는 미래의 혁신가를, 생애 첫 배움에서부터 키웁니다.", introEyebrow:"교육 철학", introTitle:"대한민국 대표\n국제 영어 유치원", introBody:"21세기 아이의 잠재력을 여는 데에는 탄탄한 영어 기초가 필수입니다. 한빛은 유치 시기에 원어민 교사와 함께 영어를 놀이로 익히며, 자연스러운 영어 환경 속에서 호기심과 자신감을 키웁니다.", curriculum:"교육과정 보기", diffEyebrow:"한빛의 차별점", diffTitle:"영어가 자연스러운\n일상이 되는 유치원", diff:[{t:"원어민 영어 몰입",d:"하루 종일 영어로 소통하는 자연스러운 몰입 환경."},{t:"놀이 중심 영어 학습",d:"노래, 놀이, 이야기로 영어를 즐겁게 익힙니다."},{t:"전인 교육",d:"영어와 함께 사회성, 정서, 창의력을 균형 있게."},{t:"세심한 돌봄",d:"소규모 학급과 전문 교사진의 따뜻한 보살핌."}], levelsEyebrow:"생애 첫 배움", levelsTitle:"한빛에서의 배움", levels:[{t:"엄마와 아이",a:"10–18개월",href:"/enrichment/mother-toddler",cat:"baby,toddler,parent"},{t:"프리스쿨",a:"만 1.5–3세",href:"/learning/preschool-kindergarten",cat:"preschool,toddler,children"},{t:"유치부",a:"만 3–6세",href:"/learning/preschool-kindergarten",cat:"kindergarten,children,classroom"},{t:"방과후 · 특별활동",a:"전 연령",href:"/enrichment/afterschool",cat:"children,art,activity"}], numbersTitle:"숫자로 보는 한빛", locEyebrow:"서울 · 부산 · 대전 · 대구 · 광주", locTitle:"하나의 한빛,\n다섯 도시", visitTitle:"다음 단계: 방문 예약", visitBody:"캠퍼스 투어와 입학 설명회에서 한빛을 직접 만나보세요.", explore:"캠퍼스 보기", visit:"방문 예약" },
   en: { heroTitle:"Bringing English to Life", heroSub:"Kindergarten English programme · campuses in 5 cities", missionTitle:"We raise independent thinkers and future innovators — starting from a child's very first years of learning.", introEyebrow:"Our philosophy", introTitle:"Korea's leading\nEnglish kindergarten", introBody:"A strong English foundation is essential to unlocking a child's potential. In the kindergarten years, Hanbit immerses children in English through play with native-speaking teachers, growing curiosity and confidence in a natural English environment.", curriculum:"See the curriculum", diffEyebrow:"The Hanbit Difference", diffTitle:"Where English becomes\npart of every day", diff:[{t:"Native English immersion",d:"A natural, all-day environment where children communicate in English."},{t:"Play-based English",d:"Songs, play and stories make learning English a joy."},{t:"Whole-child development",d:"Alongside English, we nurture social skills, emotion and creativity."},{t:"Attentive care",d:"Small classes and specialist teachers, with warm, attentive care."}], levelsEyebrow:"A child's first learning", levelsTitle:"Learning at Hanbit", levels:[{t:"Mother & Toddler",a:"10–18 months",href:"/enrichment/mother-toddler",cat:"baby,toddler,parent"},{t:"Preschool",a:"Ages 1.5–3",href:"/learning/preschool-kindergarten",cat:"preschool,toddler,children"},{t:"Kindergarten",a:"Ages 3–6",href:"/learning/preschool-kindergarten",cat:"kindergarten,children,classroom"},{t:"Afterschool & enrichment",a:"All ages",href:"/enrichment/afterschool",cat:"children,art,activity"}], numbersTitle:"Hanbit by the Numbers", locEyebrow:"Seoul · Busan · Daejeon · Daegu · Gwangju", locTitle:"One Hanbit,\nFive Cities", visitTitle:"Next Steps: Schedule a Visit", visitBody:"Meet Hanbit in person on a campus tour or at an information session.", explore:"Explore campuses", visit:"Schedule a visit" }
@@ -80,7 +79,11 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 <style is:global>
   #hbMap .leaflet-tile { filter: grayscale(1) brightness(1.05) sepia(1) hue-rotate(178deg) saturate(1.7) contrast(0.95); }
   #hbMap .leaflet-container { background: #e8f0fb; font: inherit; }
-  .hb-pin { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .hb-pin { position: relative; width: 90px; height: 72px; display: flex; flex-direction: column; align-items: center; }
+  .hb-pulse { position: absolute; left: 45px; top: 43px; width: 14px; height: 14px; border-radius: 9999px; background: #283566; transform: translate(-50%, -50%); animation: hbpulse 2s ease-out infinite; pointer-events: none; }
+  @keyframes hbpulse { 0% { transform: translate(-50%,-50%) scale(0.5); opacity: 0.55; } 70% { opacity: 0; } 100% { transform: translate(-50%,-50%) scale(3); opacity: 0; } }
+  .hb-pin-svg { animation: hbdrop 2.6s ease-in-out infinite; transform-origin: center bottom; }
+  @keyframes hbdrop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   .hb-pin-svg { filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
   .hb-label { margin-top: 2px; white-space: nowrap; background: #283566; color: #fff; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 5px; box-shadow: 0 1px 5px rgba(0,0,0,0.25); }
   .hb-label-gold { background: #c9a227; color: #1f2a5e; }
@@ -91,7 +94,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   <div class="pointer-events-none absolute inset-0 z-[600]">
     <div class="mx-auto max-w-6xl px-6 pt-12 md:pt-16">
       <div class="max-w-md" style="text-shadow:0 1px 14px rgba(255,255,255,0.95),0 1px 3px rgba(255,255,255,0.95)">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-gold">{c.locEyebrow}</p>
         <h2 class="mt-3 whitespace-pre-line font-serif text-4xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.locTitle}</h2>
         <a href={p("/schools")} style="text-shadow:none" class="pointer-events-auto mt-8 inline-block rounded-md bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white hover:brightness-95">{seeMap}</a>
       </div>
@@ -107,7 +109,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom: 19, subdomains: "abcd", attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(map);
       pts.forEach(function (pt) {
         var gold = pt.flagship;
-        var html = '<div class="hb-pin"><svg class="hb-pin-svg" width="34" height="44" viewBox="0 0 24 32"><path d="M12 0C5.4 0 0 5.4 0 12c0 8.5 12 20 12 20s12-11.5 12-20C24 5.4 18.6 0 12 0z" fill="' + (gold ? "#c9a227" : "#283566") + '"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg><span class="hb-label ' + (gold ? "hb-label-gold" : "") + '">' + pt.label + "</span></div>";
+        var html = '<div class="hb-pin"><span class="hb-pulse"></span><svg class="hb-pin-svg" width="34" height="44" viewBox="0 0 24 32"><path d="M12 0C5.4 0 0 5.4 0 12c0 8.5 12 20 12 20s12-11.5 12-20C24 5.4 18.6 0 12 0z" fill="' + (gold ? "#c9a227" : "#283566") + '"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg><span class="hb-label ' + (gold ? "hb-label-gold" : "") + '">' + pt.label + "</span></div>";
         var icon = L.divIcon({ className: "hb-divicon", html: html, iconSize: [90, 72], iconAnchor: [45, 44] });
         L.marker([pt.lat, pt.lng], { icon: icon }).addTo(map).on("click", function () { window.location.href = pt.href; });
       });
@@ -116,15 +118,6 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   })();
 </script>
 
-<section class="bg-cream"><div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-2">
-  <div class="reveal flex justify-center"><ScheduleArt class="w-full max-w-sm" /></div>
-  <div class="reveal">
-    <div class="rule-gold mb-8"></div>
-    <h2 class="font-serif text-4xl font-semibold text-navy-900 md:text-5xl">{c.visitTitle}</h2>
-    <p class="mt-5 max-w-lg text-ink/70">{c.visitBody}</p>
-    <a href={p("/contact")} class={`mt-9 ${btnFill}`}>{c.visit}</a>
-  </div>
-</div></section>
 
 <script define:vars={{ vids: media.heroVideos }}>
   const v = document.getElementById("heroVid");
