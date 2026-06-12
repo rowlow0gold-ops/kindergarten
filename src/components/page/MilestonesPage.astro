@@ -74,14 +74,21 @@ const c = {
     <span class="absolute left-[18%] top-7 h-2.5 w-2.5 rounded-full bg-gold-soft opacity-40"></span>
     <span class="absolute right-[28%] bottom-10 h-2 w-2 rounded-full bg-navy/20"></span>
     <span class="absolute left-[40%] bottom-6 h-1.5 w-1.5 rounded-full bg-gold-soft opacity-50"></span>
+    <svg class="absolute left-[5%] top-[40%] h-16 w-16 text-gold-soft opacity-[0.3]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V10"/><path d="M12 12C10.5 8.5 7 7 3 7c0 4 3 7 9 7z"/><path d="M12 13c1.3-3 4.5-4.5 8-4.5 0 3.6-3 6.5-8 6z"/></svg>
+    <svg class="absolute left-[1%] top-[56%] h-40 w-40 text-navy opacity-[0.05]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="46"/></svg>
+    <svg class="absolute right-[2%] top-[60%] h-52 w-52 text-gold-soft opacity-[0.14]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="50" cy="50" r="24"/><circle cx="50" cy="50" r="38"/></svg>
+    <span class="absolute left-[55%] top-[12%] h-2 w-2 rounded-full bg-navy/15"></span>
+    <span class="absolute right-[42%] bottom-[16%] h-2.5 w-2.5 rounded-full bg-gold-soft opacity-40"></span>
+    <span class="absolute left-[32%] bottom-[8%] h-1.5 w-1.5 rounded-full bg-navy/20"></span>
+    <span class="absolute right-[12%] top-[8%] h-2 w-2 rounded-full bg-gold-soft opacity-40"></span>
   </div>
-  <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pt-16 pb-6 text-center">
+  <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pt-20 pb-16 text-center">
     <Logo class="mb-8 h-16 w-16 md:h-20 md:w-20" />
     <p class="font-serif text-3xl font-medium text-navy-900 md:text-5xl">
       {c.rotatePre}<span data-typewriter={JSON.stringify(c.rotate)} class="text-gold"></span><span class="tw-cursor text-gold">|</span>{c.rotatePost}
     </p>
   </div>
-  <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-6 pb-24 md:grid-cols-2">
+  <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-6 pt-8 pb-28 md:grid-cols-2">
     <h2 class="reveal font-serif text-3xl font-semibold leading-tight text-navy-900 md:text-5xl">{c.lead}</h2>
     <div data-reveal-children class="relative mx-auto h-[440px] w-full max-w-md sm:h-[500px]">
       <div class="absolute left-0 top-6 aspect-[4/5] w-36 -rotate-[6deg] sm:w-44"><img src="https://images.pexels.com/photos/36928656/pexels-photo-36928656.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&fit=crop" alt={locale === "en" ? "Children" : "아이들"} loading="lazy" class="h-full w-full rounded-2xl object-cover shadow-xl ring-4 ring-white" /></div>
