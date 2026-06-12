@@ -9,7 +9,7 @@ const p = (path: string) => localizePath(path, locale);
 const c = {
   ko: {
     years: "10년.",
-    rotate: ["자신감", "호기심", "역량"],
+    rotate: ["자신감", "호기심", "즐거움"],
     rotatePre: "아이들이 ", rotatePost: " 을 키웁니다",
     lead: "작은 질문에서 담대한 아이디어로",
     banner: "교육을 향한 10년의 진심과 성장",
@@ -32,7 +32,7 @@ const c = {
   },
   en: {
     years: "10 Years.",
-    rotate: ["Confidence", "Curiosity", "Competence"],
+    rotate: ["Confidence", "Curiosity", "Joy"],
     rotatePre: "Helping children grow with ", rotatePost: "",
     lead: "From first questions to fearless ideas",
     banner: "Honoring a decade of purpose & progress in education",
@@ -69,7 +69,7 @@ const c = {
   <div class="reveal mx-auto flex max-w-4xl flex-col items-center px-5 pb-16 text-center">
     <Molecule class="w-16 h-16" />
     <p class="mt-5 font-serif text-2xl font-medium text-navy-900 md:text-4xl">
-      {c.rotatePre}<span data-rotate={JSON.stringify(c.rotate)} class="inline-block min-w-[10ch] text-center text-gold transition-opacity duration-300">{c.rotate[0]}</span>{c.rotatePost}
+      {c.rotatePre}<span data-rotate={JSON.stringify(c.rotate)} class="inline-block w-[8em] text-center text-gold transition-opacity duration-300">{c.rotate[0]}</span>{c.rotatePost}
     </p>
   </div>
 </section>
