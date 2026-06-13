@@ -1,7 +1,86 @@
 [
-  { "slug": "seoul-gangnam", "name": "Seoul Campus", "city": "Seoul", "flagship": true, "levels": "Kindergarten", "ages": "Ages 3–6", "address": "123 Teheran-ro, Gangnam-gu, Seoul", "phone": "02-1234-5678", "hours": "Weekdays 08:30 – 18:00", "access": "5 min from Gangnam Stn (Line 2), Exit 3", "intro": "Our flagship campus, running the widest range of English-immersion kindergarten programmes with native-speaking teachers." },
-  { "slug": "busan-haeundae", "name": "Busan Campus", "city": "Busan", "flagship": false, "levels": "Kindergarten", "ages": "Ages 3–6", "address": "78 Centum jungang-ro, Haeundae-gu, Busan", "phone": "051-345-6789", "hours": "Weekdays 08:30 – 18:00", "access": "8 min from Centum City Stn (Busan Line 2)", "intro": "Our southeastern hub campus, where English becomes a natural part of every day." },
-  { "slug": "daejeon-yuseong", "name": "Daejeon Campus", "city": "Daejeon", "flagship": false, "levels": "Kindergarten", "ages": "Ages 3–6", "address": "90 Daehak-ro, Yuseong-gu, Daejeon", "phone": "042-456-7890", "hours": "Weekdays 08:30 – 18:00", "access": "10 min from Yuseong Oncheon Stn (Line 1)", "intro": "An English kindergarten campus in Daejeon, with play-based English education." },
-  { "slug": "daegu-suseong", "name": "Daegu Campus", "city": "Daegu", "flagship": false, "levels": "Kindergarten", "ages": "Ages 3–6", "address": "200 Dongdaegu-ro, Suseong-gu, Daegu", "phone": "053-567-8901", "hours": "Weekdays 08:30 – 18:00", "access": "6 min from Beomeo Stn (Daegu Line 2)", "intro": "An English kindergarten campus in Suseong-gu, Daegu." },
-  { "slug": "gwangju-namgu", "name": "Gwangju Campus", "city": "Gwangju", "flagship": false, "levels": "Kindergarten", "ages": "Ages 3–6", "address": "55 Bongseon-ro, Nam-gu, Gwangju", "phone": "062-678-9012", "hours": "Weekdays 08:30 – 18:00", "access": "9 min from Namgwangju Stn (Gwangju Line 1)", "intro": "Our Honam-region English kindergarten campus." }
+  {
+    "slug": "seoul-gangnam",
+    "name": "Seoul Campus",
+    "city": "Seoul",
+    "flagship": true,
+    "levels": "Kindergarten",
+    "ages": "Ages 3–6",
+    "address": "123 Teheran-ro, Gangnam-gu, Seoul",
+    "phone": "02-1234-5678",
+    "hours": "Weekdays 08:30 – 18:00",
+    "access": "5 min from Gangnam Stn (Line 2), Exit 3",
+    "intro": "Our flagship campus, running the widest range of English-immersion kindergarten programmes with native-speaking teachers.",
+    "shuttle": [
+      "Route A · Gangnam – Yeoksam – Samsung · dep 08:00 / ret 15:30",
+      "Route B · Seocho – Banpo – Express Bus Terminal · dep 08:10 / ret 15:40"
+    ]
+  },
+  {
+    "slug": "busan-haeundae",
+    "name": "Busan Campus",
+    "city": "Busan",
+    "flagship": false,
+    "levels": "Kindergarten",
+    "ages": "Ages 3–6",
+    "address": "78 Centum jungang-ro, Haeundae-gu, Busan",
+    "phone": "051-345-6789",
+    "hours": "Weekdays 08:30 – 18:00",
+    "access": "8 min from Centum City Stn (Busan Line 2)",
+    "intro": "Our southeastern hub campus, where English becomes a natural part of every day.",
+    "shuttle": [
+      "Route A · Haeundae – Jangsan – Centum · dep 08:00 / ret 15:30",
+      "Route B · Marine City – Dalmaji · dep 08:10 / ret 15:40"
+    ]
+  },
+  {
+    "slug": "daejeon-yuseong",
+    "name": "Daejeon Campus",
+    "city": "Daejeon",
+    "flagship": false,
+    "levels": "Kindergarten",
+    "ages": "Ages 3–6",
+    "address": "90 Daehak-ro, Yuseong-gu, Daejeon",
+    "phone": "042-456-7890",
+    "hours": "Weekdays 08:30 – 18:00",
+    "access": "10 min from Yuseong Oncheon Stn (Line 1)",
+    "intro": "An English kindergarten campus in Daejeon, with play-based English education.",
+    "shuttle": [
+      "Route A · Yuseong – Doryong – Eoeun · dep 08:00 / ret 15:30",
+      "Route B · Wolpyeong – Galma · dep 08:10 / ret 15:40"
+    ]
+  },
+  {
+    "slug": "daegu-suseong",
+    "name": "Daegu Campus",
+    "city": "Daegu",
+    "flagship": false,
+    "levels": "Kindergarten",
+    "ages": "Ages 3–6",
+    "address": "200 Dongdaegu-ro, Suseong-gu, Daegu",
+    "phone": "053-567-8901",
+    "hours": "Weekdays 08:30 – 18:00",
+    "access": "6 min from Beomeo Stn (Daegu Line 2)",
+    "intro": "An English kindergarten campus in Suseong-gu, Daegu.",
+    "shuttle": [
+      "Route A · Suseong – Beomeo – Dusan · dep 08:00 / ret 15:30"
+    ]
+  },
+  {
+    "slug": "gwangju-namgu",
+    "name": "Gwangju Campus",
+    "city": "Gwangju",
+    "flagship": false,
+    "levels": "Kindergarten",
+    "ages": "Ages 3–6",
+    "address": "55 Bongseon-ro, Nam-gu, Gwangju",
+    "phone": "062-678-9012",
+    "hours": "Weekdays 08:30 – 18:00",
+    "access": "9 min from Namgwangju Stn (Gwangju Line 1)",
+    "intro": "Our Honam-region English kindergarten campus.",
+    "shuttle": [
+      "Route A · Nam-gu – Bongseon – Jinwol · dep 08:00 / ret 15:30",
+      "Route B · Baegun – Juwol · dep 08:10 / ret 15:40"
+    ]
+  }
 ]
