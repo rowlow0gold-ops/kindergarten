@@ -61,8 +61,8 @@ const c = en
     showButtons(false);
   }
   toggle?.addEventListener("click", () => showButtons(buttons?.classList.contains("hidden")));
-  document.querySelector("[data-open-ai]")?.addEventListener("click", () => openChat("ai"));
-  document.querySelector("[data-open-free]")?.addEventListener("click", () => openChat("free"));
+  document.querySelectorAll("[data-open-ai]").forEach((b) => b.addEventListener("click", () => openChat("ai")));
+  document.querySelectorAll("[data-open-free]").forEach((b) => b.addEventListener("click", () => openChat("free")));
   document.querySelectorAll("[data-chat-close]").forEach((b) => b.addEventListener("click", () => {
     const el = b.closest("[data-chat]"); if (el) { el.classList.add("hidden"); el.classList.remove("flex"); }
   }));

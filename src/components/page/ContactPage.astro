@@ -9,10 +9,14 @@ const site = en ? siteEn : siteKo;
 const c = en
   ? { title: "Contact Us", sub: "Reach us on the channel that suits you best.",
       kTitle: "Chat on KakaoTalk", kSub: "Ask us anything — admissions, campuses or programs. We reply quickly during weekday hours.", kBtn: "Open KakaoTalk channel", kNote: "Free to use · no app sign-up needed",
-      wTitle: "Chat on WhatsApp", wSub: "International families can reach us here. Message us anytime and we'll get back to you.", wBtn: "Open WhatsApp", wNote: "Available worldwide" }
+      wTitle: "Chat on WhatsApp", wSub: "International families can reach us here. Message us anytime and we'll get back to you.", wBtn: "Open WhatsApp", wNote: "Available worldwide",
+      aTitle: "AI Chatbot", aSub: "Get instant answers about admissions, campuses and programs — powered by AI.", aBtn: "Start AI chat", aNote: "Available 24/7",
+      fTitle: "Quick Chatbot", fSub: "Tap a question and get an instant answer. No sign-up, no waiting.", fBtn: "Open chatbot", fNote: "Common questions, answered fast" }
   : { title: "문의하기", sub: "편하신 채널로 문의해 주세요.",
       kTitle: "카카오톡으로 문의하기", kSub: "입학·캠퍼스·프로그램 무엇이든 편하게 물어보세요. 평일 상담 시간 내 빠르게 답변드립니다.", kBtn: "카카오톡 채널 열기", kNote: "별도 가입 없이 무료로 이용하실 수 있어요",
-      wTitle: "왓츠앱으로 문의하기", wSub: "해외에 계신 가정도 편하게 문의해 주세요. 메시지를 남겨주시면 빠르게 답변드립니다.", wBtn: "왓츠앱 열기", wNote: "전 세계 어디서나 이용 가능" };
+      wTitle: "왓츠앱으로 문의하기", wSub: "해외에 계신 가정도 편하게 문의해 주세요. 메시지를 남겨주시면 빠르게 답변드립니다.", wBtn: "왓츠앱 열기", wNote: "전 세계 어디서나 이용 가능",
+      aTitle: "AI 챗봇", aSub: "입학·캠퍼스·프로그램에 대한 궁금증을 AI가 즉시 답해드립니다.", aBtn: "AI 챗봇 시작", aNote: "24시간 언제든 이용 가능",
+      fTitle: "챗봇 상담", fSub: "질문을 누르면 바로 답을 확인할 수 있어요. 가입도, 기다림도 없습니다.", fBtn: "챗봇 열기", fNote: "자주 묻는 질문을 빠르게 안내" };
 ---
 <section class="bg-navy-900 text-white">
   <div class="reveal mx-auto max-w-6xl px-5 py-20 text-center">
@@ -47,6 +51,32 @@ const c = en
         {c.wBtn}
       </a>
       <p class="mt-4 text-xs font-medium text-white/70">{c.wNote}</p>
+    </div>
+
+    <div class="reveal flex flex-col rounded-3xl bg-navy-900 p-8 text-white md:p-10">
+      <span class="grid h-14 w-14 place-items-center rounded-2xl bg-white/15 text-gold">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M12 6V3"/><circle cx="12" cy="3" r="1"/><path d="M8.5 11v2M15.5 11v2"/></svg>
+      </span>
+      <h2 class="mt-6 font-serif text-2xl font-semibold md:text-3xl">{c.aTitle}</h2>
+      <p class="mt-3 leading-relaxed text-white/80">{c.aSub}</p>
+      <button type="button" data-open-ai class="mt-7 inline-flex items-center gap-2 self-start rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-navy-900 transition hover:brightness-95">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3Z"/></svg>
+        {c.aBtn}
+      </button>
+      <p class="mt-4 text-xs font-medium text-white/55">{c.aNote}</p>
+    </div>
+
+    <div class="reveal flex flex-col rounded-3xl bg-cream p-8 text-navy-900 ring-1 ring-navy-900/10 md:p-10">
+      <span class="grid h-14 w-14 place-items-center rounded-2xl bg-navy-900/10 text-navy-900">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+      </span>
+      <h2 class="mt-6 font-serif text-2xl font-semibold md:text-3xl">{c.fTitle}</h2>
+      <p class="mt-3 leading-relaxed text-navy-900/70">{c.fSub}</p>
+      <button type="button" data-open-free class="mt-7 inline-flex items-center gap-2 self-start rounded-full bg-navy-900 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-navy-700">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+        {c.fBtn}
+      </button>
+      <p class="mt-4 text-xs font-medium text-navy-900/50">{c.fNote}</p>
     </div>
   </div>
 </section>
