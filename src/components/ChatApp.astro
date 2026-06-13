@@ -1,0 +1,100 @@
+---
+import bot from "../data/botFree.json";
+import { type Locale } from "../i18n/ui";
+interface Props { mode: "ai" | "free"; locale: Locale; }
+const { mode, locale } = Astro.props;
+const en = locale === "en";
+const free = (bot as any)[locale] || (bot as any).ko;
+const title = mode === "ai" ? (en ? "AI Chatbot" : "AI 챗봇") : (en ? "Chatbot" : "챗봇");
+const ui = {
+  placeholder: en ? "Type a message…" : "메시지를 입력하세요…",
+  send: en ? "Send" : "보내기",
+  demo: en ? "Demo mode — the AI model isn't connected yet. For quick answers, try the Chatbot." : "데모 모드 — AI 모델이 아직 연결되지 않았어요. 빠른 답변은 '챗봇'을 이용해 주세요.",
+  aiGreeting: en ? "Hi! I'm the Hanbit AI assistant. Ask me anything about the school." : "안녕하세요! 한빛 AI 도우미예요. 학교에 대해 무엇이든 물어보세요.",
+  thinking: "···",
+  error: en ? "Sorry, I couldn't reach the assistant. Please try again." : "죄송해요, 응답을 가져오지 못했어요. 다시 시도해 주세요.",
+};
+const accent = mode === "ai" ? "bg-navy-900" : "bg-navy-900";
+---
+<div data-chat={mode} class="fixed right-4 z-[2100] hidden w-[20rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/10" style="bottom: calc(env(safe-area-inset-bottom,0px) + 152px); height: 26rem; max-height: calc(100vh - 12rem);">
+  <header class={`flex items-center justify-between px-4 py-3 text-white ${accent}`}>
+    <span class="flex items-center gap-2 font-serif text-sm font-semibold">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M12 6V3"/><circle cx="12" cy="3" r="1"/><path d="M8.5 11v2M15.5 11v2"/></svg>
+      {title}
+    </span>
+    <button data-chat-close aria-label="Close" class="text-white/70 transition hover:text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+  <div data-chat-log class="flex-1 space-y-2.5 overflow-y-auto bg-cream/30 px-3 py-3"></div>
+  <form data-chat-form class="flex items-center gap-2 border-t border-black/10 bg-white p-2.5">
+    <input data-chat-input type="text" autocomplete="off" placeholder={ui.placeholder} class="min-w-0 flex-1 rounded-full border border-black/15 px-3.5 py-2 text-sm outline-none focus:border-gold" />
+    <button type="submit" aria-label={ui.send} class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 text-white transition hover:bg-navy-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </form>
+</div>
+<script define:vars={{ mode, free, ui }}>
+  (function () {
+    var root = document.querySelector('[data-chat="' + mode + '"]');
+    if (!root) return;
+    var log = root.querySelector("[data-chat-log]");
+    var form = root.querySelector("[data-chat-form]");
+    var input = root.querySelector("[data-chat-input]");
+    var started = false;
+    var history = [];
+    function bubble(text, who) {
+      var d = document.createElement("div");
+      d.className = who === "user"
+        ? "ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-navy-900 px-3 py-2 text-sm leading-relaxed text-white"
+        : "mr-auto max-w-[85%] rounded-2xl rounded-bl-sm bg-white px-3 py-2 text-sm leading-relaxed text-ink/85 ring-1 ring-black/5";
+      d.textContent = text;
+      log.appendChild(d); log.scrollTop = log.scrollHeight;
+      return d;
+    }
+    function chips(items) {
+      var wrap = document.createElement("div");
+      wrap.className = "flex flex-wrap gap-1.5 pt-1";
+      (items || []).forEach(function (q) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = q;
+        b.className = "rounded-full border border-navy/15 bg-white px-2.5 py-1 text-xs font-medium text-navy transition hover:bg-cream";
+        b.onclick = function () { send(q); };
+        wrap.appendChild(b);
+      });
+      log.appendChild(wrap); log.scrollTop = log.scrollHeight;
+    }
+    function freeAnswer(q) {
+      var t = q.toLowerCase();
+      for (var i = 0; i < free.intents.length; i++) {
+        var it = free.intents[i];
+        for (var k = 0; k < it.keywords.length; k++) {
+          if (t.indexOf(String(it.keywords[k]).toLowerCase()) >= 0) return it.answer;
+        }
+      }
+      return free.fallback;
+    }
+    function aiSend(q) {
+      history.push({ role: "user", content: q });
+      var typing = bubble(ui.thinking, "bot");
+      fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          typing.remove();
+          if (d && d.unconfigured) { bubble(ui.demo, "bot"); return; }
+          if (d && d.reply) { history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); return; }
+          bubble(ui.error, "bot");
+        })
+        .catch(function () { typing.remove(); bubble(ui.error, "bot"); });
+    }
+    function send(q) {
+      q = (q || "").trim(); if (!q) return;
+      bubble(q, "user");
+      if (mode === "free") { setTimeout(function () { bubble(freeAnswer(q), "bot"); }, 180); }
+      else { aiSend(q); }
+    }
+    function start() {
+      if (started) return; started = true;
+      if (mode === "free") { bubble(free.greeting, "bot"); chips(free.quickReplies); }
+      else { bubble(ui.aiGreeting, "bot"); }
+    }
+    form.addEventListener("submit", function (e) { e.preventDefault(); var v = input.value; input.value = ""; send(v); });
+    root._chatStart = start;
+  })();
+</script>
