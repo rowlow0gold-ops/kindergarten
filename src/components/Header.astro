@@ -15,11 +15,6 @@ const L = (ko: string, en: string) => (locale === "en" ? en : ko);
 const nav = [
   { label: L("학교 소개", "About"), href: p("/about/milestones") },
   { label: L("캠퍼스", "Campuses"), href: p("/schools") },
-  { label: L("교육과정", "Learning"), children: [
-    { label: L("교육 철학 · 과정", "Philosophy & curriculum"), href: p("/learning") },
-    { label: L("유치 교육과정", "Kindergarten curriculum"), href: p("/learning/kindergarten") },
-    { label: L("교육과정 FAQ", "Curriculum FAQ"), href: p("/learning/faq") },
-  ]},
   { label: L("방과후 · 특별", "Enrichment"), href: p("/enrichment/afterschool") },
   { label: L("소식", "News"), href: p("/news") },
   { label: L("입학 안내", "Admissions"), href: p("/admissions") },
