@@ -1,9 +1,9 @@
 ---
-interface Props { src?: string; alt: string; class?: string; rounded?: string; cat?: string; }
-const { src, alt, class: cls = "aspect-[4/3]", rounded = "rounded-none", cat = "school" } = Astro.props;
+interface Props { src?: string; alt: string; class?: string; rounded?: string; cat?: string; seed?: string; }
+const { src, alt, class: cls = "aspect-[4/3]", rounded = "rounded-none", cat = "school", seed } = Astro.props;
 let img = src;
 if (!img) {
-  const base = (cat.split(",")[0] || "school").trim() + "-" + alt;
+  const base = (cat.split(",")[0] || "school").trim() + "-" + (seed || alt);
   let h = 0; for (let i = 0; i < base.length; i++) { h = (h * 31 + base.charCodeAt(i)) >>> 0; }
   img = `https://picsum.photos/seed/${h % 1000}/900/700`;
 }
