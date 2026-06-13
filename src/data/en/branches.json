@@ -12,8 +12,9 @@
     "access": "5 min from Gangnam Stn (Line 2), Exit 3",
     "intro": "Our flagship campus, running the widest range of English-immersion kindergarten programmes with native-speaking teachers.",
     "shuttle": [
-      "Route A · Gangnam – Yeoksam – Samsung · dep 08:00 / ret 15:30",
-      "Route B · Seocho – Banpo – Express Bus Terminal · dep 08:10 / ret 15:40"
+      "Route A: A - B - C - D",
+      "Route B: A - B - C - D",
+      "Route C: A - B - C - D"
     ]
   },
   {
@@ -29,8 +30,9 @@
     "access": "8 min from Centum City Stn (Busan Line 2)",
     "intro": "Our southeastern hub campus, where English becomes a natural part of every day.",
     "shuttle": [
-      "Route A · Haeundae – Jangsan – Centum · dep 08:00 / ret 15:30",
-      "Route B · Marine City – Dalmaji · dep 08:10 / ret 15:40"
+      "Route A: A - B - C - D",
+      "Route B: A - B - C - D",
+      "Route C: A - B - C - D"
     ]
   },
   {
@@ -46,8 +48,9 @@
     "access": "10 min from Yuseong Oncheon Stn (Line 1)",
     "intro": "An English kindergarten campus in Daejeon, with play-based English education.",
     "shuttle": [
-      "Route A · Yuseong – Doryong – Eoeun · dep 08:00 / ret 15:30",
-      "Route B · Wolpyeong – Galma · dep 08:10 / ret 15:40"
+      "Route A: A - B - C - D",
+      "Route B: A - B - C - D",
+      "Route C: A - B - C - D"
     ]
   },
   {
@@ -63,7 +66,9 @@
     "access": "6 min from Beomeo Stn (Daegu Line 2)",
     "intro": "An English kindergarten campus in Suseong-gu, Daegu.",
     "shuttle": [
-      "Route A · Suseong – Beomeo – Dusan · dep 08:00 / ret 15:30"
+      "Route A: A - B - C - D",
+      "Route B: A - B - C - D",
+      "Route C: A - B - C - D"
     ]
   },
   {
@@ -79,8 +84,9 @@
     "access": "9 min from Namgwangju Stn (Gwangju Line 1)",
     "intro": "Our Honam-region English kindergarten campus.",
     "shuttle": [
-      "Route A · Nam-gu – Bongseon – Jinwol · dep 08:00 / ret 15:30",
-      "Route B · Baegun – Juwol · dep 08:10 / ret 15:40"
+      "Route A: A - B - C - D",
+      "Route B: A - B - C - D",
+      "Route C: A - B - C - D"
     ]
   }
 ]
