@@ -10,8 +10,8 @@ const p = (path: string) => localizePath(path, locale);
 const branches = en ? brEn : brKo;
 
 const c = en
-  ? { eyebrow: "Seoul · Busan · Daejeon · Daegu · Gwangju", title: "Our Campuses", sub: "Choose a city to see campus details, shuttle routes and enrichment programs.", filter: "Find your campus", info: "Campus information", shuttle: "Shuttle bus", after: "Afterschool", sat: "Saturday School", camp: "Seasonal Camp", none: "Not offered at this campus", fAddr: "Address", fPhone: "Phone", fHours: "Hours", fAccess: "Getting here", fAges: "Ages" }
-  : { eyebrow: "서울 · 부산 · 대전 · 대구 · 광주", title: "캠퍼스 안내", sub: "도시를 선택하면 캠퍼스 정보, 통학 차량, 특별활동을 확인할 수 있습니다.", filter: "캠퍼스 선택", info: "캠퍼스 정보", shuttle: "통학 차량", after: "방과후", sat: "토요학교", camp: "계절 캠프", none: "이 캠퍼스에서는 운영하지 않습니다", fAddr: "주소", fPhone: "전화", fHours: "운영 시간", fAccess: "오시는 길", fAges: "연령" };
+  ? { eyebrow: "Seoul · Busan · Daejeon · Daegu · Gwangju", title: "Our Campuses", sub: "Choose a city to see campus details, shuttle routes and enrichment programs.", filter: "Find your campus", info: "Campus information", shuttle: "Shuttle bus", after: "Afterschool", sat: "Saturday School", camp: "Seasonal Camp", none: "Not offered at this campus", fAddr: "Address", fPhone: "Phone", fHours: "Hours", fAccess: "Getting here", fAges: "Ages", choose: "Choose your campus", chooseSub: "Pick a city above to see its details, shuttle routes and programs." }
+  : { eyebrow: "서울 · 부산 · 대전 · 대구 · 광주", title: "캠퍼스 안내", sub: "도시를 선택하면 캠퍼스 정보, 통학 차량, 특별활동을 확인할 수 있습니다.", filter: "캠퍼스 선택", info: "캠퍼스 정보", shuttle: "통학 차량", after: "방과후", sat: "토요학교", camp: "계절 캠프", none: "이 캠퍼스에서는 운영하지 않습니다", fAddr: "주소", fPhone: "전화", fHours: "운영 시간", fAccess: "오시는 길", fAges: "연령", choose: "캠퍼스를 선택해 주세요", chooseSub: "위에서 도시를 선택하면 정보, 통학 차량, 프로그램이 표시됩니다." };
 
 const avail: Record<string, { sat: boolean; camp: boolean }> = {
   "seoul-gangnam": { sat: true, camp: true }, "busan-haeundae": { sat: true, camp: true },
@@ -73,8 +73,8 @@ const rows = (list: any[]) => list;
     </div>
   </div>
 
-  {branches.map((b: any, i: number) => (
-    <div data-campus-block={b.slug} style={i === 0 ? "" : "display:none"} class="space-y-12">
+  {branches.map((b: any) => (
+    <div data-campus-block={b.slug} style="display:none" class="space-y-12">
       <div class="grid items-start gap-8 md:grid-cols-2">
         <div class="overflow-hidden rounded-3xl shadow-sm ring-1 ring-black/5"><Figure alt={b.name} class="aspect-[4/3]" rounded="rounded-none" /></div>
         <div>
@@ -133,15 +133,21 @@ const rows = (list: any[]) => list;
       </div>
     </div>
   ))}
+  <div data-empty class="rounded-3xl border border-dashed border-navy/20 bg-white/50 py-20 text-center">
+    <svg class="mx-auto h-12 w-12 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5.2-7-11a7 7 0 1 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+    <p class="mt-4 font-serif text-2xl font-semibold text-navy-900">{c.choose}</p>
+    <p class="mx-auto mt-2 max-w-sm text-sm text-ink/55">{c.chooseSub}</p>
+  </div>
 </div></section>
 <script is:inline>
 (function () {
   var blocks = Array.prototype.slice.call(document.querySelectorAll("[data-campus-block]"));
   var pills = Array.prototype.slice.call(document.querySelectorAll("[data-city]"));
-  if (!blocks.length) return;
-  var sel = blocks[0].getAttribute("data-campus-block");
+  var prompt = document.querySelector("[data-empty]");
+  var sel = null;
   function render() {
     blocks.forEach(function (b) { b.style.display = b.getAttribute("data-campus-block") === sel ? "" : "none"; });
+    if (prompt) prompt.style.display = sel ? "none" : "";
     pills.forEach(function (p) {
       var on = p.getAttribute("data-city") === sel;
       p.className = "rounded-full px-5 py-2 text-sm font-semibold transition " + (on ? "bg-navy text-white" : "bg-cream text-navy ring-1 ring-black/5 hover:bg-navy/10");
