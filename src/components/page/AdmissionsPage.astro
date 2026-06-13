@@ -54,7 +54,6 @@ const c = {
       <thead class="bg-navy-900 text-white"><tr><th class="px-5 py-3 font-semibold">{tuition.labels.level}</th><th class="px-5 py-3 font-semibold">{tuition.labels.year}</th><th class="px-5 py-3 font-semibold">{tuition.labels.entrance}</th></tr></thead>
       <tbody data-fee-body>{firstRows.map((r:any)=>(<tr class="border-t border-black/5"><td class="px-5 py-4 font-medium text-navy-900">{r.level}</td><td class="px-5 py-4 text-ink/80">{r.year}</td><td class="px-5 py-4 text-ink/80">{r.entrance}</td></tr>))}</tbody>
     </table>
-    <p class="mt-4 text-xs text-ink/55">{tuition.note}</p>
   </div>
   <div class="reveal mt-12 text-center"><a href={p("/contact")} class="inline-block rounded-none bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy-900 transition hover:brightness-95">{c.apply}</a></div>
 </div></section>
