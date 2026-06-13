@@ -6,8 +6,8 @@ const locale = getLocale(Astro.url);
 const site = locale === "en" ? siteEn : siteKo;
 const p = (path: string) => localizePath(path, locale);
 const c = locale === "en"
-  ? { kakao: "KakaoTalk chat", bot: "Chat assistant", title: "Choose an assistant", hi: "How would you like help today? Pick an assistant below.", aiName: "AI Assistant", aiDesc: "Conversational AI — ask anything", simpleName: "Quick Menu Bot", simpleDesc: "Guided menu — no AI", demo: "Demo — both assistants are coming soon." }
-  : { kakao: "카카오톡 상담", bot: "상담봇", title: "상담봇 선택", hi: "어떻게 도와드릴까요? 아래에서 상담 방식을 선택해 주세요.", aiName: "AI 상담봇", aiDesc: "대화형 AI에게 무엇이든 물어보세요", simpleName: "메뉴 상담봇", simpleDesc: "메뉴 기반 간편 안내 · AI 미사용", demo: "데모 — 두 상담봇 모두 준비 중입니다." };
+  ? { kakao: "KakaoTalk chat", bot: "AI assistant", title: "AI assistant", hi: "Hi! How can I help? Pick a topic below.", q1: "Campuses", q2: "Admissions", q3: "Contact", demo: "Demo assistant — live AI answers coming soon." }
+  : { kakao: "카카오톡 상담", bot: "AI 상담봇", title: "AI 상담봇", hi: "안녕하세요! 무엇을 도와드릴까요? 아래에서 선택해 주세요.", q1: "캠퍼스 안내", q2: "입학 안내", q3: "문의하기", demo: "데모 상담봇 — 실시간 AI 응답은 준비 중입니다." };
 ---
 <div data-bot-panel class="fixed right-4 z-[2000] hidden w-72 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/10" style="bottom: calc(env(safe-area-inset-bottom,0px) + 150px)">
   <div class="flex items-center justify-between bg-navy-900 px-4 py-3 text-white">
@@ -18,25 +18,10 @@ const c = locale === "en"
   </div>
   <div class="px-4 py-4">
     <p class="text-sm leading-relaxed text-ink/80">{c.hi}</p>
-    <div class="mt-3 flex flex-col gap-2.5">
-      <button type="button" data-bot-ai class="group flex items-center gap-3 rounded-xl bg-navy-900 px-3.5 py-3 text-left text-white shadow-sm transition hover:brightness-110">
-        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white/10 text-gold">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M12 6V3"/><circle cx="12" cy="3" r="1"/><path d="M8.5 11v2M15.5 11v2"/></svg>
-        </span>
-        <span class="min-w-0">
-          <span class="block text-sm font-semibold">{c.aiName}</span>
-          <span class="block text-[11px] leading-snug text-white/65">{c.aiDesc}</span>
-        </span>
-      </button>
-      <button type="button" data-bot-simple class="group flex items-center gap-3 rounded-xl border border-navy/15 bg-white px-3.5 py-3 text-left text-navy transition hover:bg-cream">
-        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-cream text-navy">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>
-        </span>
-        <span class="min-w-0">
-          <span class="block text-sm font-semibold">{c.simpleName}</span>
-          <span class="block text-[11px] leading-snug text-ink/55">{c.simpleDesc}</span>
-        </span>
-      </button>
+    <div class="mt-3 flex flex-col gap-2">
+      <a href={p("/schools")} class="rounded-lg border border-navy/15 px-3 py-2 text-sm font-medium text-navy transition hover:bg-cream">{c.q1}</a>
+      <a href={p("/admissions")} class="rounded-lg border border-navy/15 px-3 py-2 text-sm font-medium text-navy transition hover:bg-cream">{c.q2}</a>
+      <a href={p("/contact")} class="rounded-lg border border-navy/15 px-3 py-2 text-sm font-medium text-navy transition hover:bg-cream">{c.q3}</a>
     </div>
     <p class="mt-3 text-[11px] leading-snug text-ink/45">{c.demo}</p>
   </div>
