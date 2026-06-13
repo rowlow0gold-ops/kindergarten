@@ -3,6 +3,8 @@ import Figure from "../Figure.astro";
 import { localizePath, type Locale } from "../../i18n/ui";
 import newsKo from "../../data/news.json";
 import newsEn from "../../data/en/news.json";
+import brKo from "../../data/branches.json";
+import brEn from "../../data/en/branches.json";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const p = (path: string) => localizePath(path, locale);
@@ -10,10 +12,14 @@ const noticeCats = locale === "en" ? ["Notice"] : ["공지"];
 const all = (locale === "en" ? newsEn : newsKo).filter((n) => !noticeCats.includes(n.category)).slice().sort((a, b) => b.date.localeCompare(a.date));
 const featured = all[0];
 const rest = all.slice(1);
+const branches = locale === "en" ? brEn : brKo;
 const title = locale === "en" ? "News" : "뉴스";
 const featuredLabel = locale === "en" ? "Latest" : "최신 소식";
 const readMore = locale === "en" ? "Read more" : "자세히 보기";
 const moreLabel = locale === "en" ? "Show more" : "더 보기";
+const allLabel = locale === "en" ? "All campuses" : "전체 캠퍼스";
+const filterLabel = locale === "en" ? "Filter by campus" : "캠퍼스별 보기";
+const filters = [{ value: "__all__", label: locale === "en" ? "All" : "전체" }, ...branches.map((b: any) => ({ value: b.city, label: b.city }))];
 const chipMap: Record<string, string> = {
   "공지": "bg-sky-100 text-sky-700", "Notice": "bg-sky-100 text-sky-700",
   "행사": "bg-amber-100 text-amber-700", "Events": "bg-amber-100 text-amber-700",
@@ -23,19 +29,30 @@ const chipMap: Record<string, string> = {
 };
 const chip = (c: string) => chipMap[c] ?? "bg-cream text-navy";
 const link = (n: any) => p(n.href || ("/news/" + n.slug));
+const site = (n: any) => (n.campus === allLabel ? "1" : undefined);
 ---
 <section class="bg-navy-900 text-white"><div class="reveal mx-auto max-w-6xl px-6 py-20 text-center"><h1 class="font-serif text-5xl font-semibold md:text-6xl">{title}</h1></div></section>
 <section class="bg-white"><div class="mx-auto max-w-4xl px-6 py-16">
 
+  <div class="reveal mb-10">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-ink/45">{filterLabel}</p>
+    <div class="flex flex-wrap gap-2">
+      {filters.map((f) => (
+        <button data-filter={f.value} class="rounded-full px-4 py-2 text-sm font-semibold transition">{f.label}</button>
+      ))}
+    </div>
+  </div>
+
   {featured && (
-    <a href={link(featured)} class="reveal group mb-12 grid overflow-hidden rounded-3xl bg-cream shadow-sm transition hover:shadow-md md:grid-cols-2">
+    <a data-featured data-campus={featured.campus} data-site={site(featured)} href={link(featured)} class="reveal group mb-12 grid overflow-hidden rounded-3xl bg-cream shadow-sm transition hover:shadow-md md:grid-cols-2">
       <div class="relative aspect-[16/10] overflow-hidden md:aspect-auto">
         <Figure alt={featured.title} class="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-105" rounded="rounded-none" />
       </div>
       <div class="flex flex-col justify-center p-8 md:p-10">
-        <div class="flex items-center gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-2 text-xs">
           <span class="rounded-full bg-gold/15 px-3 py-1 font-semibold uppercase tracking-wide text-navy">{featuredLabel}</span>
           <span class={`rounded-full px-2.5 py-1 font-semibold ${chip(featured.category)}`}>{featured.category}</span>
+          <span class="inline-flex items-center gap-1 rounded-full bg-navy/5 px-2.5 py-1 font-semibold text-navy/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21s-7-5.2-7-11a7 7 0 1 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>{featured.campus}</span>
           <time class="text-ink/50">{featured.date}</time>
         </div>
         <h2 class="mt-4 font-serif text-2xl font-semibold leading-snug text-navy-900 md:text-3xl">{featured.title}</h2>
@@ -47,34 +64,59 @@ const link = (n: any) => p(n.href || ("/news/" + n.slug));
 
   <ul data-list="news" class="divide-y divide-black/5">
     {rest.map((n) => (
-      <li><a href={link(n)} class="group flex h-[7.5rem] items-center gap-4 py-2">
+      <li data-campus={n.campus} data-site={site(n)}><a href={link(n)} class="group flex h-[7.5rem] items-center gap-4 py-2">
         <div class="relative h-[6rem] w-[6rem] shrink-0 overflow-hidden rounded-2xl">
           <Figure alt={n.title} class="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-110" rounded="rounded-none" />
         </div>
         <div class="min-w-0 flex-1">
-          <div class="flex items-center gap-2 text-xs"><span class={`rounded-full px-2.5 py-1 font-semibold ${chip(n.category)}`}>{n.category}</span><time class="text-ink/50">{n.date}</time></div>
+          <div class="flex flex-wrap items-center gap-2 text-xs"><span class={`rounded-full px-2.5 py-1 font-semibold ${chip(n.category)}`}>{n.category}</span><span class="inline-flex items-center gap-1 rounded-full bg-navy/5 px-2.5 py-1 font-semibold text-navy/70"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21s-7-5.2-7-11a7 7 0 1 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>{n.campus}</span><time class="text-ink/50">{n.date}</time></div>
           <h3 class="mt-1.5 line-clamp-1 font-serif text-lg font-semibold text-navy-900 group-hover:text-navy">{n.title}</h3>
           <p class="mt-1 line-clamp-2 text-sm text-ink/70">{n.excerpt}</p>
         </div>
       </a></li>
     ))}
   </ul>
+  <p data-empty class="hidden py-12 text-center text-sm text-ink/50">{locale === "en" ? "No news for this campus yet." : "해당 캠퍼스의 소식이 아직 없습니다."}</p>
   <div data-more class="mt-10 flex justify-center">
     <button class="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-2.5 text-sm font-semibold text-navy ring-1 ring-black/5 transition hover:bg-navy hover:text-white"><span class="-mt-1 text-lg leading-none tracking-widest">···</span><span>{moreLabel}</span></button>
   </div>
 </div></section>
 <script is:inline>
 (function () {
-  var STEP = 5;
+  var STEP = 5, shown = STEP, sel = "__all__";
+  var lis = Array.prototype.slice.call(document.querySelectorAll('[data-list="news"] > li'));
+  var featured = document.querySelector("[data-featured]");
+  var pills = Array.prototype.slice.call(document.querySelectorAll("[data-filter]"));
   var wrap = document.querySelector("[data-more]");
   var btn = wrap ? wrap.querySelector("button") : null;
-  var items = Array.prototype.slice.call(document.querySelectorAll('[data-list="news"] > li'));
-  var shown = STEP;
-  function render() {
-    items.forEach(function (el, i) { el.style.display = i < shown ? "" : "none"; });
-    if (wrap) wrap.style.display = items.length > shown ? "flex" : "none";
+  var empty = document.querySelector("[data-empty]");
+  function match(el) {
+    if (sel === "__all__") return true;
+    return el.getAttribute("data-site") === "1" || el.getAttribute("data-campus") === sel;
   }
+  function paintPills() {
+    pills.forEach(function (p) {
+      var on = p.getAttribute("data-filter") === sel;
+      p.className = "rounded-full px-4 py-2 text-sm font-semibold transition " + (on ? "bg-navy text-white" : "bg-cream text-navy ring-1 ring-black/5 hover:bg-navy/10");
+    });
+  }
+  function render() {
+    if (featured) featured.style.display = match(featured) ? "" : "none";
+    var count = 0, total = 0;
+    lis.forEach(function (el) {
+      if (!match(el)) { el.style.display = "none"; return; }
+      total++;
+      el.style.display = count < shown ? "" : "none";
+      count++;
+    });
+    var featuredShown = featured && match(featured);
+    if (empty) empty.style.display = (total === 0 && !featuredShown) ? "block" : "none";
+    if (wrap) wrap.style.display = total > shown ? "flex" : "none";
+  }
+  pills.forEach(function (p) {
+    p.onclick = function () { sel = p.getAttribute("data-filter"); shown = STEP; paintPills(); render(); };
+  });
   if (btn) btn.onclick = function () { shown += STEP; render(); };
-  render();
+  paintPills(); render();
 })();
 </script>

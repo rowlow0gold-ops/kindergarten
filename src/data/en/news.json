@@ -5,7 +5,8 @@
     "category": "Notice",
     "title": "June Discretionary Closure Day",
     "excerpt": "The third Friday of June is a discretionary closure day.",
-    "body": "The third Friday of June is a discretionary closure day for staff training. Families needing emergency care should apply to their campus in advance."
+    "body": "The third Friday of June is a discretionary closure day for staff training. Families needing emergency care should apply to their campus in advance.",
+    "campus": "All campuses"
   },
   {
     "slug": "summer-camp-2026",
@@ -13,7 +14,8 @@
     "category": "Events",
     "title": "Summer English Camp Registration Open",
     "excerpt": "Sign up for our summer English camp with native teachers.",
-    "body": "This July we run a month-long summer English camp with native teachers. Water play, English cooking and outdoor adventures let children experience English naturally."
+    "body": "This July we run a month-long summer English camp with native teachers. Water play, English cooking and outdoor adventures let children experience English naturally.",
+    "campus": "All campuses"
   },
   {
     "slug": "bus-route-update",
@@ -21,7 +23,8 @@
     "category": "Notice",
     "title": "Shuttle Bus Route Update",
     "excerpt": "Some shuttle routes and times are being adjusted.",
-    "body": "Reflecting traffic conditions, some shuttle bus routes and pickup times are being adjusted. The updated timetable is shared via newsletter and the app."
+    "body": "Reflecting traffic conditions, some shuttle bus routes and pickup times are being adjusted. The updated timetable is shared via newsletter and the app.",
+    "campus": "All campuses"
   },
   {
     "slug": "library-renewal",
@@ -29,7 +32,8 @@
     "category": "Notice",
     "title": "English Library Renovation Complete",
     "excerpt": "Our 3,000-book English picture-book library has been renewed.",
-    "body": "Each campus English library has been refreshed with over 3,000 age-graded English picture books and cozy reading nooks to encourage a love of reading."
+    "body": "Each campus English library has been refreshed with over 3,000 age-graded English picture books and cozy reading nooks to encourage a love of reading.",
+    "campus": "All campuses"
   },
   {
     "slug": "meal-menu-june",
@@ -37,7 +41,8 @@
     "category": "Notice",
     "title": "June Meal Menu",
     "excerpt": "Here is the June lunch menu.",
-    "body": "Please find the June lunch menu prepared by our nutritionist. Allergen-containing foods are marked separately on the menu for your reference."
+    "body": "Please find the June lunch menu prepared by our nutritionist. Allergen-containing foods are marked separately on the menu for your reference.",
+    "campus": "All campuses"
   },
   {
     "slug": "gwangju-open",
@@ -45,7 +50,8 @@
     "category": "Notice",
     "title": "Gwangju Campus Opening",
     "excerpt": "Our Honam-region hub, the Gwangju campus, opens.",
-    "body": "Hanbit opens a new kindergarten campus in Gwangju, bringing English-immersion early education with native-speaking teachers to families in the Honam region."
+    "body": "Hanbit opens a new kindergarten campus in Gwangju, bringing English-immersion early education with native-speaking teachers to families in the Honam region.",
+    "campus": "Gwangju"
   },
   {
     "slug": "parent-session-june",
@@ -53,7 +59,8 @@
     "category": "Events",
     "title": "June Parent Information Session",
     "excerpt": "An information session for new and current families.",
-    "body": "On the second Saturday of June, each campus hosts a parent session introducing Hanbit's English-immersion curriculum and daily routine. Reserve a spot in advance."
+    "body": "On the second Saturday of June, each campus hosts a parent session introducing Hanbit's English-immersion curriculum and daily routine. Reserve a spot in advance.",
+    "campus": "Busan"
   },
   {
     "slug": "app-maintenance",
@@ -61,7 +68,8 @@
     "category": "Notice",
     "title": "Parent App Maintenance Notice",
     "excerpt": "The app will be briefly unavailable for maintenance.",
-    "body": "To keep the service stable, we will perform parent-app maintenance. Access may be temporarily limited during the maintenance window."
+    "body": "To keep the service stable, we will perform parent-app maintenance. Access may be temporarily limited during the maintenance window.",
+    "campus": "All campuses"
   },
   {
     "slug": "2027-admissions",
@@ -69,7 +77,8 @@
     "category": "Admissions",
     "title": "2027 Admissions Now Open",
     "excerpt": "Applications for the 2027 school year are open across all campuses.",
-    "body": "We are accepting applications across our kindergarten programme for 2027. Information session dates are on the Events page."
+    "body": "We are accepting applications across our kindergarten programme for 2027. Information session dates are on the Events page.",
+    "campus": "All campuses"
   },
   {
     "slug": "native-teachers-2026",
@@ -77,7 +86,8 @@
     "category": "Learning",
     "title": "2026 Native Teaching Team Joins",
     "excerpt": "Meet the native teachers joining us this year.",
-    "body": "Native teachers with rich early-childhood experience have joined the Hanbit family. Co-teaching with homeroom teachers strengthens our English-immersion environment."
+    "body": "Native teachers with rich early-childhood experience have joined the Hanbit family. Co-teaching with homeroom teachers strengthens our English-immersion environment.",
+    "campus": "Seoul"
   },
   {
     "slug": "english-day",
@@ -85,7 +95,8 @@
     "category": "Events",
     "title": "English Musical Day 2026",
     "excerpt": "Children's English musical performances, all in one place.",
-    "body": "Our annual English Musical Day returns this year, with children singing and acting on stage in English."
+    "body": "Our annual English Musical Day returns this year, with children singing and acting on stage in English.",
+    "campus": "Seoul"
   },
   {
     "slug": "spring-field-trip",
@@ -93,7 +104,8 @@
     "category": "Events",
     "title": "Spring Nature Field Trip",
     "excerpt": "Children met spring in the woods and fields, in English.",
-    "body": "We held a spring nature field trip to nearby woods and parks. Children observed flowers and insects and described them in English, learning through all five senses."
+    "body": "We held a spring nature field trip to nearby woods and parks. Children observed flowers and insects and described them in English, learning through all five senses.",
+    "campus": "Daejeon"
   },
   {
     "slug": "health-checkup",
@@ -101,7 +113,8 @@
     "category": "Notice",
     "title": "Regular Health Check-up Notice",
     "excerpt": "A spring health check-up for all children.",
-    "body": "Together with our partner clinic, we hold a spring health check-up for all children. Schedules and preparation details are shared via our family newsletter."
+    "body": "Together with our partner clinic, we hold a spring health check-up for all children. Schedules and preparation details are shared via our family newsletter.",
+    "campus": "All campuses"
   },
   {
     "slug": "new-uniform",
@@ -109,7 +122,8 @@
     "category": "Notice",
     "title": "New Uniform Design Unveiled",
     "excerpt": "A new uniform with more comfort and freedom to move.",
-    "body": "Designed for active little ones, our new uniform uses softer, eco-friendly fabrics. Ordering details will be announced separately."
+    "body": "Designed for active little ones, our new uniform uses softer, eco-friendly fabrics. Ordering details will be announced separately.",
+    "campus": "All campuses"
   },
   {
     "slug": "phonics",
@@ -117,7 +131,8 @@
     "category": "Programs",
     "title": "New Phonics English Program",
     "excerpt": "A new play-based way to learn English.",
-    "body": "We have introduced a new phonics programme where kindergarten children learn English through sounds and play."
+    "body": "We have introduced a new phonics programme where kindergarten children learn English through sounds and play.",
+    "campus": "Daegu"
   },
   {
     "slug": "reading-award",
@@ -125,6 +140,7 @@
     "category": "Learning",
     "title": "English Reading Awards Ceremony",
     "excerpt": "We celebrated children who read steadily all term.",
-    "body": "Wrapping up the autumn-winter English reading challenge, we held a reading awards ceremony, celebrating children who grew closer to books a little each day."
+    "body": "Wrapping up the autumn-winter English reading challenge, we held a reading awards ceremony, celebrating children who grew closer to books a little each day.",
+    "campus": "Busan"
   }
 ]
