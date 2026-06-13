@@ -5,8 +5,10 @@
     "category": "Notice",
     "title": "June Discretionary Closure Day",
     "excerpt": "The third Friday of June is a discretionary closure day.",
-    "body": "The third Friday of June is a discretionary closure day for staff training. Families needing emergency care should apply to their campus in advance.",
-    "campus": "All campuses"
+    "body": "The third Friday of June is a discretionary closure day for staff training. Families needing emergency care should apply to their campus in advance. Emergency care is available by request — please apply to your campus in advance.",
+    "campus": "All campuses",
+    "period": "Jun 19, 2026 (closed)",
+    "target": "All families"
   },
   {
     "slug": "summer-camp-2026",
@@ -14,8 +16,10 @@
     "category": "Events",
     "title": "Summer English Camp Registration Open",
     "excerpt": "Sign up for our summer English camp with native teachers.",
-    "body": "This July we run a month-long summer English camp with native teachers. Water play, English cooking and outdoor adventures let children experience English naturally.",
-    "campus": "All campuses"
+    "body": "This July we run a month-long summer English camp with native teachers. Water play, English cooking and outdoor adventures let children experience English naturally. Apply through the parent app by June 20; places are limited per class.",
+    "campus": "All campuses",
+    "period": "Jul 1 – Jul 31, 2026",
+    "target": "Current families"
   },
   {
     "slug": "bus-route-update",
@@ -23,8 +27,10 @@
     "category": "Notice",
     "title": "Shuttle Bus Route Update",
     "excerpt": "Some shuttle routes and times are being adjusted.",
-    "body": "Reflecting traffic conditions, some shuttle bus routes and pickup times are being adjusted. The updated timetable is shared via newsletter and the app.",
-    "campus": "All campuses"
+    "body": "Reflecting traffic conditions, some shuttle bus routes and pickup times are being adjusted. The updated timetable is shared via newsletter and the app. The updated timetable is available in the parent app and the family newsletter.",
+    "campus": "All campuses",
+    "period": "From Jun 1, 2026",
+    "target": "Shuttle users"
   },
   {
     "slug": "library-renewal",
@@ -32,8 +38,10 @@
     "category": "Notice",
     "title": "English Library Renovation Complete",
     "excerpt": "Our 3,000-book English picture-book library has been renewed.",
-    "body": "Each campus English library has been refreshed with over 3,000 age-graded English picture books and cozy reading nooks to encourage a love of reading.",
-    "campus": "All campuses"
+    "body": "Each campus English library has been refreshed with over 3,000 age-graded English picture books and cozy reading nooks to encourage a love of reading. Each campus library now holds over 3,000 age-graded English picture books.",
+    "campus": "All campuses",
+    "period": "From May 2026",
+    "target": "All families"
   },
   {
     "slug": "meal-menu-june",
@@ -41,8 +49,10 @@
     "category": "Notice",
     "title": "June Meal Menu",
     "excerpt": "Here is the June lunch menu.",
-    "body": "Please find the June lunch menu prepared by our nutritionist. Allergen-containing foods are marked separately on the menu for your reference.",
-    "campus": "All campuses"
+    "body": "Please find the June lunch menu prepared by our nutritionist. Allergen-containing foods are marked separately on the menu for your reference. Allergen-containing items are marked separately on the menu for your reference.",
+    "campus": "All campuses",
+    "period": "June 2026",
+    "target": "Current families"
   },
   {
     "slug": "gwangju-open",
@@ -50,8 +60,10 @@
     "category": "Notice",
     "title": "Gwangju Campus Opening",
     "excerpt": "Our Honam-region hub, the Gwangju campus, opens.",
-    "body": "Hanbit opens a new kindergarten campus in Gwangju, bringing English-immersion early education with native-speaking teachers to families in the Honam region.",
-    "campus": "Gwangju"
+    "body": "Hanbit opens a new kindergarten campus in Gwangju, bringing English-immersion early education with native-speaking teachers to families in the Honam region. The campus offers the full English-immersion kindergarten programme for ages 3–6.",
+    "campus": "Gwangju",
+    "period": "From May 20, 2026",
+    "target": "Honam-region families"
   },
   {
     "slug": "parent-session-june",
@@ -59,8 +71,10 @@
     "category": "Events",
     "title": "June Parent Information Session",
     "excerpt": "An information session for new and current families.",
-    "body": "On the second Saturday of June, each campus hosts a parent session introducing Hanbit's English-immersion curriculum and daily routine. Reserve a spot in advance.",
-    "campus": "Busan"
+    "body": "On the second Saturday of June, each campus hosts a parent session introducing Hanbit's English-immersion curriculum and daily routine. Reserve a spot in advance. Pre-booking is recommended as seats are limited; sessions run at each campus.",
+    "campus": "Busan",
+    "period": "Jun 14, 2026 · 10:00",
+    "target": "Prospective families"
   },
   {
     "slug": "app-maintenance",
@@ -68,8 +82,10 @@
     "category": "Notice",
     "title": "Parent App Maintenance Notice",
     "excerpt": "The app will be briefly unavailable for maintenance.",
-    "body": "To keep the service stable, we will perform parent-app maintenance. Access may be temporarily limited during the maintenance window.",
-    "campus": "All campuses"
+    "body": "To keep the service stable, we will perform parent-app maintenance. Access may be temporarily limited during the maintenance window. Access may be briefly limited during the maintenance window; thank you for understanding.",
+    "campus": "All campuses",
+    "period": "May 15, 2026 · 23:00–02:00",
+    "target": "App users"
   },
   {
     "slug": "2027-admissions",
@@ -77,8 +93,10 @@
     "category": "Admissions",
     "title": "2027 Admissions Now Open",
     "excerpt": "Applications for the 2027 school year are open across all campuses.",
-    "body": "We are accepting applications across our kindergarten programme for 2027. Information session dates are on the Events page.",
-    "campus": "All campuses"
+    "body": "We are accepting applications across our kindergarten programme for 2027. Information session dates are on the Events page. Visit the Admissions page for the schedule, required documents and campus quotas.",
+    "campus": "All campuses",
+    "period": "Sep – Nov 2026",
+    "target": "Prospective families"
   },
   {
     "slug": "native-teachers-2026",
@@ -86,8 +104,10 @@
     "category": "Learning",
     "title": "2026 Native Teaching Team Joins",
     "excerpt": "Meet the native teachers joining us this year.",
-    "body": "Native teachers with rich early-childhood experience have joined the Hanbit family. Co-teaching with homeroom teachers strengthens our English-immersion environment.",
-    "campus": "Seoul"
+    "body": "Native teachers with rich early-childhood experience have joined the Hanbit family. Co-teaching with homeroom teachers strengthens our English-immersion environment. Co-teaching with homeroom teachers deepens our all-day English environment.",
+    "campus": "Seoul",
+    "period": "From Mar 2026",
+    "target": "Current families"
   },
   {
     "slug": "english-day",
@@ -95,8 +115,10 @@
     "category": "Events",
     "title": "English Musical Day 2026",
     "excerpt": "Children's English musical performances, all in one place.",
-    "body": "Our annual English Musical Day returns this year, with children singing and acting on stage in English.",
-    "campus": "Seoul"
+    "body": "Our annual English Musical Day returns this year, with children singing and acting on stage in English. Families are welcome to attend and cheer on their children's English performances.",
+    "campus": "Seoul",
+    "period": "Apr 15, 2026",
+    "target": "Current families"
   },
   {
     "slug": "spring-field-trip",
@@ -104,8 +126,10 @@
     "category": "Events",
     "title": "Spring Nature Field Trip",
     "excerpt": "Children met spring in the woods and fields, in English.",
-    "body": "We held a spring nature field trip to nearby woods and parks. Children observed flowers and insects and described them in English, learning through all five senses.",
-    "campus": "Daejeon"
+    "body": "We held a spring nature field trip to nearby woods and parks. Children observed flowers and insects and described them in English, learning through all five senses. Children explored nearby woods and parks, describing what they found in English.",
+    "campus": "Daejeon",
+    "period": "Apr 8, 2026",
+    "target": "Current families"
   },
   {
     "slug": "health-checkup",
@@ -113,8 +137,10 @@
     "category": "Notice",
     "title": "Regular Health Check-up Notice",
     "excerpt": "A spring health check-up for all children.",
-    "body": "Together with our partner clinic, we hold a spring health check-up for all children. Schedules and preparation details are shared via our family newsletter.",
-    "campus": "All campuses"
+    "body": "Together with our partner clinic, we hold a spring health check-up for all children. Schedules and preparation details are shared via our family newsletter. Schedules and preparation details are shared via the family newsletter.",
+    "campus": "All campuses",
+    "period": "Mar 2026",
+    "target": "Current families"
   },
   {
     "slug": "new-uniform",
@@ -122,8 +148,10 @@
     "category": "Notice",
     "title": "New Uniform Design Unveiled",
     "excerpt": "A new uniform with more comfort and freedom to move.",
-    "body": "Designed for active little ones, our new uniform uses softer, eco-friendly fabrics. Ordering details will be announced separately.",
-    "campus": "All campuses"
+    "body": "Designed for active little ones, our new uniform uses softer, eco-friendly fabrics. Ordering details will be announced separately. Ordering details and sizing will be announced separately to families.",
+    "campus": "All campuses",
+    "period": "From Mar 2026",
+    "target": "All families"
   },
   {
     "slug": "phonics",
@@ -131,8 +159,10 @@
     "category": "Programs",
     "title": "New Phonics English Program",
     "excerpt": "A new play-based way to learn English.",
-    "body": "We have introduced a new phonics programme where kindergarten children learn English through sounds and play.",
-    "campus": "Daegu"
+    "body": "We have introduced a new phonics programme where kindergarten children learn English through sounds and play. Sounds, songs and play help children build reading confidence step by step.",
+    "campus": "Daegu",
+    "period": "From Mar 2026",
+    "target": "Current families"
   },
   {
     "slug": "reading-award",
@@ -140,7 +170,9 @@
     "category": "Learning",
     "title": "English Reading Awards Ceremony",
     "excerpt": "We celebrated children who read steadily all term.",
-    "body": "Wrapping up the autumn-winter English reading challenge, we held a reading awards ceremony, celebrating children who grew closer to books a little each day.",
-    "campus": "Busan"
+    "body": "Wrapping up the autumn-winter English reading challenge, we held a reading awards ceremony, celebrating children who grew closer to books a little each day. Certificates went to children who kept up their daily English reading all term.",
+    "campus": "Busan",
+    "period": "Feb 25, 2026",
+    "target": "Current families"
   }
 ]

@@ -2,9 +2,22 @@
 import { localizePath, type Locale } from "../../i18n/ui";
 interface Props { locale: Locale; item: any; }
 const { locale, item } = Astro.props;
+const en = locale === "en";
 const p = (path: string) => localizePath(path, locale);
-const back = locale === "en" ? "← All news" : "← 소식 전체보기";
-const contact = locale === "en" ? "Contact us" : "문의하기";
+const back = en ? "← All news" : "← 소식 전체보기";
+const contact = en ? "Contact us" : "문의하기";
+const L = {
+  posted: en ? "Posted" : "게시일",
+  period: en ? "Period" : "기간",
+  campus: en ? "Target campus" : "대상 캠퍼스",
+  audience: en ? "Audience" : "대상",
+};
+const meta = [
+  { k: L.posted, v: item.date },
+  { k: L.period, v: item.period },
+  { k: L.campus, v: item.campus },
+  { k: L.audience, v: item.target },
+].filter((m) => m.v);
 const paras = String(item.body || "").split("\n").map((x) => x.trim()).filter(Boolean);
 ---
 <section class="bg-navy-900 text-white"><div class="mx-auto max-w-3xl px-6 py-16">
@@ -15,6 +28,14 @@ const paras = String(item.body || "").split("\n").map((x) => x.trim()).filter(Bo
 
 <section class="bg-white">
   <article class="reveal mx-auto max-w-2xl px-6 py-16">
+    <dl class="mb-10 grid gap-px overflow-hidden rounded-2xl bg-black/[0.07] ring-1 ring-black/5 sm:grid-cols-2">
+      {meta.map((m) => (
+        <div class="bg-white px-5 py-4">
+          <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-ink/45">{m.k}</dt>
+          <dd class="mt-1 text-sm font-semibold text-navy-900">{m.v}</dd>
+        </div>
+      ))}
+    </dl>
     <div class="rule-gold mb-8"></div>
     {paras.map((para, i) => (
       <p class={i === 0 ? "font-serif text-xl leading-relaxed text-ink/85 md:text-2xl" : "mt-6 text-lg leading-relaxed text-ink/75"}>{para}</p>
