@@ -33,33 +33,6 @@
       }
     ]
   },
-  "about-founders": {
-    "eyebrow": "About",
-    "title": "Founder's Message",
-    "intro": "Hanbit honors each child's curiosity, raising capable young people who contribute to a better society.",
-    "sections": [
-      {
-        "h": "Our mission",
-        "b": "Through English and play, we raise children who understand the world, think for themselves and collaborate."
-      },
-      {
-        "h": "Our promise",
-        "b": "We build a safe, warm place to learn that every family can trust."
-      },
-      {
-        "h": "History & Milestones",
-        "b": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit English kindergarten education."
-      },
-      {
-        "h": "A record of growth",
-        "b": "From our first kindergarten campus to a five-city network."
-      },
-      {
-        "h": "The next decade",
-        "b": "Widening access to English-immersion early education for more families."
-      }
-    ]
-  },
   "enrichment-afterschool": {
     "eyebrow": "Afterschool",
     "title": "Afterschool Programs",
