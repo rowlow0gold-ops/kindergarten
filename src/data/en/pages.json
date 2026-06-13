@@ -45,14 +45,11 @@
       {
         "h": "Our promise",
         "b": "We build a safe, warm place to learn that every family can trust."
-      }
-    ]
-  },
-  "about-history": {
-    "eyebrow": "About",
-    "title": "History & Milestones",
-    "intro": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit English kindergarten education.",
-    "sections": [
+      },
+      {
+        "h": "History & Milestones",
+        "b": "From our start in Seoul in 2016 to five cities nationwide — ten years of Hanbit English kindergarten education."
+      },
       {
         "h": "A record of growth",
         "b": "From our first kindergarten campus to a five-city network."

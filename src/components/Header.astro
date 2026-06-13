@@ -13,10 +13,7 @@ const altPath = locale === "en" ? (pathname.replace(/^\/en/, "") || "/") : ("/en
 const L = (ko: string, en: string) => (locale === "en" ? en : ko);
 
 const nav = [
-  { label: L("학교 소개", "About"), children: [
-    { label: L("설립자 메시지", "Founder's message"), href: p("/about/founders") },
-    { label: L("연혁", "History"), href: p("/about/history") },
-  ]},
+  { label: L("학교 소개", "About"), href: p("/about/founders") },
   { label: L("캠퍼스", "Campuses"), href: p("/schools") },
   { label: L("교육과정", "Learning"), children: [
     { label: L("교육 철학 · 과정", "Philosophy & curriculum"), href: p("/learning") },
