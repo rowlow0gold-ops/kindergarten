@@ -43,12 +43,13 @@ const c = en
   .cta-fab:hover { transform: translateY(-2px); filter: brightness(.97); }
   .cta-tip { position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%) translateX(6px); white-space: nowrap; background: rgba(19,31,62,.94); color:#fff; font-size:.75rem; font-weight:600; padding:.45rem .7rem; border-radius:.5rem; opacity:0; pointer-events:none; transition: opacity .16s ease, transform .16s ease; }
   .cta-fab:hover .cta-tip, .cta-fab:focus-visible .cta-tip { opacity:1; transform: translateY(-50%) translateX(0); }
+  .cta-fab.no-tip .cta-tip { opacity:0 !important; }
 </style>
 
 <script>
   const toggle = document.querySelector("[data-bot-toggle]");
   const buttons = document.querySelector("[data-bot-buttons]");
-  function showButtons(on) { if (buttons) buttons.classList.toggle("hidden", !on); }
+  function showButtons(on) { if (buttons) buttons.classList.toggle("hidden", !on); if (toggle) toggle.classList.toggle("no-tip", on); }
   function openChat(mode) {
     document.querySelectorAll("[data-chat]").forEach((el) => { el.classList.add("hidden"); el.classList.remove("flex"); });
     const el = document.querySelector(`[data-chat="${mode}"]`);
