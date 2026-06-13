@@ -22,11 +22,11 @@ const c = {
 </section>
 <section class="bg-cream">
   <div class="mx-auto max-w-6xl px-5 py-16">
-    <Figure alt={locale === "en" ? "Campus map of Korea" : "전국 캠퍼스 지도"} class="reveal aspect-[16/7]" />
+    <Figure alt={locale === "en" ? "Campus map of Korea" : "전국 캠퍼스 지도"} seed="korea-campus-map" class="reveal aspect-[16/7]" />
     <div data-reveal-children class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {branches.map((b) => (
         <a href={p(`/schools/${b.slug}`)} class="group overflow-hidden rounded-2xl bg-white shadow-sm transition hover:shadow-md">
-          <Figure alt={b.name} class="aspect-[4/3]" rounded="rounded-none" />
+          <Figure alt={b.name} seed={b.slug} class="aspect-[4/3]" rounded="rounded-none" />
           <div class="p-6">
             <p class="text-xs font-semibold uppercase tracking-wide text-gold">{b.city}</p>
             <h2 class="mt-1 font-serif text-xl font-semibold text-navy-900 group-hover:text-navy">{b.name}</h2>

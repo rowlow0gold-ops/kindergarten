@@ -24,7 +24,7 @@ const rows = [
 </section>
 <section class="bg-white">
   <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2">
-    <Figure alt={branch.name} class="reveal aspect-[4/3]" />
+    <Figure alt={branch.name} seed={branch.slug} class="reveal aspect-[4/3]" />
     <div class="reveal">
       <p class="leading-relaxed text-ink/80">{branch.intro}</p>
       <dl class="mt-8 divide-y divide-black/5 border-y border-black/5">
@@ -43,10 +43,10 @@ const rows = [
   <div class="mx-auto max-w-6xl px-5 py-16">
     <h2 class="reveal font-serif text-2xl font-semibold text-navy-900">{L.gallery}</h2>
     <div data-reveal-children class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-      <Figure alt={`${branch.name} 1`} class="aspect-square" />
-      <Figure alt={`${branch.name} 2`} class="aspect-square" />
-      <Figure alt={`${branch.name} 3`} class="aspect-square" />
-      <Figure alt={`${branch.name} 4`} class="aspect-square" />
+      <Figure alt={`${branch.name} 1`} seed={`${branch.slug}-1`} class="aspect-square" />
+      <Figure alt={`${branch.name} 2`} seed={`${branch.slug}-2`} class="aspect-square" />
+      <Figure alt={`${branch.name} 3`} seed={`${branch.slug}-3`} class="aspect-square" />
+      <Figure alt={`${branch.name} 4`} seed={`${branch.slug}-4`} class="aspect-square" />
     </div>
   </div>
 </section>

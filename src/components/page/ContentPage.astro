@@ -20,7 +20,7 @@ const c = data[pageKey];
 <section class="bg-white">
   <div class="mx-auto max-w-6xl px-5 py-16">
     <div class="grid gap-10 md:grid-cols-2">
-      <Figure alt={c.title} class="reveal aspect-[4/3]" />
+      <Figure alt={c.title} seed={pageKey} class="reveal aspect-[4/3]" />
       <div data-reveal-children class="flex flex-col justify-center gap-6">
         {c.sections.map((s: any) => (
           <div>
