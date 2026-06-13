@@ -6,10 +6,11 @@ import newsEn from "../../data/en/news.json";
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const p = (path: string) => localizePath(path, locale);
-const all = (locale === "en" ? newsEn : newsKo).slice().sort((a, b) => b.date.localeCompare(a.date));
+const noticeCats = locale === "en" ? ["Notice"] : ["공지"];
+const all = (locale === "en" ? newsEn : newsKo).filter((n) => !noticeCats.includes(n.category)).slice().sort((a, b) => b.date.localeCompare(a.date));
 const featured = all[0];
 const rest = all.slice(1);
-const title = locale === "en" ? "News & Notices" : "뉴스 · 공지";
+const title = locale === "en" ? "News" : "뉴스";
 const featuredLabel = locale === "en" ? "Latest" : "최신 소식";
 const readMore = locale === "en" ? "Read more" : "자세히 보기";
 const moreLabel = locale === "en" ? "Show more" : "더 보기";
