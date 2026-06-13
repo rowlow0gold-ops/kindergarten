@@ -24,7 +24,7 @@ const c = {
     lead: "첫 단어에서 유창한 영어로",
     banner: "교육을 향한 10년의 진심과 성장",
     msgTitle: "설립자의 메시지",
-    msgBody: "한빛은 지난 10년간 아이 한 명 한 명의 호기심을 존중하며, 영어로 세상을 만나는 아이들을 길러왔습니다. 우리의 여정은 이제 다섯 도시로 이어집니다.",
+    msgBody: "한빛국제유치원을 찾아주셔서 진심으로 감사합니다. 한빛은 지난 10년간 아이 한 명 한 명의 호기심을 존중하며, 영어로 세상을 만나는 아이들을 길러왔습니다. 작은 교실에서 시작한 배움은 이제 전국 다섯 도시의 캠퍼스로 이어집니다. 앞으로의 10년도 변함없는 진심과 따뜻한 보살핌으로 아이들의 첫 배움을 함께하겠습니다.",
     msgName: "설립자 · 교장",
     tlTitle: "우리를 만든 순간들",
     tlLabel: "성장의 기록",
@@ -47,7 +47,7 @@ const c = {
     lead: "From first words to fluent English",
     banner: "Honoring a decade of purpose & progress in education",
     msgTitle: "A Message From Our Founder",
-    msgBody: "For ten years, Hanbit has honored each child's curiosity, raising future innovators who meet the world through English. Our journey now reaches five cities.",
+    msgBody: "Thank you for visiting Hanbit International Kindergarten. For ten years, Hanbit has honored each child's curiosity, raising children who meet the world through English. What began in a single classroom now reaches campuses in five cities nationwide. In the decade ahead, we will keep walking alongside every child's first steps in learning, with the same sincerity and warm care.",
     msgName: "Founder & Principal",
     tlTitle: "Milestones That Shaped Us",
     tlLabel: "Visual timeline",
@@ -147,7 +147,7 @@ const c = {
   <div class="relative mx-auto max-w-6xl px-6 py-24">
     <div class="reveal flex items-center gap-5">
       <Logo class="h-16 w-16 shrink-0 md:h-20 md:w-20" />
-      <h2 class="font-serif text-2xl font-semibold leading-tight md:text-4xl">{c.banner}</h2>
+      <h2 class="font-serif text-2xl font-semibold leading-tight md:text-4xl">{c.banner.split(/(\d+)/).map((part) => (/^\d+$/.test(part) ? <span class="text-[1.5em] font-bold text-gold-soft [font-variant-numeric:lining-nums]">{part}</span> : part))}</h2>
     </div>
     <div class="mt-14 grid items-stretch gap-8 lg:grid-cols-2">
       <div class="reveal rounded-3xl bg-white/95 p-8 text-ink shadow-xl md:p-10">
