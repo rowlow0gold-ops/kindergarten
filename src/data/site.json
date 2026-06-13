@@ -5,9 +5,26 @@
   "phone": "02-1234-5678",
   "kakaoUrl": "https://pf.kakao.com/_hanbit",
   "stats": [
-    { "value": 80, "suffix": "+", "label": "교직원" },
-    { "value": 600, "suffix": "+", "label": "재원생" },
-    { "value": 5, "suffix": "", "label": "도시 캠퍼스" },
-    { "value": 10, "suffix": "", "label": "년의 발자취" }
-  ]
+    {
+      "value": 80,
+      "suffix": "+",
+      "label": "교직원"
+    },
+    {
+      "value": 600,
+      "suffix": "+",
+      "label": "재원생"
+    },
+    {
+      "value": 5,
+      "suffix": "",
+      "label": "도시 캠퍼스"
+    },
+    {
+      "value": 10,
+      "suffix": "",
+      "label": "년의 발자취"
+    }
+  ],
+  "whatsappUrl": "https://wa.me/821012345678"
 }
