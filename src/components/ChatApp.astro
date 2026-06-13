@@ -6,14 +6,14 @@ const { mode, locale } = Astro.props;
 const en = locale === "en";
 const free = (bot as any)[locale] || (bot as any).ko;
 const isFree = mode === "free";
-const title = mode === "ai" ? (en ? "AI Chatbot" : "AI 챗봇") : (en ? "Hanbit Guide" : "한빛 안내봇");
+const title = mode === "ai" ? (en ? "AI Chatbot" : "AI 챗봇") : (en ? "Hanbit Bot" : "한빛 봇");
 const status = isFree
   ? (en ? "Online · replies instantly" : "온라인 · 바로 답해드려요")
   : (en ? "AI assistant" : "AI 도우미");
 const ui = {
   placeholder: en ? "Type a message…" : "메시지를 입력하세요…",
   send: en ? "Send" : "보내기",
-  suggested: en ? "Suggested" : "추천 질문",
+  suggested: en ? "Tap a topic" : "주제를 선택하세요",
   demo: en ? "Demo mode — the AI model isn't connected yet. For quick answers, try the Chatbot." : "데모 모드 — AI 모델이 아직 연결되지 않았어요. 빠른 답변은 '챗봇'을 이용해 주세요.",
   aiGreeting: en ? "Hi! I'm the Hanbit AI assistant. Ask me anything about the school." : "안녕하세요! 한빛 AI 도우미예요. 학교에 대해 무엇이든 물어보세요.",
   error: en ? "Sorry, I couldn't reach the assistant. Please try again." : "죄송해요, 응답을 가져오지 못했어요. 다시 시도해 주세요.",
@@ -41,20 +41,21 @@ const ui = {
       <button data-chat-close aria-label="Close" class="ml-auto text-white/70 transition hover:text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
     <div data-chat-log class="flex-1 space-y-2.5 overflow-y-auto bg-cream/30 px-3 py-3"></div>
-    {isFree && (
-      <div class="border-t border-black/5 bg-white px-2.5 pt-2.5">
-        <p class="mb-1.5 px-1 text-[0.65rem] font-semibold uppercase tracking-wide text-ink/40">{ui.suggested}</p>
-        <div class="flex flex-wrap gap-1.5">
+    {isFree ? (
+      <div class="border-t border-black/10 bg-white px-3 py-3">
+        <p class="mb-2 px-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-ink/40">{ui.suggested}</p>
+        <div class="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:thin]">
           {free.quickReplies.map((q: string) => (
-            <button type="button" data-quick={q} class="rounded-full border border-navy/15 bg-cream/60 px-2.5 py-1 text-xs font-medium text-navy transition hover:border-gold hover:bg-cream">{q}</button>
+            <button type="button" data-quick={q} class="shrink-0 whitespace-nowrap rounded-full border border-navy/15 bg-cream/60 px-3 py-1.5 text-xs font-medium text-navy transition hover:border-gold hover:bg-cream">{q}</button>
           ))}
         </div>
       </div>
+    ) : (
+      <form data-chat-form class="flex items-center gap-2 border-t border-black/10 bg-white p-2.5">
+        <input data-chat-input type="text" autocomplete="off" placeholder={ui.placeholder} class="min-w-0 flex-1 rounded-full border border-black/15 px-3.5 py-2 text-sm outline-none focus:border-gold" />
+        <button type="submit" aria-label={ui.send} class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 text-white transition hover:bg-navy-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+      </form>
     )}
-    <form data-chat-form class="flex items-center gap-2 bg-white p-2.5">
-      <input data-chat-input type="text" autocomplete="off" placeholder={ui.placeholder} class="min-w-0 flex-1 rounded-full border border-black/15 px-3.5 py-2 text-sm outline-none focus:border-gold" />
-      <button type="submit" aria-label={ui.send} class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 text-white transition hover:bg-navy-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
-    </form>
   </div>
 </div>
 <script define:vars={{ mode, free, ui }}>
@@ -134,7 +135,7 @@ const ui = {
     root.querySelectorAll("[data-quick]").forEach(function (b) {
       b.addEventListener("click", function () { send(b.getAttribute("data-quick")); });
     });
-    form.addEventListener("submit", function (e) { e.preventDefault(); var v = input.value; input.value = ""; send(v); });
+    if (form) form.addEventListener("submit", function (e) { e.preventDefault(); var v = input.value; input.value = ""; send(v); });
     root._chatStart = start;
   })();
 </script>

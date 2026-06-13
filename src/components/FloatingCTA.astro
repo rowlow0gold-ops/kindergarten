@@ -7,8 +7,8 @@ const locale = getLocale(Astro.url);
 const en = locale === "en";
 const site = locale === "en" ? siteEn : siteKo;
 const c = en
-  ? { kakao: "KakaoTalk chat", whatsapp: "WhatsApp", ai: "AI Chatbot", free: "Chatbot" }
-  : { kakao: "카카오톡 상담", whatsapp: "왓츠앱", ai: "AI 챗봇", free: "챗봇" };
+  ? { kakao: "KakaoTalk chat", whatsapp: "WhatsApp", ai: "AI Chatbot", free: "Bot" }
+  : { kakao: "카카오톡 상담", whatsapp: "왓츠앱", ai: "AI 챗봇", free: "봇" };
 ---
 <ChatApp mode="ai" locale={locale} />
 <ChatApp mode="free" locale={locale} />

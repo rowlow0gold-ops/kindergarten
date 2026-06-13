@@ -1,30 +1,40 @@
 {
   "ko": {
-    "greeting": "안녕하세요! 한빛국제유치원 안내봇이에요. 아래 주제를 골라 주세요. 자유롭게 입력하셔도 됩니다.",
-    "quickReplies": ["입학 안내", "캠퍼스 위치", "수업료", "운영 시간", "문의처"],
-    "fallback": "죄송해요, 아직 그 질문은 잘 모르겠어요. 아래 버튼 중에서 골라 보시겠어요? 더 자세한 안내는 전화(02-1234-5678)로도 도와드려요.",
+    "greeting": "안녕하세요! 한빛국제유치원 안내봇이에요. 아래 주제를 눌러 주시면 자세히 알려드릴게요.",
+    "quickReplies": ["입학 안내", "수업료", "캠퍼스 위치", "운영 시간", "교육 과정", "원어민 교사", "급식", "셔틀버스", "방과후", "체험 방문", "문의처"],
+    "fallback": "아래 주제 중에서 눌러 주시면 바로 안내해 드릴게요.",
     "intents": [
-      { "keywords": ["입학", "원서", "등록", "지원", "admission"], "answer": "입학은 연중 상시 상담받으실 수 있어요. 만 3~5세 대상이며, 캠퍼스별 정원이 한정되어 있습니다. '입학 안내' 페이지에서 절차와 일정을 확인하실 수 있어요." },
-      { "keywords": ["캠퍼스", "위치", "지점", "어디", "주소"], "answer": "현재 서울·부산·대전·대구·광주 다섯 개 도시에 캠퍼스가 있어요. 가까운 캠퍼스는 '캠퍼스' 페이지의 지도에서 확인하실 수 있습니다." },
-      { "keywords": ["수업료", "학비", "비용", "가격", "얼마"], "answer": "수업료는 캠퍼스와 프로그램에 따라 달라요. '입학 안내'의 학비 표에서 캠퍼스를 선택하면 항목별 금액을 보실 수 있습니다." },
-      { "keywords": ["시간", "운영", "몇 시", "하원", "등원"], "answer": "정규 과정은 평일 오전 9시부터 오후 3시까지 운영하며, 방과후·돌봄 프로그램도 마련되어 있어요. 캠퍼스별로 조금씩 다를 수 있습니다." },
-      { "keywords": ["문의", "연락", "전화", "이메일", "상담"], "answer": "전화 02-1234-5678 또는 이메일 admissions@school.minhojan-world.site 로 문의해 주세요. 카카오톡 채널 상담도 가능합니다." },
-      { "keywords": ["영어", "커리큘럼", "교육", "수업"], "answer": "한빛은 놀이 중심의 영어 몰입 교육과정을 운영해요. 아이의 호기심을 존중하며 첫 단어부터 유창한 영어까지 함께합니다." },
-      { "keywords": ["안녕", "하이", "hello", "반가"], "answer": "안녕하세요! 무엇을 도와드릴까요? 입학, 캠퍼스, 수업료 등 궁금한 점을 물어봐 주세요." }
+      { "keywords": ["입학", "원서", "등록", "지원", "admission"], "answer": "입학은 만 3~5세 어린이를 대상으로 연중 상시 진행되며, 캠퍼스별 정원이 한정되어 있어요. '입학 안내' 페이지에서 절차와 일정을 확인하시거나 카카오톡으로 문의해 주세요." },
+      { "keywords": ["수업료", "학비", "비용", "가격", "얼마", "tuition"], "answer": "수업료는 캠퍼스와 프로그램에 따라 달라요. '입학 안내' 페이지의 학비 표에서 캠퍼스를 선택하면 항목별 월 금액을 보실 수 있습니다." },
+      { "keywords": ["캠퍼스", "위치", "지점", "어디", "주소", "campus"], "answer": "서울·부산·대전·대구·광주 다섯 개 캠퍼스가 있어요. '캠퍼스' 페이지의 지도에서 가까운 캠퍼스를 찾아보실 수 있습니다." },
+      { "keywords": ["시간", "운영", "몇 시", "하원", "등원", "hour"], "answer": "정규 과정은 평일 오전 9시부터 오후 3시까지이며, 등원 전 돌봄과 방과후 돌봄도 운영해요. 캠퍼스별로 조금씩 다를 수 있습니다." },
+      { "keywords": ["원어민", "교사", "선생", "native", "teacher"], "answer": "모든 학급은 원어민 영어 교사와 한국인 보조 교사가 함께해요. 아이들이 하루 종일 자연스러운 영어를 들으면서도 늘 편안하게 도움을 받을 수 있습니다." },
+      { "keywords": ["급식", "점심", "식사", "간식", "메뉴", "알레르기", "meal"], "answer": "매일 신선하고 균형 잡힌 점심과 간식을 제공하며, 알레르기 대응 식단도 마련되어 있어요. 주간 식단표는 카카오톡 채널로 안내해 드립니다." },
+      { "keywords": ["셔틀", "버스", "통학", "차량", "shuttle"], "answer": "대부분의 캠퍼스에서 지정 노선으로 셔틀버스를 운행하며, 차량에는 인솔 교사가 함께 탑승해요. 거주 지역을 알려주시면 가까운 정류장을 확인해 드릴게요." },
+      { "keywords": ["방과후", "특별활동", "돌봄", "활동", "after"], "answer": "정규 과정 이후에는 미술·음악·신체 활동 등 방과후 돌봄과 특별활동에 참여할 수 있어요. 운영 내용은 캠퍼스별로 달라요." },
+      { "keywords": ["체험", "방문", "투어", "견학", "trial", "visit"], "answer": "물론이에요! 캠퍼스 투어나 체험 수업을 예약해 교사진을 만나고 실제 수업을 둘러보실 수 있어요. 카카오톡으로 편한 시간을 알려주세요." },
+      { "keywords": ["교육", "커리큘럼", "과정", "수업", "영어", "program"], "answer": "한빛은 놀이 중심의 영어 몰입 교육과정을 운영해요. 아이의 호기심을 존중하며 첫 단어부터 자신감 있는 유창한 영어까지 함께합니다." },
+      { "keywords": ["문의", "연락", "전화", "이메일", "상담", "contact"], "answer": "카카오톡 채널로 언제든 문의하시거나 admissions@school.minhojan-world.site 로 이메일 주세요. 운영 시간 9:00~18:00에 답변드려요." },
+      { "keywords": ["안녕", "하이", "hello", "반가", "hi"], "answer": "안녕하세요! 아래 주제를 눌러 주시면 자세히 알려드릴게요." }
     ]
   },
   "en": {
-    "greeting": "Hi! I'm the Hanbit Kindergarten guide bot. Pick a topic below, or just type your question.",
-    "quickReplies": ["Admissions", "Campus locations", "Tuition", "Hours", "Contact"],
-    "fallback": "Sorry, I don't know that one yet. Try one of the buttons below — or call us at 02-1234-5678 for more help.",
+    "greeting": "Hi! I'm the Hanbit guide bot. Tap a topic below and I'll help you out.",
+    "quickReplies": ["Admissions", "Tuition", "Campus locations", "Hours", "Programs", "Native teachers", "Meals", "Shuttle bus", "After-school", "Trial visit", "Contact"],
+    "fallback": "Tap one of the topics below and I'll help you out.",
     "intents": [
-      { "keywords": ["admission", "apply", "enroll", "register", "application"], "answer": "Admissions are open year-round. We welcome children ages 3–5, with limited spots per campus. See the Admissions page for the process and timeline." },
-      { "keywords": ["campus", "location", "where", "address", "branch"], "answer": "We have campuses in five cities: Seoul, Busan, Daejeon, Daegu, and Gwangju. Find your nearest one on the map on our Campuses page." },
-      { "keywords": ["tuition", "fee", "cost", "price", "how much"], "answer": "Tuition varies by campus and program. On the Admissions page, pick a campus in the tuition table to see itemized amounts." },
-      { "keywords": ["hour", "time", "open", "pickup", "dropoff", "schedule"], "answer": "Core hours are weekdays 9:00 AM to 3:00 PM, with afterschool and care programs available. Exact times vary slightly by campus." },
-      { "keywords": ["contact", "phone", "email", "call", "reach"], "answer": "Reach us at 02-1234-5678 or admissions@school.minhojan-world.site. You can also chat with us on KakaoTalk." },
-      { "keywords": ["english", "curriculum", "program", "learn", "class"], "answer": "Hanbit runs a play-based English-immersion curriculum, honoring each child's curiosity — from first words to fluent English." },
-      { "keywords": ["hi", "hello", "hey"], "answer": "Hello! How can I help? Ask me about admissions, campuses, tuition, and more." }
+      { "keywords": ["admission", "apply", "enroll", "register", "application"], "answer": "Admissions are open year-round for children ages 3–5, with limited spots per campus. Visit the Admissions page for the full process and timeline, or message us on KakaoTalk to start." },
+      { "keywords": ["tuition", "fee", "cost", "price", "how much"], "answer": "Tuition depends on the campus and the program you choose. Open the Admissions page and pick a campus in the tuition table to see itemized monthly amounts." },
+      { "keywords": ["campus", "location", "where", "address", "branch"], "answer": "We have five campuses: Seoul, Busan, Daejeon, Daegu, and Gwangju. Use the map on the Campuses page to find the one nearest you." },
+      { "keywords": ["hour", "time", "open", "pickup", "dropoff", "schedule"], "answer": "Core hours are weekdays 9:00 AM–3:00 PM, with morning care and after-school care available. Exact times vary slightly by campus." },
+      { "keywords": ["teacher", "native", "staff", "foreign", "co-teacher"], "answer": "Every class pairs a native English-speaking teacher with a Korean co-teacher, so children hear natural English all day while always feeling supported." },
+      { "keywords": ["meal", "lunch", "food", "snack", "menu", "allergy"], "answer": "We serve freshly prepared, balanced lunches and snacks daily, with allergy-friendly options. Weekly menus are shared with parents on our KakaoTalk channel." },
+      { "keywords": ["shuttle", "bus", "transport", "ride", "commute"], "answer": "Most campuses run shuttle buses on set routes with a teacher on board. Tell us your area and we'll check the nearest stop for you." },
+      { "keywords": ["after", "afterschool", "extra", "enrichment", "care", "activity"], "answer": "After the core day, children can join after-school care and enrichment like art, music, and active play. Availability varies by campus." },
+      { "keywords": ["trial", "visit", "tour", "experience", "try", "book"], "answer": "Of course! You can book a campus tour or a trial class to meet our teachers and see a day in action. Message us on KakaoTalk to set a time." },
+      { "keywords": ["program", "english", "curriculum", "learn", "class", "play"], "answer": "Hanbit runs a play-based English-immersion program that honors each child's curiosity — from first words to confident, fluent English." },
+      { "keywords": ["contact", "phone", "email", "call", "reach", "inquir"], "answer": "Reach us anytime on the KakaoTalk channel, or by email at admissions@school.minhojan-world.site. Our team replies during 9:00–18:00." },
+      { "keywords": ["hi", "hello", "hey"], "answer": "Hello! Tap any topic below and I'll tell you more." }
     ]
   }
 }
