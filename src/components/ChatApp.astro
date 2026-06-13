@@ -7,16 +7,20 @@ const en = locale === "en";
 const free = (bot as any)[locale] || (bot as any).ko;
 const isFree = mode === "free";
 const title = mode === "ai" ? (en ? "AI Chatbot" : "AI 챗봇") : (en ? "Hanbit Bot" : "한빛 봇");
-const status = isFree
-  ? (en ? "Online · replies instantly" : "온라인 · 바로 답해드려요")
-  : (en ? "AI assistant" : "AI 도우미");
+// Free bot is a local guide (no server) — it shows a plain descriptor, never an "online" status.
+// AI bot status is set live from the server connection (see script).
+const freeStatus = en ? "Instant answers" : "바로 답해드려요";
 const ui = {
   placeholder: en ? "Type a message…" : "메시지를 입력하세요…",
   send: en ? "Send" : "보내기",
   suggested: en ? "Tap a topic" : "주제를 선택하세요",
-  demo: en ? "Demo mode — the AI model isn't connected yet. For quick answers, try the Chatbot." : "데모 모드 — AI 모델이 아직 연결되지 않았어요. 빠른 답변은 '챗봇'을 이용해 주세요.",
+  demo: en ? "Demo mode — the AI model isn't connected yet. For quick answers, try the Bot." : "데모 모드 — AI 모델이 아직 연결되지 않았어요. 빠른 답변은 '봇'을 이용해 주세요.",
   aiGreeting: en ? "Hi! I'm the Hanbit AI assistant. Ask me anything about the school." : "안녕하세요! 한빛 AI 도우미예요. 학교에 대해 무엇이든 물어보세요.",
   error: en ? "Sorry, I couldn't reach the assistant. Please try again." : "죄송해요, 응답을 가져오지 못했어요. 다시 시도해 주세요.",
+  stChecking: en ? "Checking connection…" : "연결 확인 중…",
+  stOnline: en ? "Online" : "온라인",
+  stOffline: en ? "Offline · can't reach the server" : "오프라인 · 서버에 연결할 수 없어요",
+  stDemo: en ? "Demo mode · not connected" : "데모 모드 · 연결되지 않음",
 };
 ---
 <div
@@ -35,7 +39,8 @@ const ui = {
       <span class="flex flex-col leading-tight">
         <span class="font-serif text-sm font-semibold">{title}</span>
         <span class="mt-0.5 flex items-center gap-1.5 text-[0.7rem] text-white/65">
-          <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"></span>{status}
+          <span data-chat-dot class={"inline-block h-1.5 w-1.5 rounded-full " + (isFree ? "bg-white/40" : "bg-amber-400")}></span>
+          <span data-chat-status>{isFree ? freeStatus : ui.stChecking}</span>
         </span>
       </span>
       <button data-chat-close aria-label="Close" class="ml-auto text-white/70 transition hover:text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -67,6 +72,31 @@ const ui = {
     var input = root.querySelector("[data-chat-input]");
     var started = false;
     var history = [];
+    var dot = root.querySelector("[data-chat-dot]");
+    var statusEl = root.querySelector("[data-chat-status]");
+    function setStatus(state) {
+      if (!dot || !statusEl) return;
+      var color = state === "online" ? "bg-emerald-400"
+        : state === "offline" ? "bg-rose-400"
+        : state === "demo" ? "bg-white/40"
+        : "bg-amber-400";
+      dot.className = "inline-block h-1.5 w-1.5 rounded-full " + color;
+      statusEl.textContent = state === "online" ? ui.stOnline
+        : state === "offline" ? ui.stOffline
+        : state === "demo" ? ui.stDemo
+        : ui.stChecking;
+    }
+    function probe() {
+      setStatus("checking");
+      fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: [], ping: true }) })
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (d) {
+          if (d && d.unconfigured) setStatus("demo");
+          else if (d && (d.reply || d.ok)) setStatus("online");
+          else setStatus("offline");
+        })
+        .catch(function () { setStatus("offline"); });
+    }
     var BOT_AVATAR = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="10" rx="2.5"/><path d="M12 4.8V8"/><circle cx="12" cy="3.6" r="1.3"/><circle cx="9.2" cy="13" r="1.25" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13" r="1.25" fill="currentColor" stroke="none"/><path d="M2.6 12v2.6M21.4 12v2.6"/></svg>';
     function bubble(text, who) {
       if (who === "user") {
@@ -113,11 +143,11 @@ const ui = {
         .then(function (r) { return r.json(); })
         .then(function (d) {
           typing.remove();
-          if (d && d.unconfigured) { bubble(ui.demo, "bot"); return; }
-          if (d && d.reply) { history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); return; }
-          bubble(ui.error, "bot");
+          if (d && d.unconfigured) { setStatus("demo"); bubble(ui.demo, "bot"); return; }
+          if (d && d.reply) { setStatus("online"); history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); return; }
+          setStatus("offline"); bubble(ui.error, "bot");
         })
-        .catch(function () { typing.remove(); bubble(ui.error, "bot"); });
+        .catch(function () { typing.remove(); setStatus("offline"); bubble(ui.error, "bot"); });
     }
     function send(q) {
       q = (q || "").trim(); if (!q) return;
@@ -130,7 +160,7 @@ const ui = {
     function start() {
       if (started) return; started = true;
       if (mode === "free") { bubble(free.greeting, "bot"); }
-      else { bubble(ui.aiGreeting, "bot"); }
+      else { bubble(ui.aiGreeting, "bot"); probe(); }
     }
     root.querySelectorAll("[data-quick]").forEach(function (b) {
       b.addEventListener("click", function () { send(b.getAttribute("data-quick")); });
