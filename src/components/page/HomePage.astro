@@ -3,7 +3,6 @@ import { useT, localizePath, type Locale } from "../../i18n/ui";
 import Figure from "../Figure.astro";
 import CurvedDivider from "../CurvedDivider.astro";
 import Shapes from "../Shapes.astro";
-import Logo from "../Logo.astro";
 import siteKo from "../../data/site.json";
 import siteEn from "../../data/en/site.json";
 import branchesKo from "../../data/branches.json";
@@ -25,45 +24,8 @@ const c = {
 const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-navy-700";
 const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
-<div id="hb-loader" aria-hidden="true" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 bg-cream">
-  <span class="hb-sun grid place-items-center"><Logo class="h-16 w-16" /></span>
-  <span class="font-serif text-lg font-semibold text-navy-900">{site.name}</span>
-  <span class="hb-bar"></span>
-</div>
-<script is:inline>
-  (function () {
-    var l = document.getElementById("hb-loader");
-    if (!l) return;
-    function gone() { if (l && l.parentNode) l.parentNode.removeChild(l); }
-    try { if (sessionStorage.getItem("hb_seen")) { gone(); return; } } catch (e) {}
-    var html = document.documentElement;
-    html.style.overflow = "hidden";
-    var start = Date.now(), MIN = 650, done = false;
-    function hide() {
-      if (done) return; done = true;
-      try { sessionStorage.setItem("hb_seen", "1"); } catch (e) {}
-      l.classList.add("hb-hide");
-      html.style.overflow = "";
-      setTimeout(gone, 550);
-    }
-    function finish() { setTimeout(hide, Math.max(0, MIN - (Date.now() - start))); }
-    if (document.readyState === "complete") finish();
-    else window.addEventListener("load", finish);
-    setTimeout(hide, 4000); // safety: never hang
-  })();
-</script>
-<style>
-  #hb-loader { transition: opacity .5s ease; }
-  #hb-loader.hb-hide { opacity: 0; pointer-events: none; }
-  .hb-sun { animation: hbSpin 9s linear infinite; }
-  @keyframes hbSpin { to { transform: rotate(360deg); } }
-  .hb-bar { position: relative; width: 120px; height: 3px; border-radius: 9999px; overflow: hidden; background: rgba(193,154,62,.18); }
-  .hb-bar::after { content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 40%; border-radius: 9999px; background: var(--color-gold); animation: hbSlide 1.1s ease-in-out infinite; }
-  @keyframes hbSlide { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
-  @media (prefers-reduced-motion: reduce) { .hb-sun, .hb-bar::after { animation: none; } }
-</style>
 <section class="relative isolate flex min-h-[78vh] flex-col justify-center overflow-hidden bg-cream md:min-h-[88vh]">
-  <video id="heroVid" autoplay muted playsinline preload="auto" src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
+  <video id="heroVid" autoplay muted playsinline preload="auto" poster="/hero-poster.jpg" src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
   <div class="relative mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
     <p class="reveal mt-6 text-base font-medium text-navy-900 md:whitespace-nowrap md:text-lg">{c.heroSub}</p>
