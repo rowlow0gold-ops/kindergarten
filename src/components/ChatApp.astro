@@ -23,6 +23,9 @@ const ui = {
   stDemo: en ? "Demo mode · not connected" : "데모 모드 · 연결되지 않음",
   gateTitle: en ? "Quick security check" : "보안 확인 중",
   gateSub: en ? "Cloudflare is verifying your browser before connecting you to the AI assistant." : "AI 도우미에 연결하기 전, Cloudflare가 브라우저를 확인하고 있어요.",
+  gateFailTitle: en ? "Verification failed" : "확인에 실패했어요",
+  gateFailSub: en ? "We couldn't verify your browser, so the AI assistant stays locked. Please try again." : "브라우저 확인에 실패해 AI 도우미를 열 수 없어요. 다시 시도해 주세요.",
+  retry: en ? "Try again" : "다시 시도",
 };
 ---
 <div
@@ -67,6 +70,14 @@ const ui = {
           <p class="font-serif text-base font-semibold text-navy-900">{ui.gateTitle}</p>
           <p class="max-w-[16rem] text-xs leading-relaxed text-ink/55">{ui.gateSub}</p>
         </div>
+        <div data-cf-error class="hidden flex-col items-center gap-3">
+          <span class="grid h-12 w-12 place-items-center rounded-full bg-rose-50 text-rose-500">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M12 9v3.5M12 16h.01"/></svg>
+          </span>
+          <p class="font-serif text-base font-semibold text-navy-900">{ui.gateFailTitle}</p>
+          <p class="max-w-[16rem] text-xs leading-relaxed text-ink/55">{ui.gateFailSub}</p>
+          <button type="button" data-cf-retry class="mt-1 rounded-full bg-navy-900 px-5 py-2 text-xs font-semibold text-white transition hover:bg-navy-700">{ui.retry}</button>
+        </div>
         <div data-cf-turnstile class="min-h-[70px]"></div>
       </div>
       <div data-chat-pane class="hidden">
@@ -97,7 +108,7 @@ const ui = {
         sitekey: CF_SITEKEY,
         size: "flexible",
         callback: function (t) { cfToken = t; revealChat(); },
-        "error-callback": function () { cfToken = ""; revealChat(); },
+        "error-callback": function () { cfToken = ""; if (!revealed) showGateError(); },
         "expired-callback": function () { cfToken = ""; },
       });
     }
@@ -107,10 +118,28 @@ const ui = {
     var pane = root.querySelector("[data-chat-pane]");
     var gate = root.querySelector("[data-cf-gate]");
     var gateMsg = root.querySelector("[data-cf-gate-msg]");
+    var gateErr = root.querySelector("[data-cf-error]");
+    var gateTimer = null;
     var revealed = false;
+    function armGateTimer() { clearTimeout(gateTimer); gateTimer = setTimeout(function () { if (!revealed) showGateError(); }, 15000); }
+    function showGateError() {
+      if (revealed) return;
+      clearTimeout(gateTimer);
+      if (gateMsg) gateMsg.classList.add("hidden");
+      if (gateErr) { gateErr.classList.remove("hidden"); gateErr.classList.add("flex"); }
+    }
+    function retryGate() {
+      if (gateErr) { gateErr.classList.add("hidden"); gateErr.classList.remove("flex"); }
+      if (gateMsg) gateMsg.classList.remove("hidden");
+      if (cfWidgetId !== null && window.turnstile) window.turnstile.reset(cfWidgetId);
+      else { cfWidgetId = null; mountTurnstile(); }
+      armGateTimer();
+    }
     function revealChat() {
       if (revealed) return; revealed = true;
+      clearTimeout(gateTimer);
       if (gateMsg) gateMsg.classList.add("hidden");
+      if (gateErr) gateErr.classList.add("hidden");
       if (gate) gate.className = "h-0 overflow-hidden"; // keep Turnstile mounted but out of view
       if (log) log.classList.remove("hidden");
       if (pane) pane.classList.remove("hidden");
@@ -221,11 +250,13 @@ const ui = {
     function start() {
       if (started) return; started = true;
       if (mode === "free") { bubble(free.greeting, "bot"); }
-      else { mountTurnstile(); setTimeout(revealChat, 10000); } // gate first; reveal on pass (10s safety fallback)
+      else { mountTurnstile(); armGateTimer(); } // gate first; reveal only on pass, else show retry
     }
     root.querySelectorAll("[data-quick]").forEach(function (b) {
       b.addEventListener("click", function () { send(b.getAttribute("data-quick")); });
     });
+    var retryBtn = root.querySelector("[data-cf-retry]");
+    if (retryBtn) retryBtn.addEventListener("click", retryGate);
     if (form) form.addEventListener("submit", function (e) { e.preventDefault(); var v = input.value; input.value = ""; send(v); });
     root._chatStart = start;
   })();
