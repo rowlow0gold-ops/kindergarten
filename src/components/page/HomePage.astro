@@ -63,7 +63,7 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
   @media (prefers-reduced-motion: reduce) { .hb-sun, .hb-bar::after { animation: none; } }
 </style>
 <section class="relative isolate flex min-h-[78vh] flex-col justify-center overflow-hidden bg-cream md:min-h-[88vh]">
-  <video id="heroVid" muted playsinline preload="none" poster={media.heroImage} class="absolute inset-0 h-full w-full object-cover"></video>
+  <video id="heroVid" autoplay muted playsinline preload="auto" src={media.heroVideos[0]} class="absolute inset-0 h-full w-full object-cover"></video>
   <div class="relative mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
     <h1 class="reveal max-w-2xl whitespace-pre-line font-serif text-5xl font-semibold leading-[1.04] text-gold md:text-7xl">{c.heroTitle}</h1>
     <p class="reveal mt-6 text-base font-medium text-navy-900 md:whitespace-nowrap md:text-lg">{c.heroSub}</p>
@@ -159,15 +159,12 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
 
 <script define:vars={{ vids: media.heroVideos }}>
   const v = document.getElementById("heroVid");
-  if (v && Array.isArray(vids) && vids.length) {
+  if (v && Array.isArray(vids) && vids.length > 1) {
     let i = 0, timer;
     const play = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
-    const schedule = () => { if (vids.length > 1) { clearTimeout(timer); timer = setTimeout(next, 10000); } };
+    const schedule = () => { clearTimeout(timer); timer = setTimeout(next, 10000); };
     const next = () => { i = (i + 1) % vids.length; v.src = vids[i]; play(); schedule(); };
-    v.addEventListener("ended", () => { if (vids.length > 1) next(); });
-    // Defer the heavy video until the page is idle so the poster paints fast (better LCP/FCP)
-    const start = () => { v.src = vids[0]; play(); schedule(); };
-    if ("requestIdleCallback" in window) requestIdleCallback(start, { timeout: 2500 });
-    else setTimeout(start, 1200);
+    v.addEventListener("ended", next);
+    schedule();
   }
 </script>
