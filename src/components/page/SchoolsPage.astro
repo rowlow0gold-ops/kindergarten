@@ -3,6 +3,8 @@ import Figure from "../Figure.astro";
 import { localizePath, type Locale } from "../../i18n/ui";
 import brKo from "../../data/branches.json";
 import brEn from "../../data/en/branches.json";
+import media from "../../data/media.json";
+const campusImages: Record<string, string> = (media as any).campusImages || {};
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const en = locale === "en";
@@ -76,7 +78,7 @@ const rows = (list: any[]) => list;
   {branches.map((b: any) => (
     <div data-campus-block={b.slug} style="display:none" class="space-y-12">
       <div class="grid items-start gap-8 md:grid-cols-2">
-        <div class="overflow-hidden rounded-3xl shadow-sm ring-1 ring-black/5"><Figure alt={b.name} class="aspect-[4/3]" rounded="rounded-none" /></div>
+        <div class="overflow-hidden rounded-3xl shadow-sm ring-1 ring-black/5"><Figure src={campusImages[b.slug]} alt={b.name} class="aspect-[4/3]" rounded="rounded-none" /></div>
         <div>
           <p class="text-xs font-semibold uppercase tracking-wide text-gold">{b.city}</p>
           <h2 class="mt-1 font-serif text-3xl font-semibold text-navy-900 md:text-4xl">{b.name}</h2>
