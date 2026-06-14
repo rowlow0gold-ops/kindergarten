@@ -24,6 +24,7 @@ const c = {
 const btnFill = "inline-block rounded-none bg-navy-900 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-navy-700";
 const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-navy transition hover:bg-navy-900 hover:text-white hover:border-navy-900";
 ---
+<link rel="preload" as="image" href={media.heroImage} fetchpriority="high" />
 <section class="relative isolate flex min-h-[78vh] flex-col justify-center overflow-hidden bg-cream md:min-h-[88vh]">
   <video id="heroVid" muted playsinline preload="none" poster={media.heroImage} class="absolute inset-0 h-full w-full object-cover"></video>
   <div class="relative mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
@@ -129,7 +130,12 @@ const btnLine = "inline-block rounded-none border border-navy/40 px-8 py-4 text-
     v.addEventListener("ended", () => { if (vids.length > 1) next(); });
     // Defer the heavy video until the page is idle so the poster paints fast (better LCP/FCP)
     const start = () => { v.src = vids[0]; play(); schedule(); };
-    if ("requestIdleCallback" in window) requestIdleCallback(start, { timeout: 2500 });
-    else setTimeout(start, 1200);
+    // Skip the video entirely on phones / data-saver — show only the poster image (big mobile win)
+    const isSmall = window.matchMedia("(max-width: 767px)").matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (!isSmall && !saveData) {
+      if ("requestIdleCallback" in window) requestIdleCallback(start, { timeout: 2500 });
+      else setTimeout(start, 1200);
+    }
   }
 </script>
