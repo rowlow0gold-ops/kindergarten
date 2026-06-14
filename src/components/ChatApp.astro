@@ -56,20 +56,48 @@ const ui = {
         </div>
       </div>
     ) : (
-      <form data-chat-form class="flex items-center gap-2 border-t border-black/10 bg-white p-2.5">
+      <div data-chat-pane>
+      <div data-cf-turnstile class="flex justify-center border-t border-black/10 bg-white px-2.5 pt-2"></div>
+      <form data-chat-form class="flex items-center gap-2 bg-white p-2.5">
         <input data-chat-input type="text" autocomplete="off" placeholder={ui.placeholder} class="min-w-0 flex-1 rounded-full border border-black/15 px-3.5 py-2 text-sm outline-none focus:border-gold" />
         <button type="submit" aria-label={ui.send} class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 text-white transition hover:bg-navy-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
       </form>
+      </div>
     )}
   </div>
 </div>
+<script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
 <script define:vars={{ mode, free, ui }}>
   (function () {
     var root = document.querySelector('[data-chat="' + mode + '"]');
     if (!root) return;
+    var API = "https://bot.minhojan-world.site";
+    var CF_SITEKEY = "0x4AAAAAADkQXlMunatmsDXf";
+    var cfToken = "";
+    var cfWidgetId = null;
+    function mountTurnstile() {
+      if (mode !== "ai") return;
+      var el = root.querySelector("[data-cf-turnstile]");
+      if (!el || cfWidgetId !== null) return;
+      if (!window.turnstile) { setTimeout(mountTurnstile, 300); return; } // wait for api.js
+      cfWidgetId = window.turnstile.render(el, {
+        sitekey: CF_SITEKEY,
+        size: "flexible",
+        callback: function (t) { cfToken = t; },
+        "error-callback": function () { cfToken = ""; },
+        "expired-callback": function () { cfToken = ""; },
+      });
+    }
     var log = root.querySelector("[data-chat-log]");
     var form = root.querySelector("[data-chat-form]");
     var input = root.querySelector("[data-chat-input]");
+    var sendBtn = form ? form.querySelector('button[type="submit"]') : null;
+    var busy = false;
+    function setBusy(b) {
+      busy = b;
+      if (input) { input.disabled = b; }
+      if (sendBtn) { sendBtn.disabled = b; sendBtn.classList.toggle("opacity-50", b); sendBtn.classList.toggle("cursor-not-allowed", b); }
+    }
     var started = false;
     var history = [];
     var dot = root.querySelector("[data-chat-dot]");
@@ -88,11 +116,10 @@ const ui = {
     }
     function probe() {
       setStatus("checking");
-      fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: [], ping: true }) })
+      fetch(API + "/healthz", { method: "GET" })
         .then(function (r) { if (!r.ok) throw 0; return r.json(); })
         .then(function (d) {
-          if (d && d.unconfigured) setStatus("demo");
-          else if (d && (d.reply || d.ok)) setStatus("online");
+          if (d && d.status === "ok") setStatus("online");
           else setStatus("offline");
         })
         .catch(function () { setStatus("offline"); });
@@ -139,7 +166,8 @@ const ui = {
     function aiSend(q) {
       history.push({ role: "user", content: q });
       var typing = typingBubble();
-      fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) })
+      setBusy(true);
+      fetch(API + "/chat", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": cfToken }, body: JSON.stringify({ messages: history }) })
         .then(function (r) { return r.json(); })
         .then(function (d) {
           typing.remove();
@@ -147,9 +175,15 @@ const ui = {
           if (d && d.reply) { setStatus("online"); history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); return; }
           setStatus("offline"); bubble(ui.error, "bot");
         })
-        .catch(function () { typing.remove(); setStatus("offline"); bubble(ui.error, "bot"); });
+        .catch(function () { typing.remove(); setStatus("offline"); bubble(ui.error, "bot"); })
+        .finally(function () {
+          setBusy(false); if (input) input.focus();
+          cfToken = ""; // single-use; get a fresh token for the next message
+          if (cfWidgetId !== null && window.turnstile) window.turnstile.reset(cfWidgetId);
+        });
     }
     function send(q) {
+      if (busy) return;
       q = (q || "").trim(); if (!q) return;
       bubble(q, "user");
       if (mode === "free") {
@@ -160,7 +194,7 @@ const ui = {
     function start() {
       if (started) return; started = true;
       if (mode === "free") { bubble(free.greeting, "bot"); }
-      else { bubble(ui.aiGreeting, "bot"); probe(); }
+      else { bubble(ui.aiGreeting, "bot"); probe(); mountTurnstile(); }
     }
     root.querySelectorAll("[data-quick]").forEach(function (b) {
       b.addEventListener("click", function () { send(b.getAttribute("data-quick")); });
@@ -169,9 +203,9 @@ const ui = {
     root._chatStart = start;
   })();
 </script>
-<style>
+<style is:global>
   .chat-typing { display: inline-flex; align-items: center; gap: 4px; }
-  .chat-typing i { width: 6px; height: 6px; border-radius: 9999px; background: var(--color-navy); opacity: .35; animation: chatDot 1s infinite ease-in-out; }
+  .chat-typing i { width: 7px; height: 7px; border-radius: 9999px; background: #1e293b; opacity: .4; animation: chatDot 1s infinite ease-in-out; }
   .chat-typing i:nth-child(2) { animation-delay: .15s; }
   .chat-typing i:nth-child(3) { animation-delay: .3s; }
   @keyframes chatDot { 0%, 60%, 100% { opacity: .25; transform: translateY(0); } 30% { opacity: .9; transform: translateY(-3px); } }
