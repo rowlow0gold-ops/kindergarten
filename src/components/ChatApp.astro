@@ -21,6 +21,8 @@ const ui = {
   stOnline: en ? "Online" : "온라인",
   stOffline: en ? "Offline · can't reach the server" : "오프라인 · 서버에 연결할 수 없어요",
   stDemo: en ? "Demo mode · not connected" : "데모 모드 · 연결되지 않음",
+  gateTitle: en ? "Quick security check" : "보안 확인 중",
+  gateSub: en ? "Cloudflare is verifying your browser before connecting you to the AI assistant." : "AI 도우미에 연결하기 전, Cloudflare가 브라우저를 확인하고 있어요.",
 };
 ---
 <div
@@ -45,7 +47,7 @@ const ui = {
       </span>
       <button data-chat-close aria-label="Close" class="ml-auto text-white/70 transition hover:text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </header>
-    <div data-chat-log class="flex-1 space-y-2.5 overflow-y-auto bg-cream/30 px-3 py-3"></div>
+    <div data-chat-log class={"flex-1 space-y-2.5 overflow-y-auto bg-cream/30 px-3 py-3" + (isFree ? "" : " hidden")}></div>
     {isFree ? (
       <div class="border-t border-black/10 bg-white px-3 py-3">
         <p class="mb-2 px-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-ink/40">{ui.suggested}</p>
@@ -56,13 +58,24 @@ const ui = {
         </div>
       </div>
     ) : (
-      <div data-chat-pane>
-      <div data-cf-turnstile class="flex justify-center border-t border-black/10 bg-white px-2.5 pt-2"></div>
-      <form data-chat-form class="flex items-center gap-2 bg-white p-2.5">
-        <input data-chat-input type="text" autocomplete="off" placeholder={ui.placeholder} class="min-w-0 flex-1 rounded-full border border-black/15 px-3.5 py-2 text-sm outline-none focus:border-gold" />
-        <button type="submit" aria-label={ui.send} class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 text-white transition hover:bg-navy-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
-      </form>
+      <Fragment>
+      <div data-cf-gate class="flex flex-1 flex-col items-center justify-center gap-4 bg-cream/30 px-6 text-center">
+        <div data-cf-gate-msg class="flex flex-col items-center gap-3">
+          <span class="grid h-12 w-12 place-items-center rounded-full bg-navy-900/5 text-navy-900">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <p class="font-serif text-base font-semibold text-navy-900">{ui.gateTitle}</p>
+          <p class="max-w-[16rem] text-xs leading-relaxed text-ink/55">{ui.gateSub}</p>
+        </div>
+        <div data-cf-turnstile class="min-h-[70px]"></div>
       </div>
+      <div data-chat-pane class="hidden">
+        <form data-chat-form class="flex items-center gap-2 border-t border-black/10 bg-white p-2.5">
+          <input data-chat-input type="text" autocomplete="off" placeholder={ui.placeholder} class="min-w-0 flex-1 rounded-full border border-black/15 px-3.5 py-2 text-sm outline-none focus:border-gold" />
+          <button type="submit" aria-label={ui.send} class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 text-white transition hover:bg-navy-700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        </form>
+      </div>
+      </Fragment>
     )}
   </div>
 </div>
@@ -83,14 +96,28 @@ const ui = {
       cfWidgetId = window.turnstile.render(el, {
         sitekey: CF_SITEKEY,
         size: "flexible",
-        callback: function (t) { cfToken = t; },
-        "error-callback": function () { cfToken = ""; },
+        callback: function (t) { cfToken = t; revealChat(); },
+        "error-callback": function () { cfToken = ""; revealChat(); },
         "expired-callback": function () { cfToken = ""; },
       });
     }
     var log = root.querySelector("[data-chat-log]");
     var form = root.querySelector("[data-chat-form]");
     var input = root.querySelector("[data-chat-input]");
+    var pane = root.querySelector("[data-chat-pane]");
+    var gate = root.querySelector("[data-cf-gate]");
+    var gateMsg = root.querySelector("[data-cf-gate-msg]");
+    var revealed = false;
+    function revealChat() {
+      if (revealed) return; revealed = true;
+      if (gateMsg) gateMsg.classList.add("hidden");
+      if (gate) gate.className = "h-0 overflow-hidden"; // keep Turnstile mounted but out of view
+      if (log) log.classList.remove("hidden");
+      if (pane) pane.classList.remove("hidden");
+      bubble(ui.aiGreeting, "bot");
+      probe();
+      if (input) setTimeout(function () { input.focus(); }, 30);
+    }
     var sendBtn = form ? form.querySelector('button[type="submit"]') : null;
     var busy = false;
     function setBusy(b) {
@@ -194,7 +221,7 @@ const ui = {
     function start() {
       if (started) return; started = true;
       if (mode === "free") { bubble(free.greeting, "bot"); }
-      else { bubble(ui.aiGreeting, "bot"); probe(); mountTurnstile(); }
+      else { mountTurnstile(); setTimeout(revealChat, 10000); } // gate first; reveal on pass (10s safety fallback)
     }
     root.querySelectorAll("[data-quick]").forEach(function (b) {
       b.addEventListener("click", function () { send(b.getAttribute("data-quick")); });
