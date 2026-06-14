@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://school.minhojan-world.site",
+  site: "https://kindergarten.minhojan-world.site",
   i18n: {
     defaultLocale: "ko",
     locales: ["ko", "en"],
