@@ -229,20 +229,63 @@ const ui = {
       history.push({ role: "user", content: q });
       var typing = typingBubble();
       setBusy(true);
-      fetch(API + "/chat", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": cfToken }, body: JSON.stringify({ messages: history }) })
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          typing.remove();
-          if (d && d.unconfigured) { setStatus("demo"); bubble(ui.demo, "bot"); return; }
-          if (d && d.reply) { setStatus("online"); history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); return; }
-          setStatus("offline"); bubble(ui.error, "bot");
+      var token = cfToken;
+      var botRow = null, botText = null, acc = "", finished = false;
+
+      function cleanup() {
+        setBusy(false); if (input) input.focus();
+        cfToken = ""; // single-use; get a fresh token for the next message
+        if (cfWidgetId !== null && window.turnstile) window.turnstile.reset(cfWidgetId);
+      }
+      function removeTyping() { if (typing && typing.remove) { typing.remove(); typing = null; } }
+      function ensureBubble() {
+        if (!botRow) { removeTyping(); botRow = bubble("", "bot"); botText = botRow.querySelector("div"); }
+      }
+      function finishStream() {
+        if (finished) return; finished = true;
+        if (acc) { setStatus("online"); history.push({ role: "assistant", content: acc }); }
+        else { removeTyping(); if (botRow) botRow.remove(); fallback(); return; }
+        cleanup();
+      }
+      // Non-streaming fallback (used if /chat/stream is unavailable or empty)
+      function fallback() {
+        fetch(API + "/chat", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            removeTyping();
+            if (d && d.reply) { setStatus("online"); history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); }
+            else { setStatus("offline"); bubble(ui.error, "bot"); }
+          })
+          .catch(function () { removeTyping(); setStatus("offline"); bubble(ui.error, "bot"); })
+          .finally(cleanup);
+      }
+
+      fetch(API + "/chat/stream", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }) })
+        .then(function (r) {
+          if (!r.ok || !r.body) throw 0;
+          var reader = r.body.getReader();
+          var dec = new TextDecoder();
+          var buf = "";
+          function pump() {
+            return reader.read().then(function (res) {
+              if (res.done) { finishStream(); return; }
+              buf += dec.decode(res.value, { stream: true });
+              var nl;
+              while ((nl = buf.indexOf("\n")) >= 0) {
+                var line = buf.slice(0, nl).trim(); buf = buf.slice(nl + 1);
+                if (line.indexOf("data:") !== 0) continue;
+                try {
+                  var evt = JSON.parse(line.slice(5).trim());
+                  if (evt.delta) { ensureBubble(); acc += evt.delta; botText.textContent = acc; log.scrollTop = log.scrollHeight; }
+                  if (evt.done) { finishStream(); return; }
+                } catch (e) { /* partial / keep-alive */ }
+              }
+              return pump();
+            });
+          }
+          return pump();
         })
-        .catch(function () { typing.remove(); setStatus("offline"); bubble(ui.error, "bot"); })
-        .finally(function () {
-          setBusy(false); if (input) input.focus();
-          cfToken = ""; // single-use; get a fresh token for the next message
-          if (cfWidgetId !== null && window.turnstile) window.turnstile.reset(cfWidgetId);
-        });
+        .catch(function () { removeTyping(); if (botRow) botRow.remove(); fallback(); });
     }
     function send(q) {
       if (busy) return;
