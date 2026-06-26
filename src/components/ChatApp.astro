@@ -291,7 +291,7 @@ const ui = {
                 try {
                   var evt = JSON.parse(line.slice(5).trim());
                   if (evt.delta) { ensureBubble(); acc += evt.delta; botText.textContent = acc; log.scrollTop = log.scrollHeight; }
-                  if (evt.done) { finishStream(); return; }
+                  if (evt.done) { if (evt.quickReplies) quick = evt.quickReplies; finishStream(); return; }
                 } catch (e) { /* partial / keep-alive */ }
               }
               return pump();
