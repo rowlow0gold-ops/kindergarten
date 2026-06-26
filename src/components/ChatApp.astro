@@ -163,6 +163,17 @@ const ui = {
     var started = false;
     var history = [];
     var reqSeq = 0, curAbort = null;
+    // Turnstile tokens are single-use; after each message the widget re-issues one
+    // asynchronously. Wait for a fresh token (up to ~8s) before sending so we never
+    // hit the backend with an empty/expired token (which 403s instantly).
+    function awaitToken(cb) {
+      if (cfToken) { cb(cfToken); return; }
+      var n = 0;
+      var iv = setInterval(function () {
+        if (cfToken) { clearInterval(iv); cb(cfToken); }
+        else if (++n > 80) { clearInterval(iv); cb(""); }
+      }, 100);
+    }
     var dot = root.querySelector("[data-chat-dot]");
     var statusEl = root.querySelector("[data-chat-status]");
     function setStatus(state) {
@@ -244,7 +255,7 @@ const ui = {
       history.push({ role: "user", content: q });
       var typing = typingBubble();
       setBusy(true);
-      var token = cfToken;
+      var token = "";
       var botRow = null, botText = null, acc = "", finished = false, quick = null;
 
       // request sequencing: abort any prior in-flight request and ignore stale ones
@@ -285,6 +296,14 @@ const ui = {
           .finally(cleanup);
       }
 
+      awaitToken(function (tok) {
+        if (stale()) return;
+        token = tok;
+        if (!token) { removeTyping(); if (botRow) botRow.remove(); setStatus("offline"); bubble(ui.error, "bot"); cleanup(); return; }
+        startRequest();
+      });
+
+      function startRequest() {
       fetch(API + "/chat/stream", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }), signal: ac ? ac.signal : undefined })
         .then(function (r) {
           if (!r.ok || !r.body) throw 0;
@@ -312,6 +331,7 @@ const ui = {
           return pump();
         })
         .catch(function () { removeTyping(); if (botRow) botRow.remove(); if (!stale()) fallback(); });
+      }
     }
     function send(q) {
       if (busy) return;
