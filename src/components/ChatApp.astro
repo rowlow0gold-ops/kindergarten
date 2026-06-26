@@ -162,6 +162,7 @@ const ui = {
     }
     var started = false;
     var history = [];
+    var reqSeq = 0, curAbort = null;
     var dot = root.querySelector("[data-chat-dot]");
     var statusEl = root.querySelector("[data-chat-status]");
     function setStatus(state) {
@@ -246,7 +247,15 @@ const ui = {
       var token = cfToken;
       var botRow = null, botText = null, acc = "", finished = false, quick = null;
 
+      // request sequencing: abort any prior in-flight request and ignore stale ones
+      var mySeq = ++reqSeq;
+      if (curAbort) { try { curAbort.abort(); } catch (e) {} }
+      var ac = (typeof AbortController !== "undefined") ? new AbortController() : null;
+      curAbort = ac;
+      function stale() { return mySeq !== reqSeq; }
+
       function cleanup() {
+        if (stale()) return;
         setBusy(false); if (input) input.focus();
         cfToken = ""; // single-use; get a fresh token for the next message
         if (cfWidgetId !== null && window.turnstile) window.turnstile.reset(cfWidgetId);
@@ -256,25 +265,27 @@ const ui = {
         if (!botRow) { removeTyping(); botRow = bubble("", "bot"); botText = botRow.querySelector("div"); }
       }
       function finishStream() {
-        if (finished) return; finished = true;
+        if (finished || stale()) return; finished = true;
         if (acc) { setStatus("online"); history.push({ role: "assistant", content: acc }); quickChips(quick); }
         else { removeTyping(); if (botRow) botRow.remove(); fallback(); return; }
         cleanup();
       }
       // Non-streaming fallback (used if /chat/stream is unavailable or empty)
       function fallback() {
-        fetch(API + "/chat", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }) })
+        if (stale()) return;
+        fetch(API + "/chat", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }), signal: ac ? ac.signal : undefined })
           .then(function (r) { return r.json(); })
           .then(function (d) {
+            if (stale()) return;
             removeTyping();
             if (d && d.reply) { setStatus("online"); history.push({ role: "assistant", content: d.reply }); bubble(d.reply, "bot"); }
             else { setStatus("offline"); bubble(ui.error, "bot"); }
           })
-          .catch(function () { removeTyping(); setStatus("offline"); bubble(ui.error, "bot"); })
+          .catch(function () { if (stale()) return; removeTyping(); setStatus("offline"); bubble(ui.error, "bot"); })
           .finally(cleanup);
       }
 
-      fetch(API + "/chat/stream", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }) })
+      fetch(API + "/chat/stream", { method: "POST", headers: { "Content-Type": "application/json", "cf-turnstile-token": token }, body: JSON.stringify({ messages: history }), signal: ac ? ac.signal : undefined })
         .then(function (r) {
           if (!r.ok || !r.body) throw 0;
           var reader = r.body.getReader();
@@ -282,6 +293,7 @@ const ui = {
           var buf = "";
           function pump() {
             return reader.read().then(function (res) {
+              if (stale()) { try { reader.cancel(); } catch (e) {} return; }
               if (res.done) { finishStream(); return; }
               buf += dec.decode(res.value, { stream: true });
               var nl;
@@ -299,7 +311,7 @@ const ui = {
           }
           return pump();
         })
-        .catch(function () { removeTyping(); if (botRow) botRow.remove(); fallback(); });
+        .catch(function () { removeTyping(); if (botRow) botRow.remove(); if (!stale()) fallback(); });
     }
     function send(q) {
       if (busy) return;
