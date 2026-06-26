@@ -215,6 +215,20 @@ const ui = {
       log.appendChild(row); log.scrollTop = log.scrollHeight;
       return row;
     }
+    function quickChips(items) {
+      if (!items || !items.length) return;
+      var wrap = document.createElement("div");
+      wrap.className = "flex flex-wrap gap-2 pl-9";
+      items.forEach(function (q) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "rounded-full border border-navy/15 bg-cream/60 px-3 py-1.5 text-xs font-medium text-navy transition hover:border-gold hover:bg-cream";
+        b.textContent = q;
+        b.addEventListener("click", function () { send(q); });
+        wrap.appendChild(b);
+      });
+      log.appendChild(wrap); log.scrollTop = log.scrollHeight;
+    }
     function freeAnswer(q) {
       var t = q.toLowerCase();
       for (var i = 0; i < free.intents.length; i++) {
@@ -230,7 +244,7 @@ const ui = {
       var typing = typingBubble();
       setBusy(true);
       var token = cfToken;
-      var botRow = null, botText = null, acc = "", finished = false;
+      var botRow = null, botText = null, acc = "", finished = false, quick = null;
 
       function cleanup() {
         setBusy(false); if (input) input.focus();
@@ -243,7 +257,7 @@ const ui = {
       }
       function finishStream() {
         if (finished) return; finished = true;
-        if (acc) { setStatus("online"); history.push({ role: "assistant", content: acc }); }
+        if (acc) { setStatus("online"); history.push({ role: "assistant", content: acc }); quickChips(quick); }
         else { removeTyping(); if (botRow) botRow.remove(); fallback(); return; }
         cleanup();
       }
